@@ -319,12 +319,11 @@
     if (metrics.desktop) {
       houseTransform = 'translateY(' + houseY + '%)';
     } else {
-      // phones: the building starts fully zoomed out (grass visible), then
-      // SCALES UP from its bottom edge while you scroll — rising over the
-      // headline and covering the letters area by the time they fill in
-      var ms = lerp(1, 2.5, clamp(p / 0.35, 0, 1));
-      var drift = lerp(0, -12, seg(p, 0.35, 0.95)); // keeps moving inside the letters
-      houseTransform = 'translateY(' + (houseY + drift) + '%) scale(' + ms + ')';
+      // phones: NO zoom — the building slides straight up at a steady rate,
+      // rising behind the letters while the smoke (raised early below)
+      // swallows its base so the lift never shows a hard bottom edge
+      var my = -70 * Math.min(p, 0.9) / 0.45;
+      houseTransform = 'translateY(' + my + '%)';
     }
     r.houses.forEach(function (h) { h.style.transform = houseTransform; });
 
@@ -356,10 +355,17 @@
     if (r.composite) r.composite.style.opacity = String(Math.min(compIn, 1 - compOut));
     if (r.houses[0]) r.houses[0].style.opacity = String(1 - compIn);
 
-    // smoke rises past the letters near the end, covering them
+    // smoke rises past the letters near the end, covering them. On phones it
+    // already laps at the building's base at rest and climbs much earlier,
+    // hiding the bottom edge of the upward-sliding building.
     if (r.smoke) {
-      var smokeT = easeInOut(seg(p, 0.34, 0.92));
-      r.smoke.style.transform = 'translateY(' + lerp(70, -35, smokeT) + '%)';
+      if (metrics.desktop) {
+        var smokeT = easeInOut(seg(p, 0.34, 0.92));
+        r.smoke.style.transform = 'translateY(' + lerp(70, -35, smokeT) + '%)';
+      } else {
+        var smokeTm = easeInOut(seg(p, 0.03, 0.5));
+        r.smoke.style.transform = 'translateY(' + lerp(52, -30, smokeTm) + '%)';
+      }
     }
   }
 
