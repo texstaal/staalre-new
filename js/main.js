@@ -259,6 +259,14 @@
         // 0.30 coefficient targets the roofline at ~70% of viewport height,
         // sitting ~5cm below the "Find Properties" button (was 0.5 = mid screen)
         metrics.houseStart = clamp(0.704 - 0.30 * (metrics.vh / hh), 0.18, 0.82) * 100;
+        // phones: position the roofline (29.6% into the cutout) directly under
+        // the hero button instead — measured, not formula-based. Only computed
+        // near the top of the page, where the hero layout is untransformed.
+        if (!metrics.desktop && heroRefs.actions && window.scrollY < metrics.vh * 0.2) {
+          var ar = heroRefs.actions.getBoundingClientRect();
+          var targetTop = ar.bottom + window.scrollY + 16;
+          metrics.houseStart = clamp((targetTop - 0.296 * hh - (metrics.vh - hh)) / hh, 0, 0.7) * 100;
+        }
       }
     }
     setScrollbarVar();
@@ -343,6 +351,38 @@
       var smokeT = easeInOut(seg(p, 0.34, 0.92));
       r.smoke.style.transform = 'translateY(' + lerp(70, -35, smokeT) + '%)';
     }
+  }
+
+  /* ---------- sector tabs ---------- */
+  qsa('[data-tabs]').forEach(function (root) {
+    var btns = qsa('.tab-btn', root);
+    var panels = qsa('.tab-panel', root);
+    btns.forEach(function (b, i) {
+      b.addEventListener('click', function () {
+        btns.forEach(function (x) { x.classList.remove('-active'); });
+        panels.forEach(function (x) { x.classList.remove('-active'); });
+        b.classList.add('-active');
+        if (panels[i]) panels[i].classList.add('-active');
+      });
+    });
+  });
+
+  /* ---------- step pills: highlight the step you're reading ---------- */
+  var pillLinks = qsa('.step-pill[href^="#"]');
+  if (pillLinks.length && 'IntersectionObserver' in window) {
+    var pillFor = {};
+    pillLinks.forEach(function (p) { pillFor[p.getAttribute('href').slice(1)] = p; });
+    var pio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        pillLinks.forEach(function (p) { p.classList.remove('-active'); });
+        if (pillFor[en.target.id]) pillFor[en.target.id].classList.add('-active');
+      });
+    }, { rootMargin: '-25% 0px -55% 0px' });
+    Object.keys(pillFor).forEach(function (id) {
+      var t = document.getElementById(id);
+      if (t) pio.observe(t);
+    });
   }
 
   /* ---------- keep the muted hero video playing when visible ---------- */

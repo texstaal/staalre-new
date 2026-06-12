@@ -19,7 +19,9 @@
   .hero_composite__3blHB{-webkit-mask-size:122.13rem 52.88rem;mask-size:122.13rem 52.88rem}
 }
 main{background:#fff}
-.footer_wrapper__9GQwi{position:sticky;bottom:0;z-index:-1}
+/* z-index 0 keeps the footer BELOW main (z1, opaque) for the reveal effect
+   while staying clickable — negative z-index made body swallow all clicks */
+.footer_wrapper__9GQwi{position:sticky;bottom:0;z-index:0}
 
 /* steel-blue accent — small touches only; the base stays monochrome */
 ::selection{background:#1F4257;color:#fff}
@@ -100,7 +102,10 @@ main{background:#fff}
 .article-prose li{font-size:1.6rem;line-height:1.6;margin:.8rem 0}
 @media(min-width:768px){.article-prose li{font-size:2rem}}
 .article-prose strong{font-weight:600}
-.article-prose a{color:#1F4257;text-decoration:underline}
+/* steel-blue only on inline text links — NEVER on buttons (blue-on-black is
+   unreadable); buttons keep their own colours */
+.article-prose a:not([class*="button_"]){color:#1F4257;text-decoration:underline}
+.article-prose a[class*="button_"]{color:#fff;text-decoration:none}
 .legal-updated{font-size:1.4rem;color:#b3b3b3;margin-bottom:3rem}
 @media(min-width:768px){.legal-updated{font-size:1.8rem}}
 
@@ -146,6 +151,76 @@ main{background:#fff}
 
 /* anchored sections clear the sticky header */
 [id]{scroll-margin-top:10rem}
+
+/* ---- mobile polish ---- */
+@media(max-width:767px){
+  /* the warehouse sits higher on phones: wider than the viewport and
+     positioned by JS so the roofline lands just under the hero button */
+  .hero_house__aJy7p{width:170%;left:-35%;right:auto}
+  /* giant service words (Lease/Buy/Manage) were clipping off-screen */
+  .services_item-more__pkhNR{font-size:7rem}
+  /* feature cards: stack vertically instead of an off-screen side-scroller */
+  .features_items__oPgtQ{grid-auto-flow:row;margin:6rem 0 0;padding:0;overflow:visible}
+  .features_item__IPG1i{width:auto;height:36rem}
+}
+
+/* ---- inner-page components (original, same design tokens) ---- */
+/* editorial index: numbered giant words, light theme, arrow slides on hover */
+.index-list{border-top:1px solid rgba(21,23,23,.12)}
+.index-item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2rem;padding:2.6rem 0;border-bottom:1px solid rgba(21,23,23,.12);color:#151717}
+@media(min-width:768px){.index-item{grid-template-columns:8rem 1fr auto auto;gap:4rem;padding:4rem 0}}
+.index-num{font-size:1.4rem;font-weight:500;color:#b3b3b3}
+@media(min-width:768px){.index-num{font-size:1.8rem}}
+.index-word{font-weight:500;font-size:4.6rem;line-height:.95;letter-spacing:-.03em;transition:color .3s}
+@media(min-width:768px){.index-word{font-size:9.2rem;letter-spacing:-.04em}}
+.index-desc{grid-column:1/-1;font-weight:500;font-size:1.5rem;line-height:1.5;color:#6f7070;max-width:44rem}
+@media(min-width:768px){.index-desc{grid-column:auto;font-size:1.8rem;text-align:left}}
+.index-arrow{display:none}
+@media(min-width:768px){.index-arrow{display:block;width:4.4rem;height:4.4rem;opacity:0;transform:translateX(-1.5rem);transition:opacity .3s,transform .6s cubic-bezier(.16,1,.3,1)}}
+.index-item:hover .index-word{color:#1F4257}
+.index-item:hover .index-arrow{opacity:1;transform:translateX(0)}
+
+/* step pills: compact anchored overview; active state follows scroll */
+.step-pills{display:flex;flex-wrap:wrap;gap:1rem}
+.step-pill{display:inline-flex;align-items:center;gap:1rem;padding:1.1rem 1.8rem;border:1px solid rgba(21,23,23,.25);border-radius:100px;font-weight:500;font-size:1.4rem;line-height:1;color:#151717;transition:background .25s,color .25s,border-color .25s}
+@media(min-width:768px){.step-pill{padding:1.4rem 2.4rem;font-size:1.7rem}}
+.step-pill .n{font-size:1.1rem;color:#b3b3b3;transition:color .25s}
+.step-pill:hover{border-color:#151717}
+.step-pill.-active{background:#151717;border-color:#151717;color:#fff}
+.step-pill.-active .n{color:hsla(0,0%,100%,.5)}
+
+/* sector tabs: underlined tab row + image/text panel */
+.tabs-nav{display:flex;flex-wrap:wrap;gap:0 3rem;border-bottom:1px solid rgba(21,23,23,.15)}
+@media(min-width:768px){.tabs-nav{gap:0 5rem}}
+.tab-btn{appearance:none;background:none;border:none;cursor:pointer;padding:1.4rem 0;font-family:var(--font-primary);font-weight:500;font-size:1.6rem;color:#8a8b8b;position:relative;transition:color .25s}
+@media(min-width:768px){.tab-btn{font-size:2.2rem;padding:1.8rem 0}}
+.tab-btn:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#1F4257;transform:scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.tab-btn.-active{color:#151717}
+.tab-btn.-active:after{transform:scaleX(1)}
+.tab-panel{display:none;padding:4rem 0 0}
+.tab-panel.-active{display:grid;gap:3rem;animation:tabIn .5s cubic-bezier(.16,1,.3,1)}
+@media(min-width:768px){.tab-panel.-active{grid-template-columns:1fr 1fr;gap:6rem;align-items:center}}
+@keyframes tabIn{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
+.tab-media{aspect-ratio:16/11;overflow:hidden}
+.tab-media img{width:100%;height:100%;object-fit:cover}
+.tab-body h3{font-weight:500;font-size:2.4rem;letter-spacing:-.01em;margin:0 0 1.6rem}
+@media(min-width:768px){.tab-body h3{font-size:3.4rem}}
+.tab-body p{font-weight:500;font-size:1.6rem;line-height:1.55;color:#3c3e3e}
+@media(min-width:768px){.tab-body p{font-size:2rem}}
+.tab-body ul{margin:2rem 0 0;padding:0;list-style:none}
+.tab-body li{padding:1.2rem 0;border-top:1px solid rgba(21,23,23,.08);font-weight:500;font-size:1.5rem}
+@media(min-width:768px){.tab-body li{font-size:1.8rem;padding:1.5rem 0}}
+
+/* mini steps: three columns, steel numerals */
+.mini-steps{display:grid;gap:3rem}
+@media(min-width:768px){.mini-steps{grid-template-columns:repeat(3,1fr);gap:3rem}}
+.mini-step{border-top:1px solid rgba(21,23,23,.15);padding-top:2.4rem}
+.mini-step .ms-num{font-weight:700;font-size:3.4rem;line-height:1;letter-spacing:-.02em;color:#1F4257}
+@media(min-width:768px){.mini-step .ms-num{font-size:5.2rem}}
+.mini-step h3{font-weight:500;font-size:1.9rem;margin:1.6rem 0 .8rem}
+@media(min-width:768px){.mini-step h3{font-size:2.4rem}}
+.mini-step p{font-weight:500;font-size:1.5rem;line-height:1.55;color:#6f7070}
+@media(min-width:768px){.mini-step p{font-size:1.8rem}}
 
 /* stats band */
 .stats-row{display:grid;gap:4rem}

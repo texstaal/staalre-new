@@ -37,8 +37,8 @@ const statement = (html, opts = {}) => `
   <div class="container_container__v5gtR"><div class="statement">${html}</div></div>
 </section>`;
 
-const split = (label, contentHtml, num) => `
-<div class="split">
+const split = (label, contentHtml, num, id) => `
+<div class="split"${id ? ` id="${id}"` : ''}>
   <div class="split-label">${num ? `<span class="num">${num}</span>` : ''}${label}</div>
   <div class="split-content">${contentHtml}</div>
 </div>`;
@@ -75,45 +75,58 @@ const postEntry = (p) => `
   </div>
 </div></div></div>`;
 
-/* ---------- FIND-style feature blocks ---------- */
-// dark full-bleed rows with a giant word + image revealed on hover (homepage services)
-const darkRows = (items) => `
-<section class="services_root__Ch_WM" style="padding:6rem 0">
-  <div class="services_items__PESAO">
-    ${items.map(it => `
-    <a class="services_item__D_u7g" href="${it.href}">
-      <div class="container_container__v5gtR">
-        <div class="services_item-bg___wJGg"><img alt="" decoding="async" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;object-fit:cover;color:transparent" src="${it.img}" /></div>
-        <div class="services_item-num__QGde9"></div>
-        <div class="services_item-text__uKETL"><h3>${it.text}</h3></div>
-        <div class="services_item-more__pkhNR"><span>${it.word}</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z"></path></svg></div>
-      </div>
-    </a>`).join('')}
-  </div>
-</section>`;
-
-// chevron-masked image strip (homepage "arrows" motif)
-const chevronStrip = `
-<section style="padding:2rem 0 4rem">
+/* ---------- inner-page components (original, same design tokens) ---------- */
+// editorial index: numbered giant words on the light theme, arrow on hover
+const ARROW_SVG = '<svg class="index-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z"></path></svg>';
+const indexList = (items) => `
+<section class="page-section" style="padding-top:0">
   <div class="container_container__v5gtR">
-    <div class="arrows-section_arrows__BPayV">
-      ${[1, 2, 3, 4].map(n => `<div class="arrows-section_arrow___KXxg"><img alt="" loading="lazy" width="692" height="880" decoding="async" style="color:transparent" src="/images/${n}.jpg" /></div>`).join('')}
+    <div class="index-list">
+      ${items.map((it, i) => `
+      <a class="index-item" href="${it.href}">
+        <div class="index-num">0${i + 1}</div>
+        <div class="index-word">${it.word}</div>
+        <div class="index-desc">${it.desc}</div>
+        ${ARROW_SVG}
+      </a>`).join('')}
     </div>
   </div>
 </section>`;
 
-// dark hover-expanding image cards (homepage features)
-const featureCards = (items) => `
-<section class="features_root__CCic6" style="padding:8rem 0">
+// compact anchored step overview; the active pill follows your scroll
+const stepPills = (items) => `
+<section style="padding:1rem 0 3rem">
   <div class="container_container__v5gtR">
-    <div class="features_items__oPgtQ" style="margin-top:0">
-      ${items.map(it => `
-      <a class="features_item__IPG1i" href="${it.href}">
-        <div class="features_item-bg__gntQ1"><img alt="${it.title}" loading="lazy" width="1107" height="940" decoding="async" style="color:transparent" src="${it.img}" /></div>
-        <div class="features_item-title__uXmdj"><h3>${it.title}</h3></div>
-        <div class="features_item-text__X8po0"><p>${it.text}</p></div>
-        <div class="features_item-more__MtYBo"><span class="button_button-round__TFjlU button_color-secondary__FZDOG button_inversed__slQcI" style="display:inline-block"><span class="button_content__6Zh3n">${it.cta || 'Read More'}</span></span></div>
-      </a>`).join('')}
+    <div class="step-pills">
+      ${items.map((it, i) => `<a class="step-pill${i === 0 ? ' -active' : ''}" href="#${it.id}"><span class="n">0${i + 1}</span>${it.label}</a>`).join('')}
+    </div>
+  </div>
+</section>`;
+
+// underlined tabs with an image/text panel (sector switcher)
+const tabs = (items) => `
+<section class="page-section" style="padding-top:0">
+  <div class="container_container__v5gtR">
+    <div data-tabs>
+      <div class="tabs-nav">
+        ${items.map((it, i) => `<button type="button" class="tab-btn${i === 0 ? ' -active' : ''}">${it.tab}</button>`).join('')}
+      </div>
+      ${items.map((it, i) => `
+      <div class="tab-panel${i === 0 ? ' -active' : ''}">
+        <div class="tab-media"><img src="${it.img}" alt="${it.tab}" loading="lazy" /></div>
+        <div class="tab-body"><h3>${it.title}</h3><p>${it.text}</p>${it.points ? `<ul>${it.points.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}</div>
+      </div>`).join('')}
+    </div>
+  </div>
+</section>`;
+
+// three columns with steel numerals
+const miniSteps = (title, items) => `
+<section class="page-section -grey">
+  <div class="container_container__v5gtR">
+    <div class="latest-posts_title__BvrE_" style="margin-bottom:4rem"><h2>${title}</h2></div>
+    <div class="mini-steps">
+      ${items.map((it, i) => `<div class="mini-step"><div class="ms-num">0${i + 1}</div><h3>${it.h}</h3><p>${it.p}</p></div>`).join('')}
     </div>
   </div>
 </section>`;
@@ -235,10 +248,10 @@ pages.push({
   desc: 'Warehouse leasing, acquisition and occupier advisory in the Netherlands. STAAL represents the occupier — full search, negotiation and handover support.',
   content: `
 ${hero('Services', 'Find, lease, and acquire warehouse & logistics space in the Netherlands — <span class="em">with one independent advisor working only for you.</span>')}
-${darkRows([
-  { word: 'Lease', href: '#lease', img: '/images/buy.jpg', text: 'The fastest route into the Dutch market: full search, shortlists, viewings, and lease terms negotiated on your side.' },
-  { word: 'Buy', href: '#buy', img: '/images/sell.jpg', text: 'Buyer-side acquisition of logistics property: sourcing, assessment, due-diligence coordination, and price negotiation.' },
-  { word: 'Advise', href: '#advise', img: '/images/rent.jpg', text: 'For sitting tenants and owner-occupiers: renewals, expansions, relocations, and stay-or-go decisions with real market evidence.' }
+${indexList([
+  { word: 'Lease', href: '#lease', desc: 'The fastest route into the Dutch market: full search to signed lease, negotiated on your side.' },
+  { word: 'Buy', href: '#buy', desc: 'Buyer-side acquisition: sourcing, assessment, due diligence, and price negotiation.' },
+  { word: 'Advise', href: '#advise', desc: 'Renewals, expansions, relocations, and stay-or-go decisions with real market evidence.' }
 ])}
 ${statement('Whether you’re entering the Dutch market or expanding in it, the service is the same: <span class="em">we run the full process from requirement to keys, and we answer only to you.</span>')}
 ${splitSection([
@@ -283,21 +296,28 @@ pages.push({
   desc: 'How STAAL works: requirement intake, market search, viewings, suitability advice, negotiation, documentation and handover — one contact throughout.',
   content: `
 ${hero('From Brief<br />to Keys.', 'One advisor, one process, six steps — <span class="em">from the first conversation to the day you collect the keys.</span>')}
-${chevronStrip}
+${stepPills([
+  { id: 'intake', label: 'Intake' },
+  { id: 'search', label: 'Market Search' },
+  { id: 'viewings', label: 'Shortlist & Viewings' },
+  { id: 'advice', label: 'Suitability Advice' },
+  { id: 'negotiation', label: 'Negotiation' },
+  { id: 'handover', label: 'Handover' }
+])}
 ${splitSection([
   split('Intake', `
     <p>We start with your operation, not with listings. Throughput, inbound and outbound flows, racking, staff, growth plans — translated into a precise property brief: location, size, clear height, docks, floor load, power, office share, parking, timing and budget.</p>
-    <p>This step is free, and it’s where most costly mistakes are prevented.</p>`, '01'),
+    <p>This step is free, and it’s where most costly mistakes are prevented.</p>`, '01', 'intake'),
   split('Market Search', `
-    <p>We scan the full Dutch market against your brief — published listings, our owner and developer network, and space that hasn’t reached the market yet. You get a clear overview of what genuinely exists, not a portal export.</p>`, '02'),
+    <p>We scan the full Dutch market against your brief — published listings, our owner and developer network, and space that hasn’t reached the market yet. You get a clear overview of what genuinely exists, not a portal export.</p>`, '02', 'search'),
   split('Shortlist & Viewings', `
-    <p>We shortlist the buildings worth your time and organise viewings around your schedule — in person with you, or on your behalf with full photo and video reporting if you’re abroad.</p>`, '03'),
+    <p>We shortlist the buildings worth your time and organise viewings around your schedule — in person with you, or on your behalf with full photo and video reporting if you’re abroad.</p>`, '03', 'viewings'),
   split('Suitability Advice', `
-    <p>For each serious candidate: honest advice on structure, condition, compliance, zoning, energy, expansion potential and total occupancy cost. We’ll talk you out of the wrong building — that’s the job.</p>`, '04'),
+    <p>For each serious candidate: honest advice on structure, condition, compliance, zoning, energy, expansion potential and total occupancy cost. We’ll talk you out of the wrong building — that’s the job.</p>`, '04', 'advice'),
   split('Negotiation', `
-    <p>Lease or purchase, we negotiate on your side only: rent or price, incentives, indexation, break options, reinstatement, conditions precedent. Because we negotiate in this market continuously, we know what the market will actually give.</p>`, '05'),
+    <p>Lease or purchase, we negotiate on your side only: rent or price, incentives, indexation, break options, reinstatement, conditions precedent. Because we negotiate in this market continuously, we know what the market will actually give.</p>`, '05', 'negotiation'),
   split('Documentation & Handover', `
-    <p>We support the contract phase together with your (or our partner) legal counsel, manage the conditions through signing, and coordinate the handover — snagging, meter readings, condition reporting — so day one in the building is an operational day, not an administrative one.</p>`, '06')
+    <p>We support the contract phase together with your (or our partner) legal counsel, manage the conditions through signing, and coordinate the handover — snagging, meter readings, condition reporting — so day one in the building is an operational day, not an administrative one.</p>`, '06', 'handover')
 ])}
 ${statement('Throughout all six steps you have one point of contact: <span class="em">the person who took your brief is the person who hands you the keys.</span>', { grey: true })}
 ${faqBlock('Common <span class="em">Questions</span>', [
@@ -317,40 +337,31 @@ pages.push({
   desc: 'STAAL advises e-commerce, fulfilment, logistics, distribution and light-industrial occupiers on warehouse space across the Netherlands.',
   content: `
 ${hero('Sectors', 'Built for the businesses that move goods — <span class="em">especially international companies entering or expanding in the Dutch market.</span>')}
-${featureCards([
-  { title: 'E-commerce & Fulfilment', href: '#ecommerce', img: '/images/mortgage-services.jpg', text: 'Fulfilment centres, returns processing, and leases that scale with your volumes.' },
-  { title: 'Logistics & Distribution', href: '#logistics', img: '/images/property-management.jpg', text: 'Distribution centres and cross-docks, planned around your network, not a portal list.' },
-  { title: 'Light Industrial & Production', href: '#industrial', img: '/images/development.jpg', text: 'Power, permits and process-specific space, checked before you commit.' }
-])}
-${splitSection([
-  split('<span id="ecommerce"></span>E-commerce & Fulfilment', `
-    <p>D2C brands, marketplaces and 3PL fulfilment operations live or die on labour, parcel-network proximity and scalability. We search with those constraints first: workforce catchment, carrier depots, mezzanine potential, and leases with room to grow — or shrink.</p>
-    <ul>
-      <li>Fulfilment centres from first 2,000 m² unit to XXL</li>
-      <li>Returns processing and value-added services space</li>
-      <li>Scalable lease structures for fast-growing volumes</li>
-    </ul>`),
-  split('<span id="logistics"></span>Logistics & Distribution', `
-    <p>For 3PLs, freight forwarders and wholesale distribution, the building is a node in a network. Port drayage, the German hinterland, barge and rail terminals, driving-time coverage — we model the geography before we shortlist a single building.</p>
-    <ul>
-      <li>Distribution centres on the A15, A16, A58 and A67 corridors</li>
-      <li>Cross-dock and transshipment facilities</li>
-      <li>Multi-site network moves and consolidations</li>
-    </ul>`),
-  split('<span id="industrial"></span>Light Industrial & Production', `
-    <p>Assembly, processing and tech production need what standard logistics boxes often lack: power, permits and process-specific fit-out. We check grid capacity (netcongestie is real), zoning and environmental categories before you fall in love with a building.</p>
-    <ul>
-      <li>Production and assembly facilities with secured power</li>
-      <li>Combined production–warehouse–office configurations</li>
-      <li>Build-to-suit guidance where existing stock won’t fit</li>
-    </ul>`),
-  split('International Market Entry', `
-    <p>Our sweet spot: companies from abroad making their first Dutch commitment. We act as your local eyes, explain how the Dutch market actually works, and coordinate the local network — legal, tax, workforce, fit-out — around your timeline and your language.</p>
-    <ul>
-      <li>Market orientation and location strategy before you commit</li>
-      <li>Remote viewings with full reporting for overseas teams</li>
-      <li>One English-speaking contact from brief to keys</li>
-    </ul>`)
+${tabs([
+  {
+    tab: 'E-commerce &amp; Fulfilment', img: '/images/mortgage-services.jpg',
+    title: 'Built around labour, parcels and peak season',
+    text: 'D2C brands, marketplaces and 3PL fulfilment operations live or die on labour, parcel-network proximity and scalability. We search with those constraints first: workforce catchment, carrier depots, mezzanine potential, and leases with room to grow — or shrink.',
+    points: ['Fulfilment centres from a first 2,000 m² unit to XXL', 'Returns processing and value-added services space', 'Scalable lease structures for fast-growing volumes']
+  },
+  {
+    tab: 'Logistics &amp; Distribution', img: '/images/property-management.jpg',
+    title: 'The building is a node in your network',
+    text: 'For 3PLs, freight forwarders and wholesale distribution, geography decides. Port drayage, the German hinterland, barge and rail terminals, driving-time coverage — we model the network before we shortlist a single building.',
+    points: ['Distribution centres on the A15, A16, A58 and A67 corridors', 'Cross-dock and transshipment facilities', 'Multi-site network moves and consolidations']
+  },
+  {
+    tab: 'Light Industrial', img: '/images/development.jpg',
+    title: 'Power, permits and process-specific space',
+    text: 'Assembly, processing and tech production need what standard logistics boxes often lack. We check grid capacity (netcongestie is real), zoning and environmental categories before you fall in love with a building.',
+    points: ['Production and assembly facilities with secured power', 'Combined production–warehouse–office configurations', 'Build-to-suit guidance where existing stock won’t fit']
+  },
+  {
+    tab: 'Market Entry', img: '/images/1 (2).jpg',
+    title: 'Your first Dutch commitment, done properly',
+    text: 'Our sweet spot: companies from abroad entering the Netherlands. We act as your local eyes, explain how the Dutch market actually works, and coordinate the local network — legal, tax, workforce, fit-out — around your timeline and your language.',
+    points: ['Market orientation and location strategy before you commit', 'Remote viewings with full reporting for overseas teams', 'One English-speaking contact from brief to keys']
+  }
 ])}
 ${outro('Don’t see your exact operation? <span class="em">If it moves goods, we can help — or say honestly who can.</span>')}`
 });
@@ -363,16 +374,11 @@ pages.push({
   content: `
 ${hero('Partners', 'Boutique doesn’t mean alone. <span class="em">Around every transaction we coordinate a proven Dutch network — so you never have to assemble one yourself.</span>')}
 ${statement('We stay independent: partners are engaged case by case, you contract with them directly, <span class="em">and we take no hidden fees for introductions.</span>')}
-<section class="page-section -grey">
-  <div class="container_container__v5gtR">
-    <div class="rewired_label__db93N">How engagement works:</div>
-    <div>
-      <div class="rewired_list-item__R5lrq" data-index="01"><span>You brief us once. <span class="em">One conversation covers the property deal and everything needed around it.</span></span></div>
-      <div class="rewired_list-item__R5lrq" data-index="02"><span>We bring the right partner in. <span class="em">Matched to your case, introduced at the right moment, briefed by us.</span></span></div>
-      <div class="rewired_list-item__R5lrq" data-index="03"><span>You contract directly. <span class="em">Transparent scope and fees, while we keep the whole timeline coordinated.</span></span></div>
-    </div>
-  </div>
-</section>
+${miniSteps('How engagement <span class="em">works</span>', [
+  { h: 'You brief us once', p: 'One conversation covers the property deal and everything needed around it.' },
+  { h: 'We bring the right partner in', p: 'Matched to your case, introduced at the right moment, briefed by us.' },
+  { h: 'You contract directly', p: 'Transparent scope and fees, while we keep the whole timeline coordinated.' }
+])}
 ${splitSection([
   split('Legal & Tax', `
     <p>Dutch real estate lawyers and tax advisors who work in English and know occupier-side priorities — ROZ deviations, VAT-on-rent elections, transfer tax structuring and permit questions.</p>`),
@@ -395,11 +401,6 @@ pages.push({
   desc: 'STAAL Real Estate is a boutique occupier-side advisory for warehouse and logistics property in the Netherlands, based in Amsterdam.',
   content: `
 ${hero('Steel-strong<br />on your side.', 'STAAL is a boutique real estate advisory from Amsterdam — <span class="em">focused on warehouse and logistics space, acting for the occupier.</span>')}
-<section style="padding:0 0 2rem">
-  <div class="container_container__v5gtR">
-    <div class="why-us_preview__OofJt"><video src="/images/why-us.mp4" autoplay="" playsinline="" loop="" muted=""></video></div>
-  </div>
-</section>
 ${statement('<em>Staal</em> is Dutch for steel: the material the buildings are made of, <span class="em">and the way we negotiate for the companies inside them.</span>')}
 ${statsBand([
   ['100%', 'Occupier-side. We never act for the landlord.'],
