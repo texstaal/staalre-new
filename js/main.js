@@ -319,11 +319,11 @@
     if (metrics.desktop) {
       houseTransform = 'translateY(' + houseY + '%)';
     } else {
-      // phones: the building is small at rest (fully visible), then SCALES UP
-      // from its bottom edge while you scroll — rising over the headline and
-      // sitting behind the STAAL letters by the time they write themselves
-      var ms = lerp(1, 2.05, clamp(p / 0.5, 0, 1));
-      var drift = lerp(0, -10, seg(p, 0.45, 0.95)); // keeps moving inside the letters
+      // phones: the building starts fully zoomed out (grass visible), then
+      // SCALES UP from its bottom edge while you scroll — rising over the
+      // headline and covering the letters area by the time they fill in
+      var ms = lerp(1, 2.5, clamp(p / 0.35, 0, 1));
+      var drift = lerp(0, -12, seg(p, 0.35, 0.95)); // keeps moving inside the letters
       houseTransform = 'translateY(' + (houseY + drift) + '%) scale(' + ms + ')';
     }
     r.houses.forEach(function (h) { h.style.transform = houseTransform; });

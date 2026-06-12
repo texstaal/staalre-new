@@ -478,10 +478,10 @@ main{background:#fff}
 
 /* ---- mobile polish ---- */
 @media(max-width:767px){
-  /* whole warehouse visible at rest (mild 135% crop); JS scales it up
-     while you scroll so it rises over the headline and ends up behind
-     the STAAL letters (transform-origin is bottom center) */
-  .hero_house__aJy7p{width:135%;left:-17.5%;right:auto}
+  /* fully zoomed out at rest — the whole cutout incl. the grass beside the
+     building is visible; JS scales it up while you scroll so it rises over
+     the headline and ends up behind the STAAL letters */
+  .hero_house__aJy7p{width:100%;left:0;right:auto}
   /* giant service words (Lease/Buy/Manage) were clipping off-screen */
   .services_item-more__pkhNR{font-size:7rem}
   /* feature cards: side-by-side swipe with snap + a peek of the next card */
