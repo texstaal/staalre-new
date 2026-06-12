@@ -155,7 +155,7 @@ setInner('features_item-text__X8po0', 'div', [
 body = body.replace(/(latest-posts_title__BvrE_">\s*<h2>\s*<div>)([\s\S]*?)(<\/div>\s*<\/h2>)/,
   '$1Insights<br /><span class="em">&amp; Resources</span>$3');
 setInner('latest-posts_text__1m3Av', 'div',
-  '<p>Practical insight on the Dutch logistics market — site selection, lease terms, and what to know before you sign.</p>');
+  '<p>Practical insight on the Dutch logistics market: site selection, lease terms, and what to know before you sign.</p>');
 body = body.replaceAll('Visit Our Blog', 'Read Our Insights');
 body = body.replaceAll('Q1 2026 NYC Market Report', 'A Foreign Company’s Guide to Leasing Warehouse Space in the Netherlands');
 body = body.replaceAll('Philly Real Estate: A Winter Chill or a Spring Opportunity?', 'Rotterdam, Venlo or Tilburg: Choosing the Right Dutch Logistics Hub');
@@ -165,8 +165,8 @@ body = body.replaceAll('/blog/Q1-2026-NYC-Market-Report', '/blog/leasing-warehou
 body = body.replaceAll('/blog/blog-post-1', '/blog/dutch-logistics-hub-comparison');
 body = body.replaceAll('/blog/What-1M-Buys-in-Different-NYC-Neighborhoods', '/blog/lease-or-buy-distribution');
 setInner('post-entry_text__Xeca_', 'div', [
-  '<p>What international occupiers need to know before signing a Dutch lease — from indexation and service charges to break options.</p>',
-  '<p>The major Dutch logistics regions compared on location, labour, transport links and availability — and how to choose.</p>',
+  '<p>What international occupiers need to know before signing a Dutch lease: indexation, service charges, and break options.</p>',
+  '<p>The major Dutch logistics regions compared on location, labour, transport links and availability, and how to choose between them.</p>',
   '<p>A practical look at when leasing beats buying for a distribution operation in the Netherlands, and when it doesn’t.</p>'
 ]);
 
@@ -456,6 +456,43 @@ main{background:#fff}
 
 /* 404 */
 .notfound{min-height:55vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:3rem;padding:8rem 0}
+
+/* responsive footer: the sticky reveal trick is desktop-only — on phones the
+   footer is a normal block (sticky + negative z-index is flaky on mobile
+   Safari), plus guards against fixed-width overflow at any width */
+@media(max-width:767px){
+  .footer_wrapper__9GQwi{position:static;z-index:0}
+  .footer_newsletter-container__POI_T{width:auto;max-width:100%}
+}
+.footer_newsletter-container__POI_T{max-width:100%}
+.footer_logo__5ncK8 svg{max-width:100%;height:auto}
+.footer_copyright-container__yt1ht{flex-wrap:wrap}
+
+/* anchored sections clear the sticky header */
+[id]{scroll-margin-top:10rem}
+
+/* stats band */
+.stats-row{display:grid;gap:4rem}
+@media(min-width:768px){.stats-row{grid-template-columns:repeat(3,1fr);gap:3rem}}
+.stat{border-top:1px solid rgba(21,23,23,.15);padding-top:2.4rem}
+.stat-num{font-weight:700;font-size:5.6rem;line-height:1;letter-spacing:-.03em}
+@media(min-width:768px){.stat-num{font-size:9.6rem}}
+.stat-label{margin-top:1.4rem;font-weight:500;font-size:1.5rem;line-height:1.5;color:#7a7a7a}
+@media(min-width:768px){.stat-label{font-size:2rem}}
+
+/* FAQ (native details/summary, styled like the numbered rows) */
+.faq{border-bottom:1px solid rgba(21,23,23,.1)}
+.faq-item{border-top:1px solid rgba(21,23,23,.1)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:3rem;padding:2.6rem 0;font-weight:500;font-size:1.9rem;line-height:1.25;letter-spacing:-.01em}
+@media(min-width:768px){.faq-item summary{padding:3.6rem 0;font-size:3rem;letter-spacing:-.02em}}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:after{content:"";flex:0 0 auto;width:2rem;height:2rem;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23151717" d="M11 5h2v14h-2z"/><path fill="%23151717" d="M5 11h14v2H5z"/></svg>') center/contain no-repeat;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+@media(min-width:768px){.faq-item summary:after{width:2.6rem;height:2.6rem}}
+.faq-item[open] summary:after{transform:rotate(45deg)}
+.faq-item summary:hover{color:${ACCENT}}
+.faq-body{padding:0 0 3rem;max-width:81.2rem}
+.faq-body p{font-weight:400;font-size:1.6rem;line-height:1.6;color:#3c3e3e}
+@media(min-width:768px){.faq-body p{font-size:2rem}}
 `;
 fs.writeFileSync('css/staal.css', staalCss, 'utf8');
 
