@@ -72,9 +72,9 @@ function setInner(cls, tag, vals) {
 }
 
 /* ---- hero ---- */
-body = body.replaceAll('Find What Moves You', 'Built on Solid Ground');
+body = body.replaceAll('Find What Moves You', 'Make Your Move.');
 setInner('hero_text__R6LQ5', 'div',
-  '<p>Warehouse &amp; logistics real estate advisory in the Netherlands. <span class="em">We help international businesses find, lease, and acquire the right space.</span></p>');
+  '<p>The Netherlands is Europe’s logistics heart. <span class="em">We secure the space your growth runs on.</span></p>');
 body = body.replaceAll('Find Properties', 'Find Your Space');
 
 /* ---- why STAAL ---- */
@@ -248,8 +248,8 @@ for (const [orig, label, href] of burgerMap) {
 }
 
 const SITE_URL = 'https://staalre.com/';
-const TITLE = 'STAAL Real Estate | Warehouse & Logistics Real Estate Advisory in the Netherlands';
-const DESC = 'STAAL Real Estate is a boutique advisory helping international businesses find, lease and acquire warehouse and logistics property in the Netherlands. Independent, occupier-focused and hands-on.';
+const TITLE = 'STAAL Real Estate | Make Your Move — Warehouse & Logistics Space in the Netherlands';
+const DESC = 'The Netherlands is Europe’s logistics heart. STAAL helps international businesses find, lease and acquire the warehouse space their growth runs on. Independent, occupier-only, hands-on.';
 const ACCENT = '#1F4257';        // steel-blue brand accent (STAAL = steel) — on light
 const ACCENT_BRIGHT = '#6FA0C0'; // lighter steel for hovers on the dark footer
 
