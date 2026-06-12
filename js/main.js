@@ -315,7 +315,17 @@
     // 0 ("landed", doors at the bottom) near p=0.45 → keeps panning inside the
     // letters. Both the solid building and the copy in the letters share it.
     var houseY = metrics.houseStart * (1 - Math.min(p, 0.9) / 0.45);
-    var houseTransform = 'translateY(' + houseY + '%)';
+    var houseTransform;
+    if (metrics.desktop) {
+      houseTransform = 'translateY(' + houseY + '%)';
+    } else {
+      // phones: the building is small at rest (fully visible), then SCALES UP
+      // from its bottom edge while you scroll — rising over the headline and
+      // sitting behind the STAAL letters by the time they write themselves
+      var ms = lerp(1, 2.05, clamp(p / 0.5, 0, 1));
+      var drift = lerp(0, -10, seg(p, 0.45, 0.95)); // keeps moving inside the letters
+      houseTransform = 'translateY(' + (houseY + drift) + '%) scale(' + ms + ')';
+    }
     r.houses.forEach(function (h) { h.style.transform = houseTransform; });
 
     // headline is overtaken / fades upward

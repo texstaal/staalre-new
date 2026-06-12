@@ -478,15 +478,22 @@ main{background:#fff}
 
 /* ---- mobile polish ---- */
 @media(max-width:767px){
-  /* the warehouse sits higher on phones: wider than the viewport and
-     positioned by JS so the roofline lands just under the hero button */
-  .hero_house__aJy7p{width:170%;left:-35%;right:auto}
+  /* whole warehouse visible at rest (mild 135% crop); JS scales it up
+     while you scroll so it rises over the headline and ends up behind
+     the STAAL letters (transform-origin is bottom center) */
+  .hero_house__aJy7p{width:135%;left:-17.5%;right:auto}
   /* giant service words (Lease/Buy/Manage) were clipping off-screen */
   .services_item-more__pkhNR{font-size:7rem}
-  /* feature cards: stack vertically instead of an off-screen side-scroller */
-  .features_items__oPgtQ{grid-auto-flow:row;margin:6rem 0 0;padding:0;overflow:visible}
-  .features_item__IPG1i{width:auto;height:36rem}
+  /* feature cards: side-by-side swipe with snap + a peek of the next card */
+  .features_items__oPgtQ{grid-auto-flow:column;grid-auto-columns:78%;gap:1.6rem;margin:6rem -2rem 0;padding:0 2rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .features_item__IPG1i{width:auto;height:38rem;scroll-snap-align:center}
 }
+
+/* footer contacts: never clip the phone number — items may wrap to a new
+   row, numbers stay on one line */
+.footer_contact__fFxbr{min-width:0}
+.footer_contact-value__e1jbK span{white-space:nowrap}
+@media(min-width:768px){.footer_contacts__HFiAl{gap:5rem;flex-wrap:wrap}}
 
 /* ---- inner-page components (original, same design tokens) ---- */
 /* editorial index: numbered giant words, light theme, arrow slides on hover */
