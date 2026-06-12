@@ -65,6 +65,28 @@ const wordmark = buildWord('STAAL', 280, 975, 280, 10);
 const heroWord = buildWord('STAAL', 280, 977, 280, 10);
 const heroSub = buildWord('Real Estate', 76, 977, 419, 4);
 
+// Instrument Sans builds glyphs from OVERLAPPING component contours — fine when
+// filled, but the hero letters are STROKED (the "writing" effect), so every
+// internal seam shows as a white line crossing the letter. Boolean-union each
+// glyph's contours into a single clean outline so the stroke is seam-free. Only
+// the hero outline needs this; the wordmark/mask are filled and unaffected.
+const paper = require('paper-jsdom');
+paper.setup(new paper.Size(2000, 2000));
+function cleanD(d) {
+  const item = new paper.CompoundPath({ pathData: d, insert: false });
+  const united = item.unite(item, { insert: false }); // resolves self-overlap
+  const out = united.pathData;
+  item.remove();
+  united.remove();
+  return out;
+}
+function cleanWord(word) {
+  word.paths = word.paths.map(p => ({ d: cleanD(p.d), char: p.char }));
+  return word;
+}
+cleanWord(heroWord);
+cleanWord(heroSub);
+
 function svgPaths(word, extraAttr) {
   return word.paths
     .map(p => `<path fill="currentColor" d="${p.d}" data-letter="${p.char}"${extraAttr || ''}></path>`)

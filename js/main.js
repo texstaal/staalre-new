@@ -126,15 +126,17 @@
     });
   }
 
-  /* ---------- newsletter form (no backend locally) ---------- */
-  var newsForm = qs('.footer_newsletter-form__0k_h5 form');
-  if (newsForm) {
-    newsForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var input = newsForm.querySelector('input');
-      if (input) input.value = '';
-    });
-  }
+  /* ---------- CTA routing ----------
+     The FIND site opened dialogs from these buttons; the dialog markup was
+     client-rendered and isn't in the static DOM, so they route to pages. */
+  qsa('button[aria-haspopup="dialog"]').forEach(function (btn) {
+    var to = '/contact';
+    if (btn.closest('.services_item__D_u7g')) to = '/services';
+    else if (btn.closest('.features_item-more__MtYBo')) to = '/partners';
+    if (btn.classList.contains('services_item__D_u7g')) to = '/services';
+    btn.addEventListener('click', function () { window.location.href = to; });
+  });
+  // (newsletter + contact submission live in js/forms.js)
 
   /* ---------- reveal-on-scroll ---------- */
   var revealGroups = [
@@ -297,17 +299,16 @@
 
     // warehouse rises: roofline visible mid-screen at rest, overhead doors
     // reach the viewport bottom edge (translateY 0) at the end of the rise
-    var houseT = easeInOut(seg(p, 0, 0.45));
-    var houseY = lerp(metrics.houseStart, 0, houseT);
-    if (r.houses[0]) r.houses[0].style.transform = 'translateY(' + houseY + '%)';
-    // the warehouse INSIDE the letters keeps panning after the building has
-    // finished rising, so the texture never freezes: it matches the solid
-    // building through the hand-off (p<=0.45), then keeps scrolling within the
-    // letter mask as you continue down the hero.
-    if (r.houses[1]) {
-      var innerExtra = lerp(0, -24, easeInOut(seg(p, 0.45, 0.95)));
-      r.houses[1].style.transform = 'translateY(' + (houseY + innerExtra) + '%)';
-    }
+    // warehouse pans at a STEADY (linear) rate the whole way down so scrolling
+    // feels continuous. The old version eased the rise OUT and the in-letter
+    // pan IN, and the two met at zero velocity around p=0.45 (just as the
+    // writing finished) — which read as the building pausing. A single linear
+    // pan keeps a constant speed: houseStart (lower, sky above) at p=0 →
+    // 0 ("landed", doors at the bottom) near p=0.45 → keeps panning inside the
+    // letters. Both the solid building and the copy in the letters share it.
+    var houseY = metrics.houseStart * (1 - Math.min(p, 0.9) / 0.45);
+    var houseTransform = 'translateY(' + houseY + '%)';
+    r.houses.forEach(function (h) { h.style.transform = houseTransform; });
 
     // headline is overtaken / fades upward
     if (r.content) {

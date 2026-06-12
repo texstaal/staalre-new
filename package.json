@@ -3,6 +3,7 @@
     "shadcn": "^4.10.0"
   },
   "dependencies": {
-    "fontkit": "^2.0.4"
+    "fontkit": "^2.0.4",
+    "paper-jsdom": "^0.12.18"
   }
 }

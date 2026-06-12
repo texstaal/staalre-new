@@ -187,9 +187,6 @@ for (const [from, to] of navMap) {
 // burger (mobile) menu — plain-text links and dropdown triggers
 body = body.replace(/(href="\/search">\s*)Search/g, '$1Services');
 body = body.replace(/(href="\/agents">\s*)Agents/g, '$1Process');
-for (const [from, to] of [['Join', 'Sectors'], ['Paperwork', 'Insights'], ['Resources', 'Partners']]) {
-  body = body.replace(new RegExp('(burger-menu_nav-item__mCA9u"[^>]*aria-controls="[^"]*">\\s*)' + from, 'g'), '$1' + to);
-}
 
 /* ---- footer newsletter + sublinks ---- */
 body = body.replace('Subscribe to our Newsletter!', 'Get our market updates.');
@@ -207,14 +204,48 @@ body = body.replaceAll('FIND', 'STAAL');
 body = body.replaceAll('hello@findrealestate.com', 'tex@staalre.com');
 body = body.replaceAll('+1 212 994 9965', '+31 6 28 36 36 31');
 body = body.replaceAll('tel:+12129949965', 'tel:+31628363631');
-body = body.replace('5 West 37th Street, 12th Floor,', 'Speerstraat 7-2');
-body = body.replace(/<div>\s*New York, NY 10018\s*<\/div>\s*/, '');
-body = body.replace(/href="geo:[^"]*"/, 'href="https://maps.google.com/?q=Speerstraat+7-2"');
+body = body.replace('5 West 37th Street, 12th Floor,', 'Speerstraat 7-2,');
+body = body.replace('New York, NY 10018', 'Amsterdam, 1076XM, The Netherlands');
+body = body.replace(/href="geo:[^"]*"/, 'href="https://maps.google.com/?q=Speerstraat+7-2,+Amsterdam"');
 
 /* ---- external FIND links ---- */
-body = body.replaceAll('https://app.findrealestate.com/authentication/sign-in', '#');
+body = body.replaceAll('https://app.findrealestate.com/authentication/sign-in', '/contact');
 body = body.replace(/href="https:\/\/(?:www\.)?(?:facebook|instagram|youtube)\.com\/[^"]*"/g, 'href="#"');
 body = body.replace(/href="https:\/\/www\.linkedin\.com\/[^"]*"/g, 'href="#"');
+
+/* ---- route internal links to the real pages ---- */
+// "Work With Us" in the occupiers section goes to contact, not the old /join
+body = body.replace(/(for-agents_controls__pBRRC">\s*<a[^>]*href=")\/join(")/, '$1/contact$2');
+body = body.replaceAll('href="/search"', 'href="/services"');
+body = body.replaceAll('href="/agents"', 'href="/process"');
+body = body.replaceAll('href="/join"', 'href="/sectors"');
+body = body.replaceAll('href="/blog"', 'href="/insights"');
+body = body.replaceAll('/blog/', '/insights/');
+body = body.replaceAll('href="/terms-of-service"', 'href="/terms"');
+body = body.replaceAll('href="/privacy-policy"', 'href="/privacy"');
+body = body.replaceAll('href="/operating-procedure"', 'href="/cookie-policy"');
+// Disclaimer pointed at an external NY-state PDF; Press has no page — local now
+body = body.replace(/<a target="_blank" href="https:\/\/dos\.ny\.gov[^"]*">([\s\S]*?)<\/a>/, '<a href="/disclaimer">$1</a>');
+body = body.replace(/<a href="\/press-and-media">[\s\S]*?<\/a>\s*/, '');
+
+/* ---- header + burger nav: radix dropdown triggers -> direct links ---- */
+const navHrefs = { Sectors: '/sectors', Insights: '/insights', Partners: '/partners', About: '/about' };
+for (const [label, href] of Object.entries(navHrefs)) {
+  // desktop header item (drop the chevron arrow; plain roll-hover link)
+  body = body.replace(
+    new RegExp('<div>\\s*<div class="header_nav-item__Wn05d" type="button"[^>]*>\\s*<span data-text="' + label + '">[\\s\\S]*?</div>\\s*</div>\\s*</div>'),
+    '<div class="header_nav-item__Wn05d"><a href="' + href + '"><span data-text="' + label + '">' + label + '\n</span></a></div>'
+  );
+}
+// burger items still carry the ORIGINAL FIND labels (Join/Paperwork/Resources/
+// About) at this point — convert each whole dropdown block to a direct link
+const burgerMap = [['Join', 'Sectors', '/sectors'], ['Paperwork', 'Insights', '/insights'], ['Resources', 'Partners', '/partners'], ['About', 'About', '/about']];
+for (const [orig, label, href] of burgerMap) {
+  body = body.replace(
+    new RegExp('<div data-state="closed">\\s*<div class="burger-menu_nav-item__mCA9u" type="button"[^>]*>\\s*' + orig + '[\\s\\S]*?burger-menu_nav-item-content__kj0Kw">\\s*</div>\\s*</div>'),
+    '<div class="burger-menu_nav-item__mCA9u"><a href="' + href + '">' + label + '\n</a></div>'
+  );
+}
 
 const SITE_URL = 'https://staalre.com/';
 const TITLE = 'STAAL Real Estate | Warehouse & Logistics Real Estate Advisory in the Netherlands';
@@ -273,7 +304,7 @@ const head = `<!DOCTYPE html>
     <link rel="stylesheet" href="css/17424100e880a33c.css" data-precedence="next" />
     <link rel="stylesheet" href="css/staal.css" />
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"RealEstateAgent","name":"STAAL Real Estate","description":"${DESC}","url":"${SITE_URL}","email":"tex@staalre.com","telephone":"+31628363631","areaServed":"NL","address":{"@type":"PostalAddress","streetAddress":"Speerstraat 7-2","addressCountry":"NL"},"knowsAbout":["Warehouse real estate","Logistics property","Tenant representation","Occupier advisory"]}
+    {"@context":"https://schema.org","@type":"RealEstateAgent","name":"STAAL Real Estate","description":"${DESC}","url":"${SITE_URL}","email":"tex@staalre.com","telephone":"+31628363631","areaServed":"NL","address":{"@type":"PostalAddress","streetAddress":"Speerstraat 7-2","addressLocality":"Amsterdam","postalCode":"1076XM","addressCountry":"NL"},"knowsAbout":["Warehouse real estate","Logistics property","Tenant representation","Occupier advisory"]}
     </script>
   </head>
 `;
@@ -283,6 +314,7 @@ const tail = `
     <script src="js/lenis.min.js"></script>
     <script src="js/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/forms.js"></script>
   </body>
 </html>
 `;
@@ -331,6 +363,99 @@ main{background:#fff}
 .footer_newsletter-submit-btn__HrC3v:hover{color:${ACCENT_BRIGHT}}
 /* newsletter field underline on focus */
 .footer_input-wrapper__1l5CZ:focus-within{border-bottom-color:${ACCENT_BRIGHT}}
+
+/* ====================================================================
+   SUBPAGE STYLES — same tokens as the FIND modules (rem scale, #151717,
+   #f1f1f1, .em grey). Used by the generated inner pages.
+   ==================================================================== */
+.page-hero{padding:6rem 0 4rem}
+@media(min-width:768px){.page-hero{padding:15rem 0 8rem}}
+.page-hero h1{font-weight:700;font-size:4.4rem;line-height:1.05;letter-spacing:-.02em;margin:0}
+@media(min-width:768px){.page-hero h1{font-size:9.6rem;letter-spacing:-.04em}}
+.page-hero .page-hero-sub{margin-top:2rem;font-weight:500;font-size:1.8rem;line-height:1.5;max-width:81.2rem}
+@media(min-width:768px){.page-hero .page-hero-sub{margin-top:3rem;font-size:3.2rem;line-height:130%;letter-spacing:-.01em}}
+.page-section{padding:4rem 0}
+@media(min-width:768px){.page-section{padding:7rem 0}}
+.page-section.-grey{background:#f1f1f1}
+.page-section.-dark{background:#151717;color:#fff}
+.page-section.-dark .em{color:hsla(0,0%,100%,.4)}
+
+/* split rows (label left, content right) — mirrors labeled-section */
+.split{display:flex;flex-direction:column;gap:3rem;padding:4rem 0;border-top:1px solid rgba(21,23,23,.1)}
+@media(min-width:768px){.split{flex-direction:row;gap:6rem;padding:7rem 0}
+.split>.split-label{flex:1 1}
+.split>.split-content{max-width:97.6rem;flex:2 1}}
+.split-label{font-size:2.6rem;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+@media(min-width:768px){.split-label{font-size:3.6rem}}
+.split-label .num{display:block;font-size:1.4rem;color:#b3b3b3;margin-bottom:1.6rem}
+@media(min-width:768px){.split-label .num{font-size:2rem}}
+.split-content p{font-weight:500;font-size:1.7rem;line-height:1.55}
+@media(min-width:768px){.split-content p{font-size:2.2rem;line-height:1.5}}
+.split-content p+p{margin-top:2rem}
+.split-content ul{margin:2.4rem 0 0;padding:0;list-style:none}
+.split-content li{position:relative;padding:1.6rem 0 1.6rem 3.4rem;font-weight:500;font-size:1.6rem;line-height:1.5;border-top:1px solid rgba(21,23,23,.08)}
+@media(min-width:768px){.split-content li{font-size:2rem;padding:2rem 0 2rem 4.2rem}}
+.split-content li:before{content:"";position:absolute;left:.2rem;top:2.35rem;width:1.6rem;height:1.6rem;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%231F4257" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>') center/contain no-repeat}
+.split-content .btn-row{margin-top:3rem}
+
+/* big intro statement */
+.statement{font-weight:500;font-size:2.6rem;line-height:1.3;letter-spacing:-.01em;max-width:97.6rem}
+@media(min-width:768px){.statement{font-size:4.4rem;line-height:1.15;letter-spacing:-.02em}}
+
+/* article prose */
+.article-head{padding:6rem 0 0}
+@media(min-width:768px){.article-head{padding:13rem 0 0}}
+.article-date{font-weight:500;font-size:1.4rem;color:#b3b3b3;margin-bottom:2rem}
+@media(min-width:768px){.article-date{font-size:1.8rem}}
+.article-head h1{font-weight:700;font-size:3.4rem;line-height:1.1;letter-spacing:-.02em;max-width:97.6rem}
+@media(min-width:768px){.article-head h1{font-size:6.4rem;letter-spacing:-.03em}}
+.article-hero-img{margin:4rem 0 0;aspect-ratio:976/450;overflow:hidden}
+@media(min-width:768px){.article-hero-img{margin:6rem 0 0}}
+.article-hero-img img{width:100%;height:100%;object-fit:cover}
+.article-prose{max-width:81.2rem;margin:0 auto;padding:5rem 0 2rem}
+@media(min-width:768px){.article-prose{padding:8rem 0 4rem}}
+.article-prose h2{font-weight:600;font-size:2.4rem;line-height:1.2;letter-spacing:-.01em;margin:4rem 0 1.6rem}
+@media(min-width:768px){.article-prose h2{font-size:3.4rem;margin:5.5rem 0 2rem}}
+.article-prose h3{font-weight:600;font-size:1.9rem;margin:3rem 0 1.2rem}
+@media(min-width:768px){.article-prose h3{font-size:2.4rem}}
+.article-prose p{font-weight:400;font-size:1.6rem;line-height:1.65;margin:0 0 1.8rem}
+@media(min-width:768px){.article-prose p{font-size:2rem;margin:0 0 2.4rem}}
+.article-prose ul,.article-prose ol{margin:0 0 2.4rem;padding-left:2.4rem}
+.article-prose li{font-size:1.6rem;line-height:1.6;margin:.8rem 0}
+@media(min-width:768px){.article-prose li{font-size:2rem}}
+.article-prose strong{font-weight:600}
+.article-prose a{color:${ACCENT};text-decoration:underline}
+.legal-updated{font-size:1.4rem;color:#b3b3b3;margin-bottom:3rem}
+@media(min-width:768px){.legal-updated{font-size:1.8rem}}
+
+/* contact page */
+.contact-grid{display:grid;gap:5rem;padding:2rem 0 6rem}
+@media(min-width:768px){.contact-grid{grid-template-columns:1fr 97.6rem;gap:8rem;padding:2rem 0 10rem}}
+.contact-block+.contact-block{margin-top:3.6rem}
+.contact-label{font-size:1.4rem;color:#b3b3b3;margin-bottom:1rem}
+@media(min-width:768px){.contact-label{font-size:1.8rem}}
+.contact-value,.contact-value a{font-weight:500;font-size:1.8rem;line-height:1.5;color:#151717}
+@media(min-width:768px){.contact-value,.contact-value a{font-size:2.2rem}}
+.contact-value a:hover{color:${ACCENT}}
+.contact-form{display:grid;gap:2.4rem}
+@media(min-width:768px){.contact-form{grid-template-columns:1fr 1fr;gap:3rem}}
+.form-field{display:flex;flex-direction:column;gap:.8rem}
+.form-field.-full{grid-column:1/-1}
+.form-field label{font-weight:500;font-size:1.4rem;color:#151717}
+@media(min-width:768px){.form-field label{font-size:1.6rem}}
+.form-field input,.form-field select,.form-field textarea{appearance:none;border:1px solid rgba(21,23,23,.25);background:#fff;border-radius:.4rem;padding:1.5rem 1.8rem;font-family:var(--font-primary);font-size:1.6rem;color:#151717;outline:none;transition:border-color .2s}
+@media(min-width:768px){.form-field input,.form-field select,.form-field textarea{font-size:1.8rem}}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:${ACCENT}}
+.form-field textarea{min-height:14rem;resize:vertical}
+.form-actions{grid-column:1/-1;display:flex;align-items:center;gap:2.4rem;flex-wrap:wrap}
+.form-note{font-size:1.3rem;color:#b3b3b3;max-width:46rem}
+@media(min-width:768px){.form-note{font-size:1.5rem}}
+.form-status{grid-column:1/-1;display:none;padding:1.6rem 2rem;border-radius:.4rem;font-weight:500;font-size:1.6rem}
+.form-status.-ok{display:block;background:rgba(31,66,87,.08);color:${ACCENT}}
+.form-status.-err{display:block;background:rgba(170,40,40,.07);color:#a22}
+
+/* 404 */
+.notfound{min-height:55vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:3rem;padding:8rem 0}
 `;
 fs.writeFileSync('css/staal.css', staalCss, 'utf8');
 
