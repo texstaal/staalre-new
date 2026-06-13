@@ -321,20 +321,22 @@ const tail = `
 
 /* ---- interactive Netherlands logistics map (replaces the chevron strip) ---- */
 const nlmap = JSON.parse(fs.readFileSync('nl-map.json', 'utf8'));
-const [, , vbW, vbH] = nlmap.viewBox.split(' ').map(Number);
-const mapPins = nlmap.hubs.map((h, i) => {
-  const xp = (h.x / vbW * 100).toFixed(2), yp = (h.y / vbH * 100).toFixed(2);
-  const flip = (h.x / vbW * 100) > 60 ? ' -flip' : '';
-  return `<button type="button" class="nl-pin${i === 0 ? ' -active' : ''}${flip}" data-i="${i}" style="left:${xp}%;top:${yp}%" aria-label="${h.name}"><span class="nl-pin-dot"></span><span class="nl-pin-label">${h.name}</span></button>`;
-}).join('');
-const mapPanels = nlmap.hubs.map((h, i) =>
-  `<div class="nl-hub-panel${i === 0 ? ' -active' : ''}" data-i="${i}"><div class="nl-hub-name">${h.name}</div><p class="nl-hub-note">${h.note}</p></div>`).join('');
+// pins live INSIDE the svg (shared coordinate system) so they always line up
+const mapPins = nlmap.hubs.map((h, i) =>
+  `<g class="nl-pin${i === 0 ? ' -active' : ''}" data-i="${i}"><circle class="nl-pin-hit" cx="${h.x}" cy="${h.y}" r="20" /><circle class="nl-pin-halo" cx="${h.x}" cy="${h.y}" r="6" /><circle class="nl-pin-dot" cx="${h.x}" cy="${h.y}" r="5.5" /></g>`).join('');
+const mapRows = nlmap.hubs.map((h, i) =>
+  `<li><button type="button" class="nl-hub-row${i === 0 ? ' -active' : ''}" data-i="${i}"><span class="nl-hub-tick"></span><span>${h.name}</span></button></li>`).join('');
+const mapNotes = nlmap.hubs.map((h, i) =>
+  `<p class="nl-hub-note${i === 0 ? ' -active' : ''}" data-i="${i}">${h.note}</p>`).join('');
 const mapHtml = `<div class="nl-map" data-nl-map>
-            <div class="nl-map-figure" style="aspect-ratio:${vbW}/${vbH}">
-              <svg class="nl-map-svg" viewBox="${nlmap.viewBox}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="nl-map-shape" d="${nlmap.path}" /></svg>
-              ${mapPins}
+            <div class="nl-map-aside">
+              <div class="nl-map-eyebrow">Where we work</div>
+              <ul class="nl-hub-list">${mapRows}</ul>
+              <div class="nl-map-notes">${mapNotes}</div>
             </div>
-            <div class="nl-map-panels"><div class="nl-map-eyebrow">Where we work</div>${mapPanels}</div>
+            <div class="nl-map-figure">
+              <svg class="nl-map-svg" viewBox="${nlmap.viewBox}" xmlns="http://www.w3.org/2000/svg"><path class="nl-map-shape" d="${nlmap.path}" /><g class="nl-pins">${mapPins}</g></svg>
+            </div>
           </div>
           `;
 body = body.replace(
@@ -575,28 +577,36 @@ main{background:#fff}
 .tab-body li{padding:1.2rem 0;border-top:1px solid rgba(21,23,23,.08);font-weight:500;font-size:1.5rem}
 @media(min-width:768px){.tab-body li{font-size:1.8rem;padding:1.5rem 0}}
 
-/* interactive Netherlands logistics map (homepage, replaces chevron strip) */
-.nl-map{display:grid;gap:3.5rem;margin-top:5rem}
-@media(min-width:768px){.nl-map{grid-template-columns:1.15fr 1fr;gap:6rem;align-items:center;margin-top:8rem}}
-.nl-map-figure{position:relative;width:100%;max-width:42rem;margin:0 auto;overflow:visible}
+/* interactive Netherlands logistics map (homepage, replaces chevron strip).
+   pins are inside the SVG so they always align with the coastline. */
+.nl-map{display:grid;gap:4rem;margin-top:5rem;align-items:center}
+@media(min-width:768px){.nl-map{grid-template-columns:0.8fr 1fr;gap:7rem;margin-top:9rem}}
+.nl-map-figure{order:-1;position:relative;width:100%;max-width:40rem;margin:0 auto}
+@media(min-width:768px){.nl-map-figure{order:0;max-width:46rem}}
 .nl-map-svg{width:100%;height:auto;display:block;overflow:visible}
-.nl-map-shape{fill:#e9e8e4;stroke:rgba(21,23,23,.16);stroke-width:1.2;stroke-linejoin:round}
-.nl-pin{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:.8rem;background:none;border:none;padding:0;cursor:pointer;font-family:var(--font-primary);z-index:1}
-.nl-pin.-flip{flex-direction:row-reverse}
-.nl-pin.-active{z-index:2}
-.nl-pin-dot{flex:0 0 auto;width:1.1rem;height:1.1rem;border-radius:50%;background:#151717;box-shadow:0 0 0 0 rgba(31,66,87,.3);transition:transform .25s,background .25s,box-shadow .25s}
-.nl-pin-label{font-weight:500;font-size:1.3rem;color:#1F4257;white-space:nowrap;opacity:0;transition:opacity .25s}
-@media(min-width:768px){.nl-pin-label{font-size:1.5rem}}
-.nl-pin:hover .nl-pin-dot,.nl-pin.-active .nl-pin-dot{background:#1F4257;transform:scale(1.4);box-shadow:0 0 0 .6rem rgba(31,66,87,.13)}
-.nl-pin:hover .nl-pin-label,.nl-pin.-active .nl-pin-label{opacity:1}
-.nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:2.5rem}
-@media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem}}
-.nl-hub-panel{display:none}
-.nl-hub-panel.-active{display:block;animation:tabIn .45s cubic-bezier(.16,1,.3,1)}
-.nl-hub-name{font-weight:500;font-size:3rem;line-height:1.05;letter-spacing:-.02em}
-@media(min-width:768px){.nl-hub-name{font-size:4.4rem}}
-.nl-hub-note{margin-top:1.6rem;font-weight:500;font-size:1.7rem;line-height:1.5;color:#4a4c4c;max-width:40rem}
+.nl-map-shape{fill:#eceae6;stroke:rgba(21,23,23,.12);stroke-width:1.1;stroke-linejoin:round}
+.nl-pin{cursor:pointer}
+.nl-pin-hit{fill:transparent}
+.nl-pin-dot{fill:#151717;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .25s}
+.nl-pin-halo{fill:#1F4257;opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}
+.nl-pin:hover .nl-pin-dot{fill:#1F4257;transform:scale(1.25)}
+.nl-pin.-active .nl-pin-dot{fill:#1F4257;transform:scale(1.35)}
+.nl-pin.-active .nl-pin-halo{animation:nlPulse 2.2s ease-out infinite}
+@keyframes nlPulse{0%{opacity:.45;transform:scale(.5)}100%{opacity:0;transform:scale(2.6)}}
+.nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:2rem}
+@media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem;margin-bottom:2.5rem}}
+.nl-hub-list{list-style:none;margin:0;padding:0}
+.nl-hub-row{display:flex;align-items:center;gap:1.4rem;width:100%;text-align:left;background:none;border:none;border-top:1px solid rgba(21,23,23,.1);padding:1.5rem 0;cursor:pointer;font-family:var(--font-primary);font-weight:500;font-size:2rem;line-height:1.1;letter-spacing:-.01em;color:#9a9b9b;transition:color .25s}
+@media(min-width:768px){.nl-hub-row{font-size:2.6rem;padding:1.8rem 0}}
+.nl-hub-list li:last-child .nl-hub-row{border-bottom:1px solid rgba(21,23,23,.1)}
+.nl-hub-tick{flex:0 0 auto;width:0;height:2px;background:#1F4257;transition:width .35s cubic-bezier(.16,1,.3,1)}
+.nl-hub-row:hover{color:#151717}
+.nl-hub-row.-active{color:#151717}
+.nl-hub-row.-active .nl-hub-tick{width:2.6rem}
+.nl-map-notes{margin-top:2.4rem;min-height:7rem}
+.nl-hub-note{display:none;font-weight:500;font-size:1.7rem;line-height:1.5;color:#5a5c5c;max-width:40rem}
 @media(min-width:768px){.nl-hub-note{font-size:2rem}}
+.nl-hub-note.-active{display:block;animation:tabIn .4s cubic-bezier(.16,1,.3,1)}
 
 /* mini steps: three columns, steel numerals */
 .mini-steps{display:grid;gap:3rem}

@@ -388,16 +388,19 @@
   /* ---------- interactive NL logistics map ---------- */
   qsa('[data-nl-map]').forEach(function (root) {
     var pins = qsa('.nl-pin', root);
-    var panels = qsa('.nl-hub-panel', root);
+    var rows = qsa('.nl-hub-row', root);
+    var notes = qsa('.nl-hub-note', root);
     function activate(i) {
-      pins.forEach(function (p) { p.classList.toggle('-active', +p.dataset.i === i); });
-      panels.forEach(function (p) { p.classList.toggle('-active', +p.dataset.i === i); });
+      [pins, rows, notes].forEach(function (group) {
+        group.forEach(function (el) { el.classList.toggle('-active', +el.dataset.i === i); });
+      });
     }
-    pins.forEach(function (p) {
-      var i = +p.dataset.i;
-      p.addEventListener('mouseenter', function () { activate(i); });
-      p.addEventListener('focus', function () { activate(i); });
-      p.addEventListener('click', function (e) { e.preventDefault(); activate(i); });
+    // both the map pins and the list rows drive (and stay in sync with) each other
+    pins.concat(rows).forEach(function (el) {
+      var i = +el.dataset.i;
+      el.addEventListener('mouseenter', function () { activate(i); });
+      el.addEventListener('click', function (e) { e.preventDefault(); activate(i); });
+      el.addEventListener('focus', function () { activate(i); });
     });
   });
 
