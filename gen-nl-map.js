@@ -12,10 +12,13 @@ const PAD = 20;          // padding inside the viewBox
 // logistics hubs (lat, lon) + a short note shown on hover/tap
 const HUBS = [
   { name: 'Rotterdam', lat: 51.92, lon: 4.48, note: 'Europe’s largest seaport: deep-sea containers and port-edge distribution.' },
-  { name: 'Schiphol / Amsterdam', lat: 52.31, lon: 4.76, note: 'Air cargo and high-value, time-critical logistics around the capital.' },
+  { name: 'Schiphol / Amsterdam', lat: 52.31, lon: 4.76, note: 'Schiphol air cargo: high-value, time-critical and temperature-controlled goods.' },
+  { name: 'Venlo', lat: 51.37, lon: 6.17, note: 'On the German border: one of Europe’s top logistics hotspots and a 3PL cluster.' },
   { name: 'Tilburg–Waalwijk', lat: 51.56, lon: 5.08, note: 'Central Brabant: XXL warehousing and the e-commerce fulfilment cluster.' },
-  { name: 'Venlo', lat: 51.37, lon: 6.17, note: 'On the German border: tri-modal gateway to the Ruhr and beyond.' },
-  { name: 'Eindhoven', lat: 51.44, lon: 5.48, note: 'Brainport: tech production, assembly and high-mix light-industrial space.' }
+  { name: 'Breda–Moerdijk', lat: 51.65, lon: 4.69, note: 'Inland port and distribution, with direct links to Rotterdam and Antwerp.' },
+  { name: 'Eindhoven', lat: 51.44, lon: 5.48, note: 'Brainport: high-tech manufacturing supply chains and high-value goods.' },
+  { name: 'Nijmegen–Arnhem', lat: 51.91, lon: 5.89, note: 'Eastern corridor: a fast-growing logistics region right by the German market.' },
+  { name: 'Roermond–Maastricht', lat: 51.00, lon: 5.85, note: 'Southern gateway: cross-border distribution into Germany and Belgium.' }
 ];
 
 (async () => {

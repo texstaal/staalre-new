@@ -330,7 +330,8 @@ const mapNotes = nlmap.hubs.map((h, i) =>
   `<p class="nl-hub-note${i === 0 ? ' -active' : ''}" data-i="${i}">${h.note}</p>`).join('');
 const mapHtml = `<div class="nl-map" data-nl-map>
             <div class="nl-map-aside">
-              <div class="nl-map-eyebrow">Where we work</div>
+              <div class="nl-map-eyebrow">Main logistics hubs</div>
+              <p class="nl-map-lede">We work nationwide — these are the hubs that drive Dutch logistics. <span class="em">Tap one to see what it’s known for.</span></p>
               <ul class="nl-hub-list">${mapRows}</ul>
               <div class="nl-map-notes">${mapNotes}</div>
             </div>
@@ -593,8 +594,10 @@ main{background:#fff}
 .nl-pin.-active .nl-pin-dot{fill:#1F4257;transform:scale(1.35)}
 .nl-pin.-active .nl-pin-halo{animation:nlPulse 2.2s ease-out infinite}
 @keyframes nlPulse{0%{opacity:.45;transform:scale(.5)}100%{opacity:0;transform:scale(2.6)}}
-.nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:2rem}
-@media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem;margin-bottom:2.5rem}}
+.nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:1.4rem}
+@media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem}}
+.nl-map-lede{font-weight:500;font-size:1.7rem;line-height:1.4;letter-spacing:-.01em;margin-bottom:3rem;max-width:34rem}
+@media(min-width:768px){.nl-map-lede{font-size:2.2rem;margin-bottom:3.5rem}}
 .nl-hub-list{list-style:none;margin:0;padding:0}
 .nl-hub-row{display:flex;align-items:center;gap:1.4rem;width:100%;text-align:left;background:none;border:none;border-top:1px solid rgba(21,23,23,.1);padding:1.5rem 0;cursor:pointer;font-family:var(--font-primary);font-weight:500;font-size:2rem;line-height:1.1;letter-spacing:-.01em;color:#9a9b9b;transition:color .25s}
 @media(min-width:768px){.nl-hub-row{font-size:2.6rem;padding:1.8rem 0}}

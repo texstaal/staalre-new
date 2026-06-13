@@ -10,9 +10,15 @@
     },
     {
       "name": "Schiphol / Amsterdam",
-      "note": "Air cargo and high-value, time-critical logistics around the capital.",
+      "note": "Schiphol air cargo: high-value, time-critical and temperature-controlled goods.",
       "x": 210.6,
       "y": 294.8
+    },
+    {
+      "name": "Venlo",
+      "note": "On the German border: one of Europe’s top logistics hotspots and a 3PL cluster.",
+      "x": 401.1,
+      "y": 501.8
     },
     {
       "name": "Tilburg–Waalwijk",
@@ -21,16 +27,28 @@
       "y": 460
     },
     {
-      "name": "Venlo",
-      "note": "On the German border: tri-modal gateway to the Ruhr and beyond.",
-      "x": 401.1,
-      "y": 501.8
+      "name": "Breda–Moerdijk",
+      "note": "Inland port and distribution, with direct links to Rotterdam and Antwerp.",
+      "x": 201.1,
+      "y": 440.1
     },
     {
       "name": "Eindhoven",
-      "note": "Brainport: tech production, assembly and high-mix light-industrial space.",
+      "note": "Brainport: high-tech manufacturing supply chains and high-value goods.",
       "x": 307.8,
       "y": 486.4
+    },
+    {
+      "name": "Nijmegen–Arnhem",
+      "note": "Eastern corridor: a fast-growing logistics region right by the German market.",
+      "x": 363.2,
+      "y": 382.9
+    },
+    {
+      "name": "Roermond–Maastricht",
+      "note": "Southern gateway: cross-border distribution into Germany and Belgium.",
+      "x": 357.8,
+      "y": 583.3
     }
   ]
 }
