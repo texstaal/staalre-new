@@ -385,6 +385,22 @@
     });
   });
 
+  /* ---------- interactive NL logistics map ---------- */
+  qsa('[data-nl-map]').forEach(function (root) {
+    var pins = qsa('.nl-pin', root);
+    var panels = qsa('.nl-hub-panel', root);
+    function activate(i) {
+      pins.forEach(function (p) { p.classList.toggle('-active', +p.dataset.i === i); });
+      panels.forEach(function (p) { p.classList.toggle('-active', +p.dataset.i === i); });
+    }
+    pins.forEach(function (p) {
+      var i = +p.dataset.i;
+      p.addEventListener('mouseenter', function () { activate(i); });
+      p.addEventListener('focus', function () { activate(i); });
+      p.addEventListener('click', function (e) { e.preventDefault(); activate(i); });
+    });
+  });
+
   /* ---------- step pills: highlight the step you're reading ---------- */
   var pillLinks = qsa('.step-pill[href^="#"]');
   if (pillLinks.length && 'IntersectionObserver' in window) {

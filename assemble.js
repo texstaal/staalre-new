@@ -319,6 +319,40 @@ const tail = `
 </html>
 `;
 
+/* ---- interactive Netherlands logistics map (replaces the chevron strip) ---- */
+const nlmap = JSON.parse(fs.readFileSync('nl-map.json', 'utf8'));
+const [, , vbW, vbH] = nlmap.viewBox.split(' ').map(Number);
+const mapPins = nlmap.hubs.map((h, i) => {
+  const xp = (h.x / vbW * 100).toFixed(2), yp = (h.y / vbH * 100).toFixed(2);
+  const flip = (h.x / vbW * 100) > 60 ? ' -flip' : '';
+  return `<button type="button" class="nl-pin${i === 0 ? ' -active' : ''}${flip}" data-i="${i}" style="left:${xp}%;top:${yp}%" aria-label="${h.name}"><span class="nl-pin-dot"></span><span class="nl-pin-label">${h.name}</span></button>`;
+}).join('');
+const mapPanels = nlmap.hubs.map((h, i) =>
+  `<div class="nl-hub-panel${i === 0 ? ' -active' : ''}" data-i="${i}"><div class="nl-hub-name">${h.name}</div><p class="nl-hub-note">${h.note}</p></div>`).join('');
+const mapHtml = `<div class="nl-map" data-nl-map>
+            <div class="nl-map-figure" style="aspect-ratio:${vbW}/${vbH}">
+              <svg class="nl-map-svg" viewBox="${nlmap.viewBox}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="nl-map-shape" d="${nlmap.path}" /></svg>
+              ${mapPins}
+            </div>
+            <div class="nl-map-panels"><div class="nl-map-eyebrow">Where we work</div>${mapPanels}</div>
+          </div>
+          `;
+body = body.replace(
+  /<div class="arrows-section_arrows__BPayV">[\s\S]*?<\/div>\s*<div class="arrows-section_text__Z1Oii">/,
+  mapHtml + '<div class="arrows-section_text__Z1Oii">'
+);
+
+/* ---- lift the testimonials section off the homepage, but keep it ----
+   Saved to saved/testimonials-section.html. To bring it back later, comment
+   out this block (and add a <link>/markup hook) — nothing is lost. */
+const testiRe = /\s*<section class="testimonials_root__PiYLZ">[\s\S]*?<\/section>/;
+const testiMatch = body.match(testiRe);
+if (testiMatch) {
+  fs.mkdirSync('saved', { recursive: true });
+  fs.writeFileSync('saved/testimonials-section.html', testiMatch[0].trim() + '\n', 'utf8');
+  body = body.replace(testiRe, '\n      <!-- "What our clients say" removed for now; full section saved in saved/testimonials-section.html. Restore once real testimonials are in. -->');
+}
+
 fs.writeFileSync('index.html', head + body.trimEnd() + tail, 'utf8');
 
 /* ---- STAAL override stylesheet ---- */
@@ -540,6 +574,29 @@ main{background:#fff}
 .tab-body ul{margin:2rem 0 0;padding:0;list-style:none}
 .tab-body li{padding:1.2rem 0;border-top:1px solid rgba(21,23,23,.08);font-weight:500;font-size:1.5rem}
 @media(min-width:768px){.tab-body li{font-size:1.8rem;padding:1.5rem 0}}
+
+/* interactive Netherlands logistics map (homepage, replaces chevron strip) */
+.nl-map{display:grid;gap:3.5rem;margin-top:5rem}
+@media(min-width:768px){.nl-map{grid-template-columns:1.15fr 1fr;gap:6rem;align-items:center;margin-top:8rem}}
+.nl-map-figure{position:relative;width:100%;max-width:42rem;margin:0 auto;overflow:visible}
+.nl-map-svg{width:100%;height:auto;display:block;overflow:visible}
+.nl-map-shape{fill:#e9e8e4;stroke:rgba(21,23,23,.16);stroke-width:1.2;stroke-linejoin:round}
+.nl-pin{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:.8rem;background:none;border:none;padding:0;cursor:pointer;font-family:var(--font-primary);z-index:1}
+.nl-pin.-flip{flex-direction:row-reverse}
+.nl-pin.-active{z-index:2}
+.nl-pin-dot{flex:0 0 auto;width:1.1rem;height:1.1rem;border-radius:50%;background:#151717;box-shadow:0 0 0 0 rgba(31,66,87,.3);transition:transform .25s,background .25s,box-shadow .25s}
+.nl-pin-label{font-weight:500;font-size:1.3rem;color:#1F4257;white-space:nowrap;opacity:0;transition:opacity .25s}
+@media(min-width:768px){.nl-pin-label{font-size:1.5rem}}
+.nl-pin:hover .nl-pin-dot,.nl-pin.-active .nl-pin-dot{background:#1F4257;transform:scale(1.4);box-shadow:0 0 0 .6rem rgba(31,66,87,.13)}
+.nl-pin:hover .nl-pin-label,.nl-pin.-active .nl-pin-label{opacity:1}
+.nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:2.5rem}
+@media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem}}
+.nl-hub-panel{display:none}
+.nl-hub-panel.-active{display:block;animation:tabIn .45s cubic-bezier(.16,1,.3,1)}
+.nl-hub-name{font-weight:500;font-size:3rem;line-height:1.05;letter-spacing:-.02em}
+@media(min-width:768px){.nl-hub-name{font-size:4.4rem}}
+.nl-hub-note{margin-top:1.6rem;font-weight:500;font-size:1.7rem;line-height:1.5;color:#4a4c4c;max-width:40rem}
+@media(min-width:768px){.nl-hub-note{font-size:2rem}}
 
 /* mini steps: three columns, steel numerals */
 .mini-steps{display:grid;gap:3rem}
