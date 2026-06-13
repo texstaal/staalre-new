@@ -478,9 +478,9 @@ main{background:#fff}
 
 /* ---- mobile polish ---- */
 @media(max-width:767px){
-  /* slightly zoomed at rest; while scrolling the building slides UP (no
-     zoom) and the smoke rises early to swallow its base for a clean flow */
-  .hero_house__aJy7p{width:118%;left:-9%;right:auto}
+  /* zoomed at rest; while scrolling the building slides UP (no zoom) and
+     the smoke rises early to swallow its base for a clean flow */
+  .hero_house__aJy7p{width:140%;left:-20%;right:auto}
   /* giant service words (Lease/Buy/Manage) were clipping off-screen */
   .services_item-more__pkhNR{font-size:7rem}
   /* feature cards: side-by-side swipe with snap + a peek of the next card */

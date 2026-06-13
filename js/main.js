@@ -321,8 +321,10 @@
     } else {
       // phones: NO zoom — the building slides straight up at a steady rate,
       // rising behind the letters while the smoke (raised early below)
-      // swallows its base so the lift never shows a hard bottom edge
-      var my = -70 * Math.min(p, 0.9) / 0.45;
+      // swallows its base so the lift never shows a hard bottom edge.
+      // The rise is spread over 70% of the hero so the image bottom
+      // arrives late instead of rushing up in the first half-scroll.
+      var my = -70 * Math.min(p, 0.9) / 0.7;
       houseTransform = 'translateY(' + my + '%)';
     }
     r.houses.forEach(function (h) { h.style.transform = houseTransform; });
