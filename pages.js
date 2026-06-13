@@ -662,8 +662,8 @@ const headFor = (p) => `<!DOCTYPE html>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" href="/fonts/26d0ba92e140f0dc-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
-    <link rel="preload" href="/fonts/5c0c2bcbaa4149ca-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
+    <link rel="preload" href="/fonts/space-grotesk-400.woff2" as="font" crossorigin="" type="font/woff2" />
+    <link rel="preload" href="/fonts/space-grotesk-700.woff2" as="font" crossorigin="" type="font/woff2" />
     <link rel="stylesheet" href="/css/a463080343a8b988.css" />
     <link rel="stylesheet" href="/css/804a152dbcc38a56.css" />
     <link rel="stylesheet" href="/css/5290e5f354def47d.css" />

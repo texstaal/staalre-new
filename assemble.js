@@ -289,8 +289,8 @@ const head = `<!DOCTYPE html>
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
 
-    <link rel="preload" href="fonts/26d0ba92e140f0dc-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
-    <link rel="preload" href="fonts/5c0c2bcbaa4149ca-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
+    <link rel="preload" href="fonts/space-grotesk-400.woff2" as="font" crossorigin="" type="font/woff2" />
+    <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" crossorigin="" type="font/woff2" />
     <link rel="stylesheet" href="css/a463080343a8b988.css" data-precedence="next" />
     <link rel="stylesheet" href="css/804a152dbcc38a56.css" data-precedence="next" />
     <link rel="stylesheet" href="css/5290e5f354def47d.css" data-precedence="next" />

@@ -6,7 +6,7 @@
 const fontkit = require('fontkit');
 const fs = require('fs');
 
-let font = fontkit.openSync('InstrumentSans-var.ttf');
+let font = fontkit.openSync('SpaceGrotesk-var.ttf');
 if (font.variationAxes && font.variationAxes.wght) {
   font = font.getVariation({ wght: 700 });
 }
