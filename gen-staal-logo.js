@@ -1,10 +1,13 @@
-// One-off generator: builds STAAL logo SVG path data from the local
-// Instrument Sans variable font (bold instance), in the same coordinate
-// systems as the FIND artwork it replaces:
+// One-off generator: builds the STAAL logo path data in the coordinate
+// systems the FIND artwork uses:
 //   - wordmark svg: viewBox 0 0 975 280  (header + footer)
 //   - hero svg:     viewBox 0 0 977 423  (big word + "Real Estate" line)
-const fontkit = require('fontkit');
+// STAAL letterforms come from the custom logo (images/logo-src.svg);
+// "Real Estate" is set from the site font (Space Grotesk).
 const fs = require('fs');
+const fontkit = require('fontkit');
+const paper = require('paper-jsdom');
+paper.setup(new paper.Size(4000, 4000));
 
 let font = fontkit.openSync('SpaceGrotesk-var.ttf');
 if (font.variationAxes && font.variationAxes.wght) {
@@ -12,7 +15,6 @@ if (font.variationAxes && font.variationAxes.wght) {
 }
 
 function transformPath(path, sx, sy, tx, ty) {
-  // flip Y (font coords are y-up, SVG y-down): y' = ty - y*sy
   let d = '';
   for (const cmd of path.commands) {
     const a = cmd.args;
@@ -29,24 +31,17 @@ function transformPath(path, sx, sy, tx, ty) {
   return d;
 }
 
-// returns per-glyph path data for `str`, scaled so cap height == capPx,
-// then horizontally fitted/centred into boxW; baseline at baselineY
+// "Real Estate" from the font: per-glyph paths scaled to capPx, centred in boxW
 function buildWord(str, capPx, boxW, baselineY, letterSpacing) {
   const run = font.layout(str);
   const capHeight = font.capHeight || 700;
   let scale = capPx / capHeight;
-  // measure advance width (+ letter spacing between glyphs)
   let width = 0;
   run.positions.forEach((pos, i) => {
     width += pos.xAdvance * scale;
     if (i < run.positions.length - 1) width += letterSpacing;
   });
-  if (width > boxW) {
-    const shrink = boxW / width;
-    scale *= shrink;
-    width = boxW;
-    letterSpacing *= shrink;
-  }
+  if (width > boxW) { const k = boxW / width; scale *= k; width = boxW; letterSpacing *= k; }
   let x = (boxW - width) / 2;
   const paths = [];
   run.glyphs.forEach((glyph, i) => {
@@ -58,34 +53,36 @@ function buildWord(str, capPx, boxW, baselineY, letterSpacing) {
   return { paths, width, scale };
 }
 
-// 1) wordmark: STAAL filling 975 x 280
-const wordmark = buildWord('STAAL', 280, 975, 280, 10);
+// STAAL from the custom logo: import (resolving transforms), scale so the caps
+// are capPx tall, centre in boxW, sit the baseline at baselineY.
+const logoSvg = fs.readFileSync('images/logo-src.svg', 'utf8');
+function buildWordFromLogo(capPx, boxW, baselineY) {
+  const imported = paper.project.importSVG(logoSvg, { insert: false, expandShapes: true });
+  const glyphs = [];
+  (function walk(it) {
+    if (it.clipMask) return;
+    if (it.className === 'Path' || it.className === 'CompoundPath') {
+      if (it.bounds.width > 2 && it.bounds.height > 2) glyphs.push(it);
+    } else if (it.children) { it.children.forEach(walk); }
+  })(imported);
+  const group = new paper.Group(glyphs);
+  const b = group.bounds;
+  let scale = capPx / b.height;
+  if (b.width * scale > boxW) scale = boxW / b.width;
+  group.scale(scale, b.topLeft);
+  const nb = group.bounds;
+  group.translate(new paper.Point((boxW - nb.width) / 2 - nb.x, baselineY - nb.bottom));
+  const chars = ['S', 'T', 'A', 'A', 'L'];
+  const sorted = group.children.slice().sort((p, q) => p.bounds.x - q.bounds.x);
+  const paths = sorted.map((it, i) => ({ d: it.pathData, char: chars[i] || 'x' }));
+  const width = group.bounds.width;
+  group.remove();
+  return { paths, width, scale };
+}
 
-// 2) hero logo: STAAL on top (cap 280, baseline 280) + "Real Estate" below
-const heroWord = buildWord('STAAL', 280, 977, 280, 10);
+const wordmark = buildWordFromLogo(280, 975, 280);
+const heroWord = buildWordFromLogo(280, 977, 280);
 const heroSub = buildWord('Real Estate', 76, 977, 419, 4);
-
-// Instrument Sans builds glyphs from OVERLAPPING component contours — fine when
-// filled, but the hero letters are STROKED (the "writing" effect), so every
-// internal seam shows as a white line crossing the letter. Boolean-union each
-// glyph's contours into a single clean outline so the stroke is seam-free. Only
-// the hero outline needs this; the wordmark/mask are filled and unaffected.
-const paper = require('paper-jsdom');
-paper.setup(new paper.Size(2000, 2000));
-function cleanD(d) {
-  const item = new paper.CompoundPath({ pathData: d, insert: false });
-  const united = item.unite(item, { insert: false }); // resolves self-overlap
-  const out = united.pathData;
-  item.remove();
-  united.remove();
-  return out;
-}
-function cleanWord(word) {
-  word.paths = word.paths.map(p => ({ d: cleanD(p.d), char: p.char }));
-  return word;
-}
-cleanWord(heroWord);
-cleanWord(heroSub);
 
 function svgPaths(word, extraAttr) {
   return word.paths
@@ -103,4 +100,4 @@ const out = {
   mask: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 977 423"><g fill="%23000">${maskPaths(heroWord)}${maskPaths(heroSub)}</g></svg>`
 };
 fs.writeFileSync('staal-logo.json', JSON.stringify(out, null, 2));
-console.log('wordmark width', Math.round(wordmark.width), '| hero sub width', Math.round(heroSub.width), '| paths', wordmark.paths.length, heroWord.paths.length, heroSub.paths.length);
+console.log('wordmark w', Math.round(wordmark.width), '| heroWord w', Math.round(heroWord.width), '| heroSub w', Math.round(heroSub.width), '| glyphs', wordmark.paths.length, heroWord.paths.length, heroSub.paths.length);

@@ -44,21 +44,16 @@ for (const [alt, src] of thumbs) {
 /* ---- drop GTM noscript ---- */
 body = body.replace(/\s*<noscript>[\s\S]*?<\/noscript>/, '');
 
-/* ---- custom STAAL logo: header (dark) + footer (light recolor) ---- */
+/* ---- STAAL wordmark (header + footer svgs share the 975x280 viewBox) ---- */
 body = body.replace(
-  /(<div class="header_logo__LO_Jk">\s*<a href="\/">)\s*<svg[\s\S]*?<\/svg>/,
-  '$1<img src="/images/logo.svg" alt="STAAL Real Estate" class="staal-logo-img" />'
-);
-body = body.replace(
-  /(<div class="footer_logo__5ncK8">)\s*<svg[\s\S]*?<\/svg>/,
-  '$1<img src="/images/logo-light.svg" alt="STAAL Real Estate" class="staal-logo-img" />'
+  /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" fill="none" viewBox="0 0 975 280">[\s\S]*?<\/svg>/g,
+  `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 975 280">\n              ${logo.wordmark}\n            </svg>`
 );
 
-/* ---- hero: empty the wordmark svg; the logo silhouette is painted via a CSS
-   mask on .hero_logo (white) and .hero_composite (warehouse-filled) ---- */
+/* ---- STAAL hero outline logo (977x423) ---- */
 body = body.replace(
   /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" viewBox="0 0 977 423">[\s\S]*?<\/svg>/,
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 977 423"></svg>'
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 977 423">\n                <g fill="currentColor">\n              ${logo.heroWord}\n              ${logo.heroSub}\n                </g>\n              </svg>`
 );
 
 /* ====================================================================
@@ -375,17 +370,14 @@ const staalCss = `/* STAAL overrides on top of the original FIND stylesheets:
      painted opaque white so the sticky footer (z-index -1) is covered by
      every section above and only shows through below the last section. */
 .hero_house__aJy7p{top:auto;bottom:0;height:auto;aspect-ratio:1920/1250}
-/* hero logo = the custom STAAL mark, used as a CSS mask on two layers:
-   a white silhouette (.hero_logo) fades in, then the warehouse-filled
-   silhouette (.hero_composite) crossfades in. Both masked from the same file
-   at the same size + centre so they line up exactly. (paths in css/ resolve
-   relative to the stylesheet, hence ../images) */
-.hero_logo__FxgRj{background:#fff;width:30rem;height:12rem;top:calc(50% - 6rem);left:calc(50% - 15rem);-webkit-mask:url(../images/logo.svg) no-repeat center / contain;mask:url(../images/logo.svg) no-repeat center / contain}
-.hero_logo__FxgRj svg{display:none}
-.hero_composite__3blHB{-webkit-mask:url(../images/logo.svg) no-repeat center / 30rem auto;mask:url(../images/logo.svg) no-repeat center / 30rem auto}
+.hero_composite__3blHB{-webkit-mask-image:url('data:image/svg+xml,${logo.mask}');mask-image:url('data:image/svg+xml,${logo.mask}')}
+/* bigger STAAL hero wordmark — outline (.hero_logo) and the composite fill
+   must scale together and stay centred so they line up exactly (~1.25x) */
+.hero_logo__FxgRj{width:29.38rem;height:12.75rem;top:calc(50% - 6.38rem);left:calc(50% - 14.69rem)}
+.hero_composite__3blHB{-webkit-mask-size:29.38rem 12.75rem;mask-size:29.38rem 12.75rem}
 @media(min-width:768px){
-  .hero_logo__FxgRj{width:104rem;height:41.6rem;top:calc(50% - 20.8rem);left:calc(50% - 52rem)}
-  .hero_composite__3blHB{-webkit-mask-size:104rem auto;mask-size:104rem auto}
+  .hero_logo__FxgRj{width:122.13rem;height:52.88rem;top:calc(50% - 26.44rem);left:calc(50% - 61.06rem)}
+  .hero_composite__3blHB{-webkit-mask-size:122.13rem 52.88rem;mask-size:122.13rem 52.88rem}
 }
 main{background:#fff}
 /* z-index 0 keeps the footer BELOW main (z1, opaque) for the reveal effect
@@ -516,10 +508,6 @@ main{background:#fff}
 }
 .footer_newsletter-container__POI_T{max-width:100%}
 .footer_logo__5ncK8 svg{max-width:100%;height:auto}
-/* custom logo images (header dark, footer light) */
-.header_logo__LO_Jk img.staal-logo-img{width:auto;height:3rem;display:block}
-@media(min-width:768px){.header_logo__LO_Jk img.staal-logo-img{height:3.2rem}}
-.footer_logo__5ncK8 img.staal-logo-img{width:100%;max-width:46rem;height:auto;display:block}
 .footer_copyright-container__yt1ht{flex-wrap:wrap}
 
 /* anchored sections clear the sticky header */
