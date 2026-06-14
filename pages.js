@@ -247,7 +247,7 @@ pages.push({
   title: 'Services — Lease, Buy & Occupier Advisory',
   desc: 'Warehouse leasing, acquisition and occupier advisory in the Netherlands. STAAL represents the occupier — full search, negotiation and handover support.',
   content: `
-${hero('Services', 'Find, lease, and acquire warehouse & logistics space in the Netherlands — <span class="em">with one independent advisor working only for you.</span>')}
+${hero('Services', 'Find, lease, and acquire warehouse space in the Netherlands — <span class="em">with one independent advisor working only for you.</span>')}
 ${indexList([
   { word: 'Lease', href: '#lease', desc: 'The fastest route into the Dutch market: full search to signed lease, negotiated on your side.' },
   { word: 'Buy', href: '#buy', desc: 'Buyer-side acquisition: sourcing, assessment, due diligence, and price negotiation.' },
@@ -266,7 +266,7 @@ ${splitSection([
     </ul>
     <div class="btn-row">${btn('Start a Lease Search', '/contact')}</div>`, '01'),
   split('<span id="buy"></span>Buy', `
-    <p>For operations ready to own — specialised fit-out, scarce locations, or simply better arithmetic. We source, assess and negotiate logistics property acquisitions on the buyer’s side only.</p>
+    <p>For operations ready to own — specialised fit-out, scarce locations, or simply better arithmetic. We source, assess and negotiate warehouse acquisitions on the buyer’s side only.</p>
     <ul>
       <li>Acquisition brief and total-cost-of-ownership modelling</li>
       <li>Sourcing: on-market, off-market and build-to-suit opportunities</li>
@@ -397,10 +397,10 @@ ${outro('Need a deal team, not just a building? <span class="em">Tell us what yo
 /* ABOUT */
 pages.push({
   file: 'about.html', url: '/about',
-  title: 'About STAAL Real Estate',
-  desc: 'STAAL Real Estate is a boutique occupier-side advisory for warehouse and logistics property in the Netherlands, based in Amsterdam.',
+  title: 'About Staal Real Estate',
+  desc: 'Staal Real Estate is a boutique occupier-side advisory for warehouse property in the Netherlands, based in Amsterdam.',
   content: `
-${hero('Steel-strong<br />on your side.', 'STAAL is a boutique real estate advisory from Amsterdam — <span class="em">focused on warehouse and logistics space, acting for the occupier.</span>')}
+${hero('Steel-strong<br />on your side.', 'STAAL is a boutique real estate advisory from Amsterdam — <span class="em">focused on warehouse space, acting for the occupier.</span>')}
 ${statement('<em>Staal</em> is Dutch for steel: the material the buildings are made of, <span class="em">and the way we negotiate for the companies inside them.</span>')}
 ${statsBand([
   ['100%', 'Occupier-side. We never act for the landlord.'],
@@ -409,7 +409,7 @@ ${statsBand([
 ])}
 ${splitSection([
   split('What we are', `
-    <p>A specialist, not a department. STAAL does one thing: helping businesses find, lease and acquire logistics property in the Netherlands. No landlord listings, no divided loyalty — when we sit at the table, everyone knows whose side we’re on.</p>`),
+    <p>A specialist, not a department. STAAL does one thing: helping businesses find, lease and acquire warehouse space in the Netherlands. No landlord listings, no divided loyalty — when we sit at the table, everyone knows whose side we’re on.</p>`),
   split('Who we work for', `
     <p>Occupiers — especially international e-commerce, fulfilment, logistics and distribution companies entering or expanding in the Dutch market. Most of our clients work in English, decide from abroad, and need a local advisor they can trust with the whole process.</p>`),
   split('How we work', `
@@ -424,8 +424,8 @@ ${outro('The Dutch market, with someone on your side. <span class="em">Let’s t
 /* CONTACT */
 pages.push({
   file: 'contact.html', url: '/contact',
-  title: 'Contact STAAL Real Estate',
-  desc: 'Send your warehouse or logistics requirement to STAAL Real Estate, Amsterdam. We respond within one business day.',
+  title: 'Contact Staal Real Estate',
+  desc: 'Send your warehouse requirement to Staal Real Estate, Amsterdam. We respond within one business day.',
   content: `
 ${hero('Contact', 'Tell us what your operation needs — <span class="em">we respond within one business day.</span>')}
 <section class="page-section" style="padding-top:0">
@@ -457,8 +457,8 @@ ${hero('Contact', 'Tell us what your operation needs — <span class="em">we res
           <div class="form-field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" autocomplete="tel" /></div>
           <div class="form-field -full"><label for="cf-interest">I’m looking to</label>
             <select id="cf-interest" name="interest">
-              <option value="lease">Lease warehouse / logistics space</option>
-              <option value="buy">Buy warehouse / logistics property</option>
+              <option value="lease">Lease warehouse space</option>
+              <option value="buy">Buy a warehouse</option>
               <option value="advice">Get advice on an existing situation</option>
               <option value="other">Something else</option>
             </select>
@@ -479,10 +479,10 @@ ${hero('Contact', 'Tell us what your operation needs — <span class="em">we res
 /* INSIGHTS LISTING */
 pages.push({
   file: 'insights.html', url: '/insights',
-  title: 'Insights — Dutch Logistics Real Estate',
-  desc: 'Practical insight on the Dutch logistics property market: site selection, lease terms, and what to know before you sign.',
+  title: 'Insights — Dutch Warehouse Real Estate',
+  desc: 'Practical insight on the Dutch warehouse market: site selection, lease terms, and what to know before you sign.',
   content: `
-${hero('Insights<br /><span class="em">&amp; Resources</span>', 'Practical reading on the Dutch logistics market: <span class="em">site selection, lease terms, and what to know before you sign.</span>')}
+${hero('Insights<br /><span class="em">&amp; Resources</span>', 'Practical reading on the Dutch warehouse market: <span class="em">site selection, lease terms, and what to know before you sign.</span>')}
 <section class="latest-posts_root__W0OHF" style="padding-top:0">
   <div class="container_container__v5gtR">
     <div class="latest-posts_items__LcqgW">
@@ -537,10 +537,10 @@ const legalOutro = `</div></div></section>`;
 pages.push({
   file: 'terms.html', url: '/terms',
   title: 'Terms & Conditions',
-  desc: 'Terms and conditions for the use of staalre.com and the services of STAAL Real Estate, Amsterdam.',
+  desc: 'Terms and conditions for the use of staalre.com and the services of Staal Real Estate, Amsterdam.',
   content: `${legalIntro('Terms &amp;<br />Conditions')}
 <h2>1. Who we are</h2>
-<p>STAAL Real Estate (“STAAL”, “we”, “us”) is a real estate advisory firm with its head office at Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands. You can reach us at <a href="mailto:tex@staalre.com">tex@staalre.com</a> or +31 6 28 36 36 31.</p>
+<p>Staal Real Estate (“Staal”, “we”, “us”) is a real estate advisory firm with its head office at Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands. You can reach us at <a href="mailto:tex@staalre.com">tex@staalre.com</a> or +31 6 28 36 36 31.</p>
 <h2>2. Scope of these terms</h2>
 <p>These terms govern your use of this website and apply to our advisory services unless a written engagement agreement states otherwise. By using this website you accept these terms. If you do not agree with them, please do not use the site.</p>
 <h2>3. Services and engagements</h2>
@@ -563,9 +563,9 @@ ${legalOutro}`
 pages.push({
   file: 'privacy.html', url: '/privacy',
   title: 'Privacy Policy',
-  desc: 'How STAAL Real Estate handles personal data under the GDPR: what we collect, why, how long we keep it, and your rights.',
+  desc: 'How Staal Real Estate handles personal data under the GDPR: what we collect, why, how long we keep it, and your rights.',
   content: `${legalIntro('Privacy<br />Policy')}
-<p>STAAL Real Estate, Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands, is the controller for personal data processed via this website. Contact: <a href="mailto:tex@staalre.com">tex@staalre.com</a>.</p>
+<p>Staal Real Estate, Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands, is the controller for personal data processed via this website. Contact: <a href="mailto:tex@staalre.com">tex@staalre.com</a>.</p>
 <h2>1. What we collect, and why</h2>
 <ul>
 <li><strong>Contact form.</strong> Name, company, email, phone and your message. Used solely to answer your request and conduct any follow-up you ask for. Legal basis: pre-contractual steps at your request (art. 6(1)(b) GDPR).</li>
@@ -616,7 +616,7 @@ pages.push({
 <h2>3. Third-party links</h2>
 <p>Links to third-party websites are provided for convenience. We do not control and are not responsible for their content.</p>
 <h2>4. Contact</h2>
-<p>Questions about this disclaimer: <a href="mailto:tex@staalre.com">tex@staalre.com</a> · STAAL Real Estate, Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands.</p>
+<p>Questions about this disclaimer: <a href="mailto:tex@staalre.com">tex@staalre.com</a> · Staal Real Estate, Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands.</p>
 ${legalOutro}`
 });
 
@@ -642,26 +642,28 @@ const headFor = (p) => `<!DOCTYPE html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${p.title} | STAAL Real Estate</title>
+    <title>${p.title} | Staal Real Estate</title>
     <meta name="description" content="${p.desc}" />
-    <meta name="author" content="STAAL Real Estate" />
+    <meta name="author" content="Staal Real Estate" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#1F4257" />
     <link rel="canonical" href="${SITE_URL}${p.url}" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="STAAL Real Estate" />
-    <meta property="og:title" content="${p.title} | STAAL Real Estate" />
+    <meta property="og:site_name" content="Staal Real Estate" />
+    <meta property="og:title" content="${p.title} | Staal Real Estate" />
     <meta property="og:description" content="${p.desc}" />
     <meta property="og:url" content="${SITE_URL}${p.url}" />
     <meta property="og:locale" content="en_NL" />
     <meta property="og:image" content="${p.ogImage || SITE_URL + '/images/og-image.jpg'}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${p.title} | STAAL Real Estate" />
+    <meta name="twitter:title" content="${p.title} | Staal Real Estate" />
     <meta name="twitter:description" content="${p.desc}" />
     <meta name="twitter:image" content="${p.ogImage || SITE_URL + '/images/og-image.jpg'}" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/space-grotesk-400.woff2" as="font" crossorigin="" type="font/woff2" />
     <link rel="preload" href="/fonts/space-grotesk-700.woff2" as="font" crossorigin="" type="font/woff2" />
     <link rel="stylesheet" href="/css/a463080343a8b988.css" />
@@ -676,6 +678,8 @@ const headFor = (p) => `<!DOCTYPE html>
     <link rel="stylesheet" href="/css/dd8866e20d835adf.css" />
     <link rel="stylesheet" href="/css/17424100e880a33c.css" />
     <link rel="stylesheet" href="/css/staal.css" />
+    <!-- Vercel Web Analytics (cookieless; enable Analytics on the Vercel project) -->
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body class="__variable_3d9088 __variable_c1a059">
     ${loadingLine}

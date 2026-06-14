@@ -219,20 +219,40 @@ main{background:#fff}
 
 /* interactive Netherlands logistics map (homepage, replaces chevron strip).
    pins are inside the SVG so they always align with the coastline. */
-.nl-map{display:grid;gap:4rem;margin-top:5rem;align-items:center}
-@media(min-width:768px){.nl-map{grid-template-columns:0.8fr 1fr;gap:7rem;margin-top:9rem}}
-.nl-map-figure{order:-1;position:relative;width:100%;max-width:40rem;margin:0 auto}
-@media(min-width:768px){.nl-map-figure{order:0;max-width:46rem}}
-.nl-map-svg{width:100%;height:auto;display:block;overflow:visible}
-.nl-map-shape{fill:#eceae6;stroke:rgba(21,23,23,.12);stroke-width:1.1;stroke-linejoin:round}
+.nl-map{display:grid;gap:2.4rem;margin-top:5rem;grid-template-areas:"intro" "stage" "list"}
+.nl-map-intro{grid-area:intro}
+.nl-map-stage{grid-area:stage}
+.nl-hub-list.nl-map-list{grid-area:list}
+@media(min-width:768px){.nl-map{grid-template-columns:0.8fr 1fr;grid-template-areas:"intro stage" "list stage";column-gap:6rem;row-gap:3rem;margin-top:9rem;align-items:start}}
+.nl-map-figure{position:relative;width:100%;max-width:30rem;margin:0 auto}
+@media(min-width:768px){.nl-map-figure{max-width:53rem;margin:0}}
+.nl-map-svg{width:100%;height:auto;display:block;overflow:visible;background:transparent}
+/* mobile: pin the map + active note so tapping a hub in the list updates them on screen */
+@media(max-width:767px){
+.nl-map-stage{position:sticky;top:1.4rem;z-index:2;background:#fff;padding-bottom:1rem}
+.nl-map-figure{max-width:min(60vw,26rem)}
+.nl-map-notes{margin-top:1.6rem;text-align:center}
+.nl-hub-note{margin-left:auto;margin-right:auto}
+}
+.nl-map-shape{fill:url(#nlLand);stroke:rgba(21,23,23,.10);stroke-width:1.1;stroke-linejoin:round}
+/* hub-and-spoke routes radiating from the active hub */
+.nl-spokes{opacity:0;transition:opacity .45s ease}
+.nl-spokes.-active{opacity:1}
+.nl-spokes line{fill:none;stroke:#1F4257;stroke-width:1.3;stroke-opacity:.3;stroke-linecap:round;stroke-dasharray:1 7;pointer-events:none}
+.nl-spokes.-active line{animation:nlFlow 9s linear infinite}
+@keyframes nlFlow{to{stroke-dashoffset:-160}}
 .nl-pin{cursor:pointer}
 .nl-pin-hit{fill:transparent}
+.nl-pin-ring{fill:none;stroke:#1F4257;stroke-width:1.4;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.45);transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1)}
 .nl-pin-dot{fill:#151717;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .25s}
 .nl-pin-halo{fill:#1F4257;opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}
-.nl-pin:hover .nl-pin-dot{fill:#1F4257;transform:scale(1.25)}
-.nl-pin.-active .nl-pin-dot{fill:#1F4257;transform:scale(1.35)}
+.nl-pin:hover .nl-pin-dot{fill:#1F4257;transform:scale(1.2)}
+.nl-pin:hover .nl-pin-ring{opacity:.4;transform:scale(1)}
+.nl-pin.-active .nl-pin-dot{fill:#1F4257;transform:scale(1.3)}
+.nl-pin.-active .nl-pin-ring{opacity:.6;transform:scale(1)}
 .nl-pin.-active .nl-pin-halo{animation:nlPulse 2.2s ease-out infinite}
 @keyframes nlPulse{0%{opacity:.45;transform:scale(.5)}100%{opacity:0;transform:scale(2.6)}}
+@media(prefers-reduced-motion:reduce){.nl-spokes.-active line{animation:none}.nl-pin.-active .nl-pin-halo{animation:none}}
 .nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:1.4rem}
 @media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem}}
 .nl-map-lede{font-weight:500;font-size:1.7rem;line-height:1.4;letter-spacing:-.01em;margin-bottom:3rem;max-width:34rem}
@@ -245,10 +265,12 @@ main{background:#fff}
 .nl-hub-row:hover{color:#151717}
 .nl-hub-row.-active{color:#151717}
 .nl-hub-row.-active .nl-hub-tick{width:2.6rem}
-.nl-map-notes{margin-top:2.4rem;min-height:7rem}
-.nl-hub-note{display:none;font-weight:500;font-size:1.7rem;line-height:1.5;color:#5a5c5c;max-width:40rem}
+/* all notes share one grid cell so the panel height never changes between hubs
+   (a taller note no longer re-centers the grid and nudges the map sideways) */
+.nl-map-notes{margin-top:2.4rem;display:grid}
+.nl-hub-note{grid-area:1/1;font-weight:500;font-size:1.7rem;line-height:1.5;color:#5a5c5c;max-width:40rem;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
 @media(min-width:768px){.nl-hub-note{font-size:2rem}}
-.nl-hub-note.-active{display:block;animation:tabIn .4s cubic-bezier(.16,1,.3,1)}
+.nl-hub-note.-active{opacity:1;visibility:visible;transform:none}
 
 /* mini steps: three columns, steel numerals */
 .mini-steps{display:grid;gap:3rem}
@@ -283,3 +305,26 @@ main{background:#fff}
 .faq-body{padding:0 0 3rem;max-width:81.2rem}
 .faq-body p{font-weight:400;font-size:1.6rem;line-height:1.6;color:#3c3e3e}
 @media(min-width:768px){.faq-body p{font-size:2rem}}
+
+/* ---------- intro preloader (homepage): pure black, the mark self-draws ---------- */
+html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
+.preloader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden;will-change:transform;transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.preloader__inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:3.4rem;padding:0 6vw;transition:opacity .45s ease,transform .6s cubic-bezier(.76,0,.24,1)}
+.pl-logo{width:min(12rem,32vw);height:auto;display:block;overflow:visible}
+.pl-a{fill:#fff;fill-opacity:0;stroke:#fff;stroke-width:4;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.pl-a1{animation:plDraw 1.2s cubic-bezier(.62,0,.3,1) .15s forwards,plFill .55s ease 1.3s forwards}
+.pl-a2{animation:plDraw 1.2s cubic-bezier(.62,0,.3,1) .38s forwards,plFill .55s ease 1.5s forwards}
+@keyframes plDraw{to{stroke-dashoffset:0}}
+@keyframes plFill{to{fill-opacity:1}}
+.preloader__track{position:relative;width:min(14rem,36vw);height:1px;background:rgba(255,255,255,.13);overflow:hidden;opacity:0;animation:preBarIn .5s ease .45s forwards}
+@keyframes preBarIn{to{opacity:1}}
+.preloader__fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:#fff;animation:preFill 1.85s cubic-bezier(.45,.05,.2,1) .45s forwards}
+@keyframes preFill{0%{transform:scaleX(0)}100%{transform:scaleX(.95)}}
+.preloader.-done{transform:translateY(-100%)}
+.preloader.-done .preloader__fill{transition:transform .35s ease;transform:scaleX(1)}
+.preloader.-done .preloader__inner{opacity:0;transform:translateY(-16px)}
+@media(prefers-reduced-motion:reduce){.pl-a{animation:none;fill-opacity:1;stroke:none}.preloader__fill{animation:none;transform:scaleX(1)}.preloader__track{opacity:1}.preloader{transition:opacity .4s ease}.preloader.-done{transform:none;opacity:0}}
+
+/* ---------- footer copyright row: brand name sits next to the copyright, right ---------- */
+.footer_copyright-container__yt1ht{display:flex;align-items:center;gap:1.2rem 2.4rem;flex-wrap:wrap}
+.footer_copyright-container__yt1ht .footer_sublinks__Pj_ed{margin-right:auto}

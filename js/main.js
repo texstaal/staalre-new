@@ -216,27 +216,79 @@
       path.style.strokeDashoffset = String(len);
     });
 
-    // reveal the SSR-hidden hero and play the intro
+    // reveal the SSR-hidden hero; the intro plays on the 'staal:reveal' signal
+    // (fired by the preloader as its curtain lifts, or immediately when there is
+    // no preloader / reduced motion). The headline rises from behind a mask, the
+    // sub-text and button fade + slide + un-blur in a gentle stagger.
     hero.style.visibility = 'visible';
-    var introEls = [heroRefs.title, heroRefs.text, heroRefs.actions].filter(Boolean);
     if (!reduceMotion) {
-      introEls.forEach(function (el, i) {
+      var titleH1 = heroRefs.title ? heroRefs.title.querySelector('h1') : null;
+      if (heroRefs.title) heroRefs.title.style.overflow = 'hidden';
+      if (titleH1) {
+        titleH1.style.transform = 'translateY(108%)';
+        titleH1.style.transition = 'transform 1.15s cubic-bezier(.16,1,.3,1)';
+        titleH1.style.willChange = 'transform';
+      }
+      var fadeEls = [heroRefs.text, heroRefs.actions].filter(Boolean);
+      fadeEls.forEach(function (el, i) {
+        var d = 260 + i * 150;
         el.style.opacity = '0';
-        el.style.transform = 'translateY(38px)';
+        el.style.transform = 'translateY(30px)';
+        el.style.filter = 'blur(7px)';
+        el.style.willChange = 'opacity, transform, filter';
         el.style.transition =
-          'opacity 1s cubic-bezier(.16,1,.3,1) ' + (200 + i * 140) + 'ms, ' +
-          'transform 1s cubic-bezier(.16,1,.3,1) ' + (200 + i * 140) + 'ms';
+          'opacity .9s ease ' + d + 'ms, ' +
+          'transform 1s cubic-bezier(.16,1,.3,1) ' + d + 'ms, ' +
+          'filter .9s ease ' + d + 'ms';
       });
-      requestAnimationFrame(function () {
+      document.addEventListener('staal:reveal', function () {
         requestAnimationFrame(function () {
-          introEls.forEach(function (el) {
+          if (titleH1) titleH1.style.transform = 'translateY(0)';
+          fadeEls.forEach(function (el) {
             el.style.opacity = '1';
             el.style.transform = 'translateY(0)';
+            el.style.filter = 'none';
           });
         });
-      });
+      }, { once: true });
     }
   }
+
+  /* ---------- intro preloader: lift the steel curtain into the hero ---------- */
+  (function () {
+    var pre = qs('#preloader');
+    function reveal() { document.dispatchEvent(new Event('staal:reveal')); }
+    if (!pre) { reveal(); return; }                 // inner pages: no curtain
+    var KEY = 'staal:introSeen', seen = false;
+    try { seen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+    if (seen || reduceMotion) {                      // skip after first view / reduced motion
+      if (pre.parentNode) pre.parentNode.removeChild(pre);
+      reveal();
+      return;
+    }
+    doc.classList.add('-preloading');
+    try { window.scrollTo(0, 0); } catch (e) {}
+    var done = false, start = Date.now(), MIN = 2400, MAX = 3300;
+    function finish() {
+      if (done) return; done = true;
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      doc.classList.remove('-preloading');
+      pre.classList.add('-done');
+      reveal();                                      // hero intro plays as the curtain lifts
+      var gone = false, drop = function () {
+        if (gone) return; gone = true;
+        if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+      };
+      pre.addEventListener('transitionend', function (e) {
+        if (e.target === pre && e.propertyName === 'transform') drop();
+      });
+      setTimeout(drop, 1300);
+    }
+    function schedule() { setTimeout(finish, Math.max(0, MIN - (Date.now() - start))); }
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule);
+    setTimeout(finish, MAX);                          // safety: never hang on a slow asset
+  })();
 
   // cached metrics, refreshed on resize
   var metrics = { remPx: 10, vh: 0, heroH: 0, heroEnd: 0, desktop: true, houseStart: 22 };
@@ -390,8 +442,9 @@
     var pins = qsa('.nl-pin', root);
     var rows = qsa('.nl-hub-row', root);
     var notes = qsa('.nl-hub-note', root);
+    var spokes = qsa('.nl-spokes', root);
     function activate(i) {
-      [pins, rows, notes].forEach(function (group) {
+      [pins, rows, notes, spokes].forEach(function (group) {
         group.forEach(function (el) { el.classList.toggle('-active', +el.dataset.i === i); });
       });
     }

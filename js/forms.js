@@ -5,8 +5,8 @@
   'use strict';
 
   // Filled in by the Supabase setup; safe to expose (anon key + RLS insert-only)
-  var SUPABASE_URL = '';
-  var SUPABASE_ANON_KEY = '';
+  var SUPABASE_URL = 'https://vlwvlmyxcrcvlpnfluch.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsd3ZsbXl4Y3JjdmxwbmZsdWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NTM3MTAsImV4cCI6MjA5NzAyOTcxMH0.6lObN4e-9cJVRAvZsCdJ0kBn0iNctUZJkegl01NCUD4';
 
   var configured = SUPABASE_URL && SUPABASE_ANON_KEY;
 

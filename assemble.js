@@ -57,7 +57,7 @@ body = body.replace(
 );
 
 /* ====================================================================
-   COPY REWRITE — STAAL: boutique warehouse & logistics real estate
+   COPY REWRITE — STAAL: boutique warehouse real estate
    advisory in the Netherlands, acting for the occupier (tenant/buyer).
    Tone: professional, direct, boutique, international, hands-on.
    ==================================================================== */
@@ -101,7 +101,7 @@ body = body.replaceAll('Start Your Search', 'Send Your Requirements');
 setInner('assymetric-image-split_label__4qblS', 'div', 'For Occupiers');
 setInner('for-agents_above-text__SVOzq', 'div', 'We Work for You. <span class="em">Not the Landlord.</span>');
 setInner('for-agents_below-text__DBjLv', 'div',
-  'STAAL represents the occupier — the company that will actually use the space. <span class="em">No divided loyalty, no listing bias. You get one independent, hands-on advisor who knows the Dutch logistics market, negotiates hard on your behalf, and stays with you from the first brief to the day you collect the keys. When a request falls outside our scope, we bring in trusted partners rather than hand you off.</span>');
+  'STAAL represents the occupier — the company that will actually use the space. <span class="em">No divided loyalty, no listing bias. You get one independent, hands-on advisor who knows the Dutch warehouse market, negotiates hard on your behalf, and stays with you from the first brief to the day you collect the keys. When a request falls outside our scope, we bring in trusted partners rather than hand you off.</span>');
 body = body.replaceAll('Join The Movement', 'Work With Us');
 
 /* ---- testimonials (PLACEHOLDER — swap for real client quotes) ---- */
@@ -125,13 +125,13 @@ setInner('testimonials_author__5Drje', 'div', [
 body = body.replaceAll('How FIND', 'How STAAL');
 setInner('services_item-text__uKETL', 'div', [
   '<h3>Lease the right warehouse without the guesswork. We run the full search, compare options on what actually matters — location, clear height, docks, access — and negotiate terms that protect your operation.</h3>',
-  '<h3>Acquire logistics property with an advisor who answers only to you. From sourcing to due-diligence support and price negotiation, we help you buy the right asset at the right number.</h3>',
+  '<h3>Acquire the right warehouse with an advisor who answers only to you. From sourcing to due-diligence support and price negotiation, we help you buy the right asset at the right number.</h3>',
   '<h3>Already in a building? We advise on renewals, renegotiations, expansions, and relocations, so your space keeps pace with your growth.</h3>'
 ]);
 { const words = ['Lease', 'Buy', 'Manage']; let i = 0;
   body = body.replace(/(services_item-more__pkhNR">\s*<span>)([\s\S]*?)(<\/span>)/g, (m, o, inner, c) => i < words.length ? o + words[i++] + c : m); }
 body = body.replace(/(services_brief__OJqWD">\s*<div>)([\s\S]*?)(<\/div>)/,
-  '$1From first requirement to final handover, you get one boutique advisor who knows Dutch logistics real estate <span class="em">and works only for you.</span>$3');
+  '$1From first requirement to final handover, you get one boutique advisor who knows the Dutch warehouse market <span class="em">and works only for you.</span>$3');
 body = body.replaceAll('Get Started with FIND', 'Get Started with STAAL');
 
 /* ---- features (Financing / Property Management / Construction & Development) ---- */
@@ -155,7 +155,7 @@ setInner('features_item-text__X8po0', 'div', [
 body = body.replace(/(latest-posts_title__BvrE_">\s*<h2>\s*<div>)([\s\S]*?)(<\/div>\s*<\/h2>)/,
   '$1Insights<br /><span class="em">&amp; Resources</span>$3');
 setInner('latest-posts_text__1m3Av', 'div',
-  '<p>Practical insight on the Dutch logistics market: site selection, lease terms, and what to know before you sign.</p>');
+  '<p>Practical insight on the Dutch warehouse market: site selection, lease terms, and what to know before you sign.</p>');
 body = body.replaceAll('Visit Our Blog', 'Read Our Insights');
 body = body.replaceAll('Q1 2026 NYC Market Report', 'A Foreign Company’s Guide to Leasing Warehouse Space in the Netherlands');
 body = body.replaceAll('Philly Real Estate: A Winter Chill or a Spring Opportunity?', 'Rotterdam, Venlo or Tilburg: Choosing the Right Dutch Logistics Hub');
@@ -197,7 +197,7 @@ body = body.replace(/<span class="undefined">[\s\S]*?Vouchers Welcome\s*<\/span>
 body = body.replace(/<span class="undefined">[\s\S]*?Vivienda\s*<\/span>\s*/, '');
 
 /* ---- brand + any stray FIND mentions ---- */
-body = body.replaceAll('FIND Real Estate', 'STAAL Real Estate');
+body = body.replaceAll('FIND Real Estate', 'Staal Real Estate');
 body = body.replaceAll('FIND', 'STAAL');
 
 /* ---- STAAL contact details ---- */
@@ -212,6 +212,9 @@ body = body.replace(/href="geo:[^"]*"/, 'href="https://maps.google.com/?q=Speers
 body = body.replaceAll('https://app.findrealestate.com/authentication/sign-in', '/contact');
 body = body.replace(/href="https:\/\/(?:www\.)?(?:facebook|instagram|youtube)\.com\/[^"]*"/g, 'href="#"');
 body = body.replace(/href="https:\/\/www\.linkedin\.com\/[^"]*"/g, 'href="#"');
+// drop Facebook + Youtube from the footer socials (keep Instagram + Linkedin)
+body = body.replace(/<a [^>]*class="footer_social-link__2uQBq"[^>]*>\s*Facebook\s*<\/a>\s*/, '');
+body = body.replace(/<a [^>]*class="footer_social-link__2uQBq"[^>]*>\s*Youtube\s*<\/a>\s*/, '');
 
 /* ---- route internal links to the real pages ---- */
 // "Work With Us" in the occupiers section goes to contact, not the old /join
@@ -248,10 +251,25 @@ for (const [orig, label, href] of burgerMap) {
 }
 
 const SITE_URL = 'https://staalre.com/';
-const TITLE = 'STAAL Real Estate | Make Your Move — Warehouse & Logistics Space in the Netherlands';
+const TITLE = 'Staal Real Estate | Make Your Move — Warehouse Space in the Netherlands';
 const DESC = 'The Netherlands is Europe’s logistics heart. STAAL helps international businesses find, lease and acquire the warehouse space their growth runs on. Independent, occupier-only, hands-on.';
 const ACCENT = '#1F4257';        // steel-blue brand accent (STAAL = steel) — on light
 const ACCENT_BRIGHT = '#6FA0C0'; // lighter steel for hovers on the dark footer
+
+/* ---- intro preloader: black curtain; the mark self-draws then fills, lifts into the hero ---- */
+const plPath = 'M 275.734375 0 L 203.59375 0 L 185.453125 -52.671875 L 93.390625 -52.671875 L 75.234375 0 L 3.09375 0 L 88.078125 -258.921875 L 190.765625 -258.921875 Z M 173.9375 -106.21875 L 139.421875 -212.4375 L 104.890625 -106.21875 Z M 173.9375 -106.21875';
+const preloader = `<div class="preloader" id="preloader" role="presentation" aria-hidden="true">
+      <div class="preloader__inner">
+        <svg class="pl-logo" viewBox="0 0 384 384" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Staal">
+          <g transform="translate(4.178556,339.887332)"><path class="pl-a pl-a1" pathLength="1" d="${plPath}" /></g>
+          <g transform="translate(105.156232,339.887332)"><path class="pl-a pl-a2" pathLength="1" d="${plPath}" /></g>
+        </svg>
+        <div class="preloader__track"><span class="preloader__fill"></span></div>
+      </div>
+    </div>
+    `;
+body = body.replace('<div class="loading-line_loadingLine__br2iU">',
+  preloader + '<div class="loading-line_loadingLine__br2iU">');
 
 const head = `<!DOCTYPE html>
 <html lang="en">
@@ -261,14 +279,14 @@ const head = `<!DOCTYPE html>
     <title>${TITLE}</title>
     <meta name="description" content="${DESC}" />
     <meta name="keywords" content="warehouse real estate Netherlands, logistics property Netherlands, industrial real estate advisor, occupier advisory, tenant representation, lease warehouse Netherlands, distribution centre, fulfilment space, e-commerce logistics real estate" />
-    <meta name="author" content="STAAL Real Estate" />
+    <meta name="author" content="Staal Real Estate" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="${ACCENT}" />
     <link rel="canonical" href="${SITE_URL}" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="STAAL Real Estate" />
+    <meta property="og:site_name" content="Staal Real Estate" />
     <meta property="og:title" content="${TITLE}" />
     <meta property="og:description" content="${DESC}" />
     <meta property="og:url" content="${SITE_URL}" />
@@ -283,11 +301,12 @@ const head = `<!DOCTYPE html>
     <meta name="twitter:description" content="${DESC}" />
     <meta name="twitter:image" content="${SITE_URL}images/og-image.jpg" />
 
-    <!-- Icons (drop these files in later) -->
-    <link rel="icon" href="favicon.ico" sizes="any" />
-    <link rel="icon" href="icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="manifest" href="site.webmanifest" />
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="preload" href="fonts/space-grotesk-400.woff2" as="font" crossorigin="" type="font/woff2" />
     <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" crossorigin="" type="font/woff2" />
@@ -304,8 +323,10 @@ const head = `<!DOCTYPE html>
     <link rel="stylesheet" href="css/17424100e880a33c.css" data-precedence="next" />
     <link rel="stylesheet" href="css/staal.css" />
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"RealEstateAgent","name":"STAAL Real Estate","description":"${DESC}","url":"${SITE_URL}","email":"tex@staalre.com","telephone":"+31628363631","areaServed":"NL","address":{"@type":"PostalAddress","streetAddress":"Speerstraat 7-2","addressLocality":"Amsterdam","postalCode":"1076XM","addressCountry":"NL"},"knowsAbout":["Warehouse real estate","Logistics property","Tenant representation","Occupier advisory"]}
+    {"@context":"https://schema.org","@type":"RealEstateAgent","name":"Staal Real Estate","description":"${DESC}","url":"${SITE_URL}","email":"tex@staalre.com","telephone":"+31628363631","areaServed":"NL","address":{"@type":"PostalAddress","streetAddress":"Speerstraat 7-2","addressLocality":"Amsterdam","postalCode":"1076XM","addressCountry":"NL"},"knowsAbout":["Warehouse real estate","Logistics property","Tenant representation","Occupier advisory"]}
     </script>
+    <!-- Vercel Web Analytics (cookieless; enable Analytics on the Vercel project) -->
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
 `;
 
@@ -321,23 +342,43 @@ const tail = `
 
 /* ---- interactive Netherlands logistics map (replaces the chevron strip) ---- */
 const nlmap = JSON.parse(fs.readFileSync('nl-map.json', 'utf8'));
+const [, , nlW, nlH] = nlmap.viewBox.split(/\s+/).map(Number);
 // pins live INSIDE the svg (shared coordinate system) so they always line up
 const mapPins = nlmap.hubs.map((h, i) =>
-  `<g class="nl-pin${i === 0 ? ' -active' : ''}" data-i="${i}"><circle class="nl-pin-hit" cx="${h.x}" cy="${h.y}" r="20" /><circle class="nl-pin-halo" cx="${h.x}" cy="${h.y}" r="6" /><circle class="nl-pin-dot" cx="${h.x}" cy="${h.y}" r="5.5" /></g>`).join('');
+  `<g class="nl-pin${i === 0 ? ' -active' : ''}" data-i="${i}"><circle class="nl-pin-hit" cx="${h.x}" cy="${h.y}" r="22" /><circle class="nl-pin-ring" cx="${h.x}" cy="${h.y}" r="11" /><circle class="nl-pin-halo" cx="${h.x}" cy="${h.y}" r="6" /><circle class="nl-pin-dot" cx="${h.x}" cy="${h.y}" r="5.5" /></g>`).join('');
+// hub-and-spoke routes: each hub links to every other hub; only the active set shows
+const mapSpokes = nlmap.hubs.map((h, i) =>
+  `<g class="nl-spokes${i === 0 ? ' -active' : ''}" data-i="${i}">${
+    nlmap.hubs.map((h2, j) => j === i ? '' :
+      `<line x1="${h.x}" y1="${h.y}" x2="${h2.x}" y2="${h2.y}" />`).join('')
+  }</g>`).join('');
 const mapRows = nlmap.hubs.map((h, i) =>
   `<li><button type="button" class="nl-hub-row${i === 0 ? ' -active' : ''}" data-i="${i}"><span class="nl-hub-tick"></span><span>${h.name}</span></button></li>`).join('');
 const mapNotes = nlmap.hubs.map((h, i) =>
   `<p class="nl-hub-note${i === 0 ? ' -active' : ''}" data-i="${i}">${h.note}</p>`).join('');
 const mapHtml = `<div class="nl-map" data-nl-map>
-            <div class="nl-map-aside">
+            <div class="nl-map-intro">
               <div class="nl-map-eyebrow">Main logistics hubs</div>
               <p class="nl-map-lede">We work nationwide — these are the hubs that drive Dutch logistics. <span class="em">Tap one to see what it’s known for.</span></p>
-              <ul class="nl-hub-list">${mapRows}</ul>
+            </div>
+            <div class="nl-map-stage">
+              <div class="nl-map-figure">
+              <svg class="nl-map-svg" viewBox="${nlmap.viewBox}" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="nlLand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f3f0" /><stop offset="1" stop-color="#e3e0d9" /></linearGradient>
+                  <pattern id="nlDots" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="1.7" cy="1.7" r="1.1" fill="rgba(21,23,23,0.06)" /></pattern>
+                  <filter id="nlShadow" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#151717" flood-opacity="0.10" /></filter>
+                  <clipPath id="nlClip"><path d="${nlmap.path}" /></clipPath>
+                </defs>
+                <path class="nl-map-shape" d="${nlmap.path}" filter="url(#nlShadow)" />
+                <g clip-path="url(#nlClip)"><rect x="0" y="0" width="${nlW}" height="${nlH}" fill="url(#nlDots)" /></g>
+                <g class="nl-spokes-layer">${mapSpokes}</g>
+                <g class="nl-pins">${mapPins}</g>
+              </svg>
+              </div>
               <div class="nl-map-notes">${mapNotes}</div>
             </div>
-            <div class="nl-map-figure">
-              <svg class="nl-map-svg" viewBox="${nlmap.viewBox}" xmlns="http://www.w3.org/2000/svg"><path class="nl-map-shape" d="${nlmap.path}" /><g class="nl-pins">${mapPins}</g></svg>
-            </div>
+            <ul class="nl-hub-list nl-map-list">${mapRows}</ul>
           </div>
           `;
 body = body.replace(
@@ -580,20 +621,40 @@ main{background:#fff}
 
 /* interactive Netherlands logistics map (homepage, replaces chevron strip).
    pins are inside the SVG so they always align with the coastline. */
-.nl-map{display:grid;gap:4rem;margin-top:5rem;align-items:center}
-@media(min-width:768px){.nl-map{grid-template-columns:0.8fr 1fr;gap:7rem;margin-top:9rem}}
-.nl-map-figure{order:-1;position:relative;width:100%;max-width:40rem;margin:0 auto}
-@media(min-width:768px){.nl-map-figure{order:0;max-width:46rem}}
-.nl-map-svg{width:100%;height:auto;display:block;overflow:visible}
-.nl-map-shape{fill:#eceae6;stroke:rgba(21,23,23,.12);stroke-width:1.1;stroke-linejoin:round}
+.nl-map{display:grid;gap:2.4rem;margin-top:5rem;grid-template-areas:"intro" "stage" "list"}
+.nl-map-intro{grid-area:intro}
+.nl-map-stage{grid-area:stage}
+.nl-hub-list.nl-map-list{grid-area:list}
+@media(min-width:768px){.nl-map{grid-template-columns:0.8fr 1fr;grid-template-areas:"intro stage" "list stage";column-gap:6rem;row-gap:3rem;margin-top:9rem;align-items:start}}
+.nl-map-figure{position:relative;width:100%;max-width:30rem;margin:0 auto}
+@media(min-width:768px){.nl-map-figure{max-width:53rem;margin:0}}
+.nl-map-svg{width:100%;height:auto;display:block;overflow:visible;background:transparent}
+/* mobile: pin the map + active note so tapping a hub in the list updates them on screen */
+@media(max-width:767px){
+.nl-map-stage{position:sticky;top:1.4rem;z-index:2;background:#fff;padding-bottom:1rem}
+.nl-map-figure{max-width:min(60vw,26rem)}
+.nl-map-notes{margin-top:1.6rem;text-align:center}
+.nl-hub-note{margin-left:auto;margin-right:auto}
+}
+.nl-map-shape{fill:url(#nlLand);stroke:rgba(21,23,23,.10);stroke-width:1.1;stroke-linejoin:round}
+/* hub-and-spoke routes radiating from the active hub */
+.nl-spokes{opacity:0;transition:opacity .45s ease}
+.nl-spokes.-active{opacity:1}
+.nl-spokes line{fill:none;stroke:#1F4257;stroke-width:1.3;stroke-opacity:.3;stroke-linecap:round;stroke-dasharray:1 7;pointer-events:none}
+.nl-spokes.-active line{animation:nlFlow 9s linear infinite}
+@keyframes nlFlow{to{stroke-dashoffset:-160}}
 .nl-pin{cursor:pointer}
 .nl-pin-hit{fill:transparent}
+.nl-pin-ring{fill:none;stroke:#1F4257;stroke-width:1.4;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.45);transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1)}
 .nl-pin-dot{fill:#151717;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .25s}
 .nl-pin-halo{fill:#1F4257;opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}
-.nl-pin:hover .nl-pin-dot{fill:#1F4257;transform:scale(1.25)}
-.nl-pin.-active .nl-pin-dot{fill:#1F4257;transform:scale(1.35)}
+.nl-pin:hover .nl-pin-dot{fill:#1F4257;transform:scale(1.2)}
+.nl-pin:hover .nl-pin-ring{opacity:.4;transform:scale(1)}
+.nl-pin.-active .nl-pin-dot{fill:#1F4257;transform:scale(1.3)}
+.nl-pin.-active .nl-pin-ring{opacity:.6;transform:scale(1)}
 .nl-pin.-active .nl-pin-halo{animation:nlPulse 2.2s ease-out infinite}
 @keyframes nlPulse{0%{opacity:.45;transform:scale(.5)}100%{opacity:0;transform:scale(2.6)}}
+@media(prefers-reduced-motion:reduce){.nl-spokes.-active line{animation:none}.nl-pin.-active .nl-pin-halo{animation:none}}
 .nl-map-eyebrow{font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:1.4rem}
 @media(min-width:768px){.nl-map-eyebrow{font-size:1.6rem}}
 .nl-map-lede{font-weight:500;font-size:1.7rem;line-height:1.4;letter-spacing:-.01em;margin-bottom:3rem;max-width:34rem}
@@ -606,10 +667,12 @@ main{background:#fff}
 .nl-hub-row:hover{color:#151717}
 .nl-hub-row.-active{color:#151717}
 .nl-hub-row.-active .nl-hub-tick{width:2.6rem}
-.nl-map-notes{margin-top:2.4rem;min-height:7rem}
-.nl-hub-note{display:none;font-weight:500;font-size:1.7rem;line-height:1.5;color:#5a5c5c;max-width:40rem}
+/* all notes share one grid cell so the panel height never changes between hubs
+   (a taller note no longer re-centers the grid and nudges the map sideways) */
+.nl-map-notes{margin-top:2.4rem;display:grid}
+.nl-hub-note{grid-area:1/1;font-weight:500;font-size:1.7rem;line-height:1.5;color:#5a5c5c;max-width:40rem;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
 @media(min-width:768px){.nl-hub-note{font-size:2rem}}
-.nl-hub-note.-active{display:block;animation:tabIn .4s cubic-bezier(.16,1,.3,1)}
+.nl-hub-note.-active{opacity:1;visibility:visible;transform:none}
 
 /* mini steps: three columns, steel numerals */
 .mini-steps{display:grid;gap:3rem}
@@ -644,6 +707,29 @@ main{background:#fff}
 .faq-body{padding:0 0 3rem;max-width:81.2rem}
 .faq-body p{font-weight:400;font-size:1.6rem;line-height:1.6;color:#3c3e3e}
 @media(min-width:768px){.faq-body p{font-size:2rem}}
+
+/* ---------- intro preloader (homepage): pure black, the mark self-draws ---------- */
+html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
+.preloader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden;will-change:transform;transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.preloader__inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:3.4rem;padding:0 6vw;transition:opacity .45s ease,transform .6s cubic-bezier(.76,0,.24,1)}
+.pl-logo{width:min(12rem,32vw);height:auto;display:block;overflow:visible}
+.pl-a{fill:#fff;fill-opacity:0;stroke:#fff;stroke-width:4;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.pl-a1{animation:plDraw 1.2s cubic-bezier(.62,0,.3,1) .15s forwards,plFill .55s ease 1.3s forwards}
+.pl-a2{animation:plDraw 1.2s cubic-bezier(.62,0,.3,1) .38s forwards,plFill .55s ease 1.5s forwards}
+@keyframes plDraw{to{stroke-dashoffset:0}}
+@keyframes plFill{to{fill-opacity:1}}
+.preloader__track{position:relative;width:min(14rem,36vw);height:1px;background:rgba(255,255,255,.13);overflow:hidden;opacity:0;animation:preBarIn .5s ease .45s forwards}
+@keyframes preBarIn{to{opacity:1}}
+.preloader__fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:#fff;animation:preFill 1.85s cubic-bezier(.45,.05,.2,1) .45s forwards}
+@keyframes preFill{0%{transform:scaleX(0)}100%{transform:scaleX(.95)}}
+.preloader.-done{transform:translateY(-100%)}
+.preloader.-done .preloader__fill{transition:transform .35s ease;transform:scaleX(1)}
+.preloader.-done .preloader__inner{opacity:0;transform:translateY(-16px)}
+@media(prefers-reduced-motion:reduce){.pl-a{animation:none;fill-opacity:1;stroke:none}.preloader__fill{animation:none;transform:scaleX(1)}.preloader__track{opacity:1}.preloader{transition:opacity .4s ease}.preloader.-done{transform:none;opacity:0}}
+
+/* ---------- footer copyright row: brand name sits next to the copyright, right ---------- */
+.footer_copyright-container__yt1ht{display:flex;align-items:center;gap:1.2rem 2.4rem;flex-wrap:wrap}
+.footer_copyright-container__yt1ht .footer_sublinks__Pj_ed{margin-right:auto}
 `;
 fs.writeFileSync('css/staal.css', staalCss, 'utf8');
 
