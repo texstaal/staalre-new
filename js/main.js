@@ -508,30 +508,30 @@
     videoStarted = true;
     playVideo();
   }
+  function openWipe() {
+    videoWrap.style.clipPath = 'inset(0 0 0 0)';
+    videoWrap.style.webkitClipPath = 'inset(0 0 0 0)';
+  }
   if (videoWrap && video) {
     if (reduceMotion || !('IntersectionObserver' in window)) {
       startVideoOnce();                                   // no motion: just play when ready
     } else {
-      var WIPE_CLOSED = 'inset(0 100% 0 0)', WIPE_OPEN = 'inset(0 0 0 0)';
-      videoWrap.style.clipPath = WIPE_CLOSED;
-      videoWrap.style.webkitClipPath = WIPE_CLOSED;
+      videoWrap.style.clipPath = 'inset(0 100% 0 0)';
+      videoWrap.style.webkitClipPath = 'inset(0 100% 0 0)';
       videoWrap.style.transition =
         'clip-path 1s cubic-bezier(.16,1,.3,1), -webkit-clip-path 1s cubic-bezier(.16,1,.3,1)';
       videoWrap.style.willChange = 'clip-path';
-      videoWrap.addEventListener('transitionend', function (e) {
-        if (e.propertyName === 'clip-path' || e.propertyName === '-webkit-clip-path') startVideoOnce();
-      });
+      // threshold 0 + a bottom rootMargin fires reliably as soon as the section
+      // reaches ~20% up from the bottom of the viewport — independent of how
+      // tall the section is (a fixed threshold could be missed on some screens).
       var vio = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
-          vio.unobserve(entry.target);
-          requestAnimationFrame(function () {            // trigger the wipe
-            videoWrap.style.clipPath = WIPE_OPEN;
-            videoWrap.style.webkitClipPath = WIPE_OPEN;
-          });
-          setTimeout(startVideoOnce, 1150);              // fallback if transitionend never fires
+          vio.disconnect();
+          requestAnimationFrame(openWipe);               // sweep the mask open L→R
+          setTimeout(startVideoOnce, 500);               // start playing as it reveals
         });
-      }, { threshold: 0.35 });
+      }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
       vio.observe(videoWrap);
     }
   }
