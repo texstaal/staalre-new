@@ -528,8 +528,9 @@
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           vio.disconnect();
-          requestAnimationFrame(openWipe);               // sweep the mask open L→R
-          setTimeout(startVideoOnce, 500);               // start playing as it reveals
+          startVideoOnce();                              // play immediately, so the
+          requestAnimationFrame(openWipe);               // strip is already moving as
+                                                         // the mask sweeps open L→R
         });
       }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
       vio.observe(videoWrap);
