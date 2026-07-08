@@ -24,7 +24,7 @@ body = body.replace(/(testimonials_preview___uhyO"[\s\S]*?src=")images\/1\.jpg/,
 
 /* ---- local media ---- */
 // compressed video + poster, and don't preload it (autoplays when scrolled into view)
-body = body.replace('src="/videos/why-us.mp4"', 'src="images/why-us-c.mp4" poster="images/why-us-poster.webp" preload="none"');
+body = body.replace('src="/videos/why-us.mp4"', 'src="images/staalre-video.mp4" poster="images/staalre-poster.webp" preload="none"');
 body = body.replaceAll('images/house.png', 'images/warehouse.png');
 body = body.replaceAll('images/back.jpg', 'images/back2.0.webp');  // all-blue hero sky (compressed)
 // the sky is the hero backdrop (above the fold): eager-load it so mobile never
