@@ -379,14 +379,15 @@
     if (metrics.desktop) {
       houseTransform = 'translateY(' + houseY + '%)';
     } else {
-      // phones: strong steady rise + slow zoom-in (origin: bottom centre). The
-      // building has to rise a good way up so the letters sit over its WARM
-      // INTERIOR (rich composite fill) rather than just the roofline. Its bottom
-      // edge stays below the letters and under the raised cloud bank the whole
-      // time, so it's never exposed. The zoom adds depth as you scroll.
+      // phones: the building "rises" mostly by ZOOMING (scale, origin bottom)
+      // rather than translating, so its bottom edge barely moves up and stays
+      // buried deep in the opaque cloud bank — the sky beneath it is never
+      // revealed. A small translate adds a touch of lift; the zoom does the
+      // work of bringing the warm interior up behind the letters (rich fill).
       var mp = Math.min(p, 0.9);
-      var my = -72 * mp / 0.7;                 // strong rise for a rich fill
-      var mScale = 1 + 0.16 * (mp / 0.9);      // slow zoom-in over the scroll
+      var my = -30 * mp / 0.7;                 // small lift (bottom stays low)
+      var mScale = 1 + 1.3 * (mp / 0.9);       // strong zoom lifts the warm
+                                               // interior up behind the letters
       houseTransform = 'translateY(' + my + '%) scale(' + mScale + ')';
     }
     r.houses.forEach(function (h) { h.style.transform = houseTransform; });
@@ -433,7 +434,7 @@
         // the letters once STAAL has been fully coloured in for a beat.
         // (start the climb at p=0.68 so the finished wordmark dwells first.)
         var smokeTm = easeInOut(seg(p, 0.68, 0.98));
-        r.smoke.style.transform = 'translateY(' + lerp(44, -30, smokeTm) + '%)';
+        r.smoke.style.transform = 'translateY(' + lerp(30, -30, smokeTm) + '%)';
       }
     }
   }
