@@ -18,8 +18,8 @@ html = html.replace(/\?dpl=dpl_[A-Za-z0-9]+/g, '');
 let body = html.slice(html.indexOf('<body'), html.indexOf('<script src="/_next/static/chunks/webpack'));
 
 /* ---- disambiguate duplicate-named images ---- */
-body = body.replace(/(assymetric-image-split_small-img__199s0"[\s\S]*?src=")images\/1\.jpg/, '$1images/1 (1).jpg');
-body = body.replace(/(assymetric-image-split_image___yxAD"[\s\S]*?src=")images\/2\.jpg/, '$1images/2 (1).jpg');
+body = body.replace(/(assymetric-image-split_small-img__199s0"[\s\S]*?src=")images\/1\.jpg/, '$1images/occupiers-interior.webp');
+body = body.replace(/(assymetric-image-split_image___yxAD"[\s\S]*?src=")images\/2\.jpg/, '$1images/occupiers-docks.webp');
 body = body.replace(/(testimonials_preview___uhyO"[\s\S]*?src=")images\/1\.jpg/, '$1images/1 (2).jpg');
 
 /* ---- local media ---- */
@@ -297,10 +297,11 @@ function altFor(file, alt) {
 altFor('mortgage-services.jpg', 'Financing for a warehouse lease or purchase');
 altFor('property-management.jpg', 'Ongoing warehouse property management');
 altFor('development.jpg', 'Build-to-suit warehouse development');
-altFor('2 (1).jpg', 'Warehouse interior in the Netherlands');
+altFor('occupiers-docks.webp', 'Loading docks at a modern logistics warehouse in the Netherlands');
+altFor('occupiers-interior.webp', 'Palletised goods stacked inside a Dutch logistics warehouse');
 
 /* ---- swap heavy rasters to compressed WebP (cloud/smoke stay PNG — smaller) ---- */
-['warehouse.png', '2 (1).jpg', '1 (1).jpg', 'bg.jpg',
+['warehouse.png', 'bg.jpg',
  'blog-q1-2026-nyc-market-report.png', 'blog-philly-winter-chill.jpg', 'blog-what-1m-buys.jpg',
  'buy.jpg', 'sell.jpg', 'rent.jpg', 'mortgage-services.jpg', 'property-management.jpg', 'development.jpg'
 ].forEach(function (f) {
