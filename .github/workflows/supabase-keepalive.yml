@@ -1,0 +1,25 @@
+name: Supabase keep-alive
+
+# Free-tier Supabase projects pause after ~7 days of inactivity, which breaks the
+# contact + newsletter forms. This pings the project's REST API every 3 days so it
+# never idles out. The key below is the PUBLIC anon key (already shipped in
+# js/forms.js and protected by row-level security) — safe to keep in the workflow.
+
+on:
+  schedule:
+    - cron: '17 6 */3 * *'   # every 3 days at 06:17 UTC
+  workflow_dispatch:          # allow manual runs from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" \
+            "https://vlwvlmyxcrcvlpnfluch.supabase.co/rest/v1/newsletter_subscribers?select=id&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsd3ZsbXl4Y3JjdmxwbmZsdWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NTM3MTAsImV4cCI6MjA5NzAyOTcxMH0.6lObN4e-9cJVRAvZsCdJ0kBn0iNctUZJkegl01NCUD4")
+          echo "Supabase responded: $code"
+          # 2xx/4xx both prove the DB served the request (RLS may return an empty
+          # set); only a network/5xx failure should fail the job.
+          if [ "$code" -ge 500 ]; then echo "Unexpected server error"; exit 1; fi
