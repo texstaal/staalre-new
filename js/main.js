@@ -140,7 +140,7 @@
 
   /* ---------- reveal-on-scroll ---------- */
   var revealGroups = [
-    ['.why-us_grid__RSZoF', '.why-us_preview__OofJt'],
+    ['.why-us_grid__RSZoF'],   // the video preview gets its own wipe-reveal below
     ['.arrows-section_title__a4gyt'],
     ['.arrows-section_arrow___KXxg'],
     ['.arrows-section_text__Z1Oii'],
@@ -491,16 +491,52 @@
     });
   }
 
-  /* ---------- keep the muted hero video playing when visible ---------- */
-  var video = qs('.why-us_preview__OofJt video');
-  function ensureVideoPlays() {
-    if (video && video.paused && !document.hidden) {
-      var pr = video.play();
-      if (pr && pr.catch) pr.catch(function () {});
+  /* ---------- Why-STAAL video: wipe-reveal (L→R) when it enters view, then play ----------
+     The clip-path sweeps the frame open from left to right; the video only
+     starts once the wipe has finished, so it never plays behind a closed mask.
+     autoplay is removed from the markup so nothing plays before the reveal. */
+  var videoWrap = qs('.why-us_preview__OofJt');
+  var video = videoWrap ? qs('video', videoWrap) : null;
+  var videoStarted = false;
+  function playVideo() {
+    if (!video || document.hidden) return;
+    var pr = video.play();
+    if (pr && pr.catch) pr.catch(function () {});
+  }
+  function startVideoOnce() {
+    if (videoStarted) return;
+    videoStarted = true;
+    playVideo();
+  }
+  if (videoWrap && video) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      startVideoOnce();                                   // no motion: just play when ready
+    } else {
+      var HIDDEN = 'inset(0 100% 0 0)', SHOWN = 'inset(0 0 0 0)';
+      videoWrap.style.clipPath = HIDDEN;
+      videoWrap.style.webkitClipPath = HIDDEN;
+      videoWrap.style.transition =
+        'clip-path 1s cubic-bezier(.16,1,.3,1), -webkit-clip-path 1s cubic-bezier(.16,1,.3,1)';
+      videoWrap.style.willChange = 'clip-path';
+      videoWrap.addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'clip-path' || e.propertyName === '-webkit-clip-path') startVideoOnce();
+      });
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          vio.unobserve(entry.target);
+          requestAnimationFrame(function () {            // trigger the wipe
+            videoWrap.style.clipPath = SHOWN;
+            videoWrap.style.webkitClipPath = SHOWN;
+          });
+          setTimeout(startVideoOnce, 1150);              // fallback if transitionend never fires
+        });
+      }, { threshold: 0.35 });
+      vio.observe(videoWrap);
     }
   }
-  document.addEventListener('visibilitychange', ensureVideoPlays);
-  window.addEventListener('load', ensureVideoPlays);
+  // once it has started, resume the loop when the tab/section becomes visible again
+  document.addEventListener('visibilitychange', function () { if (videoStarted) playVideo(); });
 
   /* ---------- main loop ---------- */
   function tick(t) {
