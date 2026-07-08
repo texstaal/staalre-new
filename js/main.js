@@ -512,9 +512,9 @@
     if (reduceMotion || !('IntersectionObserver' in window)) {
       startVideoOnce();                                   // no motion: just play when ready
     } else {
-      var HIDDEN = 'inset(0 100% 0 0)', SHOWN = 'inset(0 0 0 0)';
-      videoWrap.style.clipPath = HIDDEN;
-      videoWrap.style.webkitClipPath = HIDDEN;
+      var WIPE_CLOSED = 'inset(0 100% 0 0)', WIPE_OPEN = 'inset(0 0 0 0)';
+      videoWrap.style.clipPath = WIPE_CLOSED;
+      videoWrap.style.webkitClipPath = WIPE_CLOSED;
       videoWrap.style.transition =
         'clip-path 1s cubic-bezier(.16,1,.3,1), -webkit-clip-path 1s cubic-bezier(.16,1,.3,1)';
       videoWrap.style.willChange = 'clip-path';
@@ -526,8 +526,8 @@
           if (!entry.isIntersecting) return;
           vio.unobserve(entry.target);
           requestAnimationFrame(function () {            // trigger the wipe
-            videoWrap.style.clipPath = SHOWN;
-            videoWrap.style.webkitClipPath = SHOWN;
+            videoWrap.style.clipPath = WIPE_OPEN;
+            videoWrap.style.webkitClipPath = WIPE_OPEN;
           });
           setTimeout(startVideoOnce, 1150);              // fallback if transitionend never fires
         });
