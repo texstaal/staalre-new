@@ -425,8 +425,13 @@
         var smokeT = easeInOut(seg(p, 0.34, 0.92));
         r.smoke.style.transform = 'translateY(' + lerp(70, -35, smokeT) + '%)';
       } else {
-        var smokeTm = easeInOut(seg(p, 0.03, 0.5));
-        r.smoke.style.transform = 'translateY(' + lerp(52, -30, smokeTm) + '%)';
+        // phones: hold the smoke low (lapping the building base) through the
+        // whole logo write + composite fill, so STAAL gets a clean, legible
+        // moment against the warehouse before the smoke rises to cover it.
+        // (previously it started rising at p=0.03 and washed the letters to
+        // white before they ever resolved.)
+        var smokeTm = easeInOut(seg(p, 0.55, 0.96));
+        r.smoke.style.transform = 'translateY(' + lerp(60, -28, smokeTm) + '%)';
       }
     }
   }
