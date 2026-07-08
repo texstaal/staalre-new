@@ -379,13 +379,15 @@
     if (metrics.desktop) {
       houseTransform = 'translateY(' + houseY + '%)';
     } else {
-      // phones: NO zoom — the building slides straight up at a steady rate,
-      // rising behind the letters while the smoke (raised early below)
-      // swallows its base so the lift never shows a hard bottom edge.
-      // The rise is spread over 70% of the hero so the image bottom
-      // arrives late instead of rushing up in the first half-scroll.
-      var my = -70 * Math.min(p, 0.9) / 0.7;
-      houseTransform = 'translateY(' + my + '%)';
+      // phones: strong steady rise + slow zoom-in (origin: bottom centre). The
+      // building has to rise a good way up so the letters sit over its WARM
+      // INTERIOR (rich composite fill) rather than just the roofline. Its bottom
+      // edge stays below the letters and under the raised cloud bank the whole
+      // time, so it's never exposed. The zoom adds depth as you scroll.
+      var mp = Math.min(p, 0.9);
+      var my = -72 * mp / 0.7;                 // strong rise for a rich fill
+      var mScale = 1 + 0.16 * (mp / 0.9);      // slow zoom-in over the scroll
+      houseTransform = 'translateY(' + my + '%) scale(' + mScale + ')';
     }
     r.houses.forEach(function (h) { h.style.transform = houseTransform; });
 
@@ -425,13 +427,13 @@
         var smokeT = easeInOut(seg(p, 0.34, 0.92));
         r.smoke.style.transform = 'translateY(' + lerp(70, -35, smokeT) + '%)';
       } else {
-        // phones: hold the smoke low (lapping the building base) through the
-        // whole logo write + composite fill, so STAAL gets a clean, legible
-        // moment against the warehouse before the smoke rises to cover it.
-        // (previously it started rising at p=0.03 and washed the letters to
-        // white before they ever resolved.)
-        var smokeTm = easeInOut(seg(p, 0.55, 0.96));
-        r.smoke.style.transform = 'translateY(' + lerp(60, -28, smokeTm) + '%)';
+        // phones: keep a cloud bank sitting fairly high over the building's
+        // base at ALL times (rest = 44%) so its bottom edge is never exposed,
+        // then hold there through the logo write + fill and only climb to cover
+        // the letters once STAAL has been fully coloured in for a beat.
+        // (start the climb at p=0.68 so the finished wordmark dwells first.)
+        var smokeTm = easeInOut(seg(p, 0.68, 0.98));
+        r.smoke.style.transform = 'translateY(' + lerp(44, -30, smokeTm) + '%)';
       }
     }
   }
