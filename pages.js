@@ -165,7 +165,7 @@ const posts = [
     thumb: '/images/blog-q1-2026-nyc-market-report.png',
     excerpt: 'What international occupiers need to know before signing a Dutch lease: indexation, service charges, and break options.',
     body: `
-<p>The Netherlands is one of Europe’s most efficient logistics markets, and one of its most particular. Dutch leases follow conventions that surprise many international occupiers, and the difference between a good and a bad signature is rarely the headline rent. It’s the structure around it.</p>
+<p><strong>Dutch warehouse leases run on the standardised ROZ model, and almost everything in it is negotiable.</strong> What decides a good signature is the structure, not the headline rent: break options, CPI-indexation caps, service-charge scope and reinstatement. The Netherlands is one of Europe’s most efficient logistics markets and one of its most particular — here is what to scrutinise before you commit.</p>
 <h2>The ROZ model: the default you’ll be offered</h2>
 <p>Most Dutch industrial leases are based on the ROZ model (Raad voor Onroerende Zaken), a standardised contract written, historically, from the landlord’s perspective. It works, but almost everything in it is negotiable, and landlords expect informed tenants to negotiate it. Key points to scrutinise:</p>
 <ul>
@@ -193,7 +193,7 @@ const posts = [
     thumb: '/images/blog-philly-winter-chill.jpg',
     excerpt: 'The major Dutch logistics regions compared on location, labour, transport links and availability, and how to choose between them.',
     body: `
-<p>“Where should we be?” is usually the first question an international occupier asks, and the honest answer is: it depends on what your network needs to do. The Netherlands is small, but its logistics geography is sharply differentiated.</p>
+<p><strong>Rotterdam fits container-heavy flows, Venlo serves the German market, Tilburg–Waalwijk is the e-commerce middle ground, and Schiphol handles high-value air cargo.</strong> “Where should we be?” is usually an international occupier’s first question, and the honest answer is: it depends on what your network needs to do. The Netherlands is small, but its logistics geography is sharply differentiated — here is how the main regions compare.</p>
 <h2>Rotterdam & the port corridor</h2>
 <p>If your flows are container-heavy, proximity to the Port of Rotterdam compresses drayage cost and time. The Maasvlakte and surrounding zones (Botlek, Waalhaven, and the A15 corridor) offer deep-sea connectivity no inland location can match. The trade-offs: scarce land, premium rents, and a tight labour market shared with the port itself.</p>
 <h2>Venlo & the southeast</h2>
@@ -218,7 +218,7 @@ const posts = [
     thumb: '/images/blog-what-1m-buys.jpg',
     excerpt: 'A practical look at when leasing beats buying for a distribution operation in the Netherlands, and when it doesn’t.',
     body: `
-<p>Most international occupiers default to leasing in a new market, usually rightly. But the Dutch market periodically rewards owner-occupiers, and the question deserves a real answer, not a reflex.</p>
+<p><strong>For most international distribution operations entering the Netherlands, leasing wins — on speed, flexibility and capital efficiency.</strong> Buying earns its place for specialised fit-out, scarce locations, or long-horizon sites where the arithmetic favours ownership. Most occupiers default to leasing, usually rightly — but the Dutch market periodically rewards owner-occupiers, and the question deserves a real answer, not a reflex.</p>
 <h2>The case for leasing</h2>
 <ul>
 <li><strong>Speed and flexibility.</strong> A lease can complete in weeks; an acquisition takes months. If your volumes may double, or halve, within five years, flexibility is worth paying for.</li>
@@ -397,8 +397,12 @@ ${outro('Need a deal team, not just a building? <span class="em">Tell us what yo
 /* ABOUT */
 pages.push({
   file: 'about.html', url: '/about',
-  title: 'About Staal Real Estate',
-  desc: 'Staal Real Estate is a boutique occupier-side advisory for warehouse property in the Netherlands, based in Amsterdam.',
+  title: 'About',
+  desc: 'Staal Real Estate is a boutique occupier-side advisory for warehouse property in the Netherlands, based in Amsterdam. Founded by Tex Staal.',
+  jsonld: `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@graph":[
+    {"@type":"Person","@id":SITE_URL+'/#tex',"name":"Tex Staal","jobTitle":"Founder & Advisor","worksFor":{"@id":SITE_URL+'/#organization'},"url":SITE_URL+'/about',"sameAs":["https://www.linkedin.com/in/texstaal"]},
+    {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":SITE_URL+'/'},{"@type":"ListItem","position":2,"name":"About","item":SITE_URL+'/about'}]}
+  ]})}</script>`,
   content: `
 ${hero('Steel-strong<br />on your side.', 'STAAL is a boutique real estate advisory from Amsterdam — <span class="em">focused on warehouse space, acting for the occupier.</span>')}
 ${statement('<em>Staal</em> is Dutch for steel: the material the buildings are made of, <span class="em">and the way we negotiate for the companies inside them.</span>')}
@@ -408,6 +412,14 @@ ${statsBand([
   ['NL', 'Nationwide, from the Rotterdam port to Venlo.']
 ])}
 ${splitSection([
+  split('The founder', `
+    <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
+      <div aria-hidden="true" style="flex:0 0 auto;width:7.2rem;height:7.2rem;border-radius:50%;background:#1F4257;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:2.4rem">TS</div>
+      <div style="flex:1 1 22rem">
+        <p>Staal Real Estate was founded by <strong>Tex Staal</strong>, an Amsterdam-based advisor working exclusively on the occupier side of the Dutch warehouse market. The firm runs on one conviction: international companies leasing or buying space in the Netherlands deserve an advisor who answers only to them — never the landlord. Tex is your single point of contact, from the first brief to the day the keys change hands.</p>
+        <p><a href="https://www.linkedin.com/in/texstaal" target="_blank" rel="noopener">Connect with Tex on LinkedIn</a></p>
+      </div>
+    </div>`),
   split('What we are', `
     <p>A specialist, not a department. STAAL does one thing: helping businesses find, lease and acquire warehouse space in the Netherlands. No landlord listings, no divided loyalty — when we sit at the table, everyone knows whose side we’re on.</p>`),
   split('Who we work for', `
@@ -424,7 +436,7 @@ ${outro('The Dutch market, with someone on your side. <span class="em">Let’s t
 /* CONTACT */
 pages.push({
   file: 'contact.html', url: '/contact',
-  title: 'Contact Staal Real Estate',
+  title: 'Contact',
   desc: 'Send your warehouse requirement to Staal Real Estate, Amsterdam. We respond within one business day.',
   content: `
 ${hero('Contact', 'Tell us what your operation needs — <span class="em">we respond within one business day.</span>')}
@@ -442,7 +454,7 @@ ${hero('Contact', 'Tell us what your operation needs — <span class="em">we res
         </div>
         <div class="contact-block">
           <div class="contact-label">Phone / WhatsApp</div>
-          <div class="contact-value"><a href="tel:+31628363631">+31 6 28 36 36 31</a></div>
+          <div class="contact-value"><a href="tel:+31659129127">+31 6 59 12 91 27</a></div>
         </div>
         <div class="contact-block">
           <div class="contact-label">Hours</div>
@@ -494,6 +506,13 @@ ${outro('Prefer answers to articles? <span class="em">Ask us directly.</span>')}
 });
 
 /* ARTICLES */
+const ORG_ID = SITE_URL + '/#organization';
+const articleLd = (p) => `<script type="application/ld+json">
+${JSON.stringify({"@context":"https://schema.org","@graph":[
+  {"@type":"BlogPosting","@id":SITE_URL+'/insights/'+p.slug+'#article',"headline":p.title,"description":p.excerpt,"url":SITE_URL+'/insights/'+p.slug,"datePublished":p.date,"dateModified":p.date,"image":SITE_URL+p.thumb,"author":{"@type":"Person","name":"Tex Staal","url":SITE_URL+'/about',"sameAs":["https://www.linkedin.com/in/texstaal"]},"publisher":{"@type":"Organization","@id":ORG_ID,"name":"Staal Real Estate","logo":{"@type":"ImageObject","url":SITE_URL+'/images/og-image.jpg'}},"mainEntityOfPage":{"@type":"WebPage","@id":SITE_URL+'/insights/'+p.slug},"inLanguage":"en"},
+  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":SITE_URL+'/'},{"@type":"ListItem","position":2,"name":"Insights","item":SITE_URL+'/insights'},{"@type":"ListItem","position":3,"name":p.title,"item":SITE_URL+'/insights/'+p.slug}]}
+]})}
+</script>`;
 for (const p of posts) {
   const others = posts.filter(x => x.slug !== p.slug);
   pages.push({
@@ -501,12 +520,15 @@ for (const p of posts) {
     title: p.title,
     desc: p.excerpt,
     ogImage: SITE_URL + p.thumb,
+    ogType: 'article',
+    jsonld: articleLd(p),
     content: `
 <article>
   <div class="container_container__v5gtR">
     <div class="article-head">
       <div class="article-date">${p.date}</div>
       <h1>${p.title}</h1>
+      <div class="article-byline" style="margin-top:.8rem;font-size:1.5rem;color:#5a5c5c">By <strong>Tex Staal</strong> &middot; Founder &amp; Advisor, Staal Real Estate</div>
       <div class="article-hero-img"><img src="${p.thumb}" alt="${p.title}" loading="eager" /></div>
     </div>
     <div class="article-prose">${p.body}
@@ -540,7 +562,7 @@ pages.push({
   desc: 'Terms and conditions for the use of staalre.com and the services of Staal Real Estate, Amsterdam.',
   content: `${legalIntro('Terms &amp;<br />Conditions')}
 <h2>1. Who we are</h2>
-<p>Staal Real Estate (“Staal”, “we”, “us”) is a real estate advisory firm with its head office at Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands. You can reach us at <a href="mailto:tex@staalre.com">tex@staalre.com</a> or +31 6 28 36 36 31.</p>
+<p>Staal Real Estate (“Staal”, “we”, “us”) is a real estate advisory firm with its head office at Speerstraat 7-2, Amsterdam, 1076XM, The Netherlands. You can reach us at <a href="mailto:tex@staalre.com">tex@staalre.com</a> or +31 6 59 12 91 27.</p>
 <h2>2. Scope of these terms</h2>
 <p>These terms govern your use of this website and apply to our advisory services unless a written engagement agreement states otherwise. By using this website you accept these terms. If you do not agree with them, please do not use the site.</p>
 <h2>3. Services and engagements</h2>
@@ -648,7 +670,9 @@ const headFor = (p) => `<!DOCTYPE html>
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#1F4257" />
     <link rel="canonical" href="${SITE_URL}${p.url}" />
-    <meta property="og:type" content="website" />
+    <link rel="alternate" hreflang="en" href="${SITE_URL}${p.url}" />
+    <link rel="alternate" hreflang="x-default" href="${SITE_URL}${p.url}" />
+    <meta property="og:type" content="${p.ogType || 'website'}" />
     <meta property="og:site_name" content="Staal Real Estate" />
     <meta property="og:title" content="${p.title} | Staal Real Estate" />
     <meta property="og:description" content="${p.desc}" />
@@ -678,6 +702,7 @@ const headFor = (p) => `<!DOCTYPE html>
     <link rel="stylesheet" href="/css/dd8866e20d835adf.css" />
     <link rel="stylesheet" href="/css/17424100e880a33c.css" />
     <link rel="stylesheet" href="/css/staal.css" />
+    ${p.jsonld || ''}
     <!-- Vercel Web Analytics (cookieless; enable Analytics on the Vercel project) -->
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
@@ -689,17 +714,25 @@ const headFor = (p) => `<!DOCTYPE html>
 const tail = `
     </main>
     ${footerHtml}
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/forms.js"></script>
+    <script defer src="/js/lenis.min.js"></script>
+    <script defer src="/js/main.js"></script>
+    <script defer src="/js/forms.js"></script>
   </body>
 </html>
 `;
 
 /* ---------- write pages ---------- */
+// swap heavy rasters to the compressed WebP versions generated in /images
+const IMG_WEBP = ['warehouse.png', '2 (1).jpg', '1 (1).jpg', 'bg.jpg',
+  'blog-q1-2026-nyc-market-report.png', 'blog-philly-winter-chill.jpg', 'blog-what-1m-buys.jpg',
+  'buy.jpg', 'sell.jpg', 'rent.jpg', 'mortgage-services.jpg', 'property-management.jpg', 'development.jpg'];
+function swapWebp(html) {
+  IMG_WEBP.forEach(f => { html = html.split('images/' + f).join('images/' + f.replace(/\.(png|jpe?g)$/i, '.webp')); });
+  return html;
+}
 fs.mkdirSync('insights', { recursive: true });
 for (const p of pages) {
-  fs.writeFileSync(p.file, headFor(p) + p.content + tail, 'utf8');
+  fs.writeFileSync(p.file, swapWebp(headFor(p) + p.content + tail), 'utf8');
 }
 
 /* ---------- sitemap + robots ---------- */

@@ -23,10 +23,17 @@ body = body.replace(/(assymetric-image-split_image___yxAD"[\s\S]*?src=")images\/
 body = body.replace(/(testimonials_preview___uhyO"[\s\S]*?src=")images\/1\.jpg/, '$1images/1 (2).jpg');
 
 /* ---- local media ---- */
-body = body.replace('src="/videos/why-us.mp4"', 'src="images/why-us.mp4"');
+// compressed video + poster, and don't preload it (autoplays when scrolled into view)
+body = body.replace('src="/videos/why-us.mp4"', 'src="images/why-us-c.mp4" poster="images/why-us-poster.webp" preload="none"');
 body = body.replaceAll('images/house.png', 'images/warehouse.png');
+body = body.replaceAll('images/back.jpg', 'images/back2.0.webp');  // all-blue hero sky (compressed)
+// the sky is the hero backdrop (above the fold): eager-load it so mobile never
+// repaints it away mid-scroll and flashes the warm warehouse behind it
+body = body.replace('alt="" loading="lazy" width="3840" height="2612"', 'alt="" loading="eager" fetchpriority="high" width="3840" height="2612"');
 // warehouse cutout has different intrinsic dimensions than the FIND house
 body = body.replaceAll('loading="eager" width="3840" height="3416"', 'loading="eager" width="1920" height="1250"');
+// hero warehouse is the LCP element: give it alt + high priority
+body = body.replaceAll('alt="" loading="eager"', 'alt="Modern logistics warehouse in the Netherlands" loading="eager" fetchpriority="high"');
 
 /* ---- blog thumbnails ---- */
 const thumbs = [
@@ -190,7 +197,10 @@ body = body.replace(/(href="\/agents">\s*)Agents/g, '$1Process');
 
 /* ---- footer newsletter + sublinks ---- */
 body = body.replace('Subscribe to our Newsletter!', 'Get our market updates.');
-body = body.replace('placeholder="Enter address"', 'placeholder="Enter your email"');
+body = body.replace('placeholder="Enter your email" autocomplete="on" name="email"', 'placeholder="Enter your email" autocomplete="on" name="email" aria-label="Email address"');
+/* ---- a11y: give the icon-only newsletter button + footer logo link accessible names ---- */
+body = body.replace('id="btn_newsletter_signup_footer" type="submit"', 'id="btn_newsletter_signup_footer" type="submit" aria-label="Subscribe"');
+body = body.replace(/<a href="\/">(\s*<svg[^>]*viewBox="0 0 975 280")/, '<a href="/" aria-label="Staal Real Estate — home">$1');
 body = body.replace('Fair Housing Notice', 'Disclaimer');
 body = body.replace('Operating Procedure', 'Cookie Policy');
 body = body.replace(/<span class="undefined">[\s\S]*?Vouchers Welcome\s*<\/span>\s*/, '');
@@ -202,8 +212,8 @@ body = body.replaceAll('FIND', 'STAAL');
 
 /* ---- STAAL contact details ---- */
 body = body.replaceAll('hello@findrealestate.com', 'tex@staalre.com');
-body = body.replaceAll('+1 212 994 9965', '+31 6 28 36 36 31');
-body = body.replaceAll('tel:+12129949965', 'tel:+31628363631');
+body = body.replaceAll('+1 212 994 9965', '+31 6 59 12 91 27');
+body = body.replaceAll('tel:+12129949965', 'tel:+31659129127');
 body = body.replace('5 West 37th Street, 12th Floor,', 'Speerstraat 7-2,');
 body = body.replace('New York, NY 10018', 'Amsterdam, 1076XM, The Netherlands');
 body = body.replace(/href="geo:[^"]*"/, 'href="https://maps.google.com/?q=Speerstraat+7-2,+Amsterdam"');
@@ -212,9 +222,12 @@ body = body.replace(/href="geo:[^"]*"/, 'href="https://maps.google.com/?q=Speers
 body = body.replaceAll('https://app.findrealestate.com/authentication/sign-in', '/contact');
 body = body.replace(/href="https:\/\/(?:www\.)?(?:facebook|instagram|youtube)\.com\/[^"]*"/g, 'href="#"');
 body = body.replace(/href="https:\/\/www\.linkedin\.com\/[^"]*"/g, 'href="#"');
-// drop Facebook + Youtube from the footer socials (keep Instagram + Linkedin)
+// footer socials: keep LinkedIn (wired to the real profile), drop Facebook/Youtube/Instagram
 body = body.replace(/<a [^>]*class="footer_social-link__2uQBq"[^>]*>\s*Facebook\s*<\/a>\s*/, '');
 body = body.replace(/<a [^>]*class="footer_social-link__2uQBq"[^>]*>\s*Youtube\s*<\/a>\s*/, '');
+body = body.replace(/<a [^>]*class="footer_social-link__2uQBq"[^>]*>\s*Instagram\s*<\/a>\s*/, '');
+body = body.replace(/<a [^>]*class="footer_social-link__2uQBq"[^>]*>\s*Linkedin\s*<\/a>/,
+  '<a href="https://www.linkedin.com/in/texstaal" target="_blank" rel="noopener noreferrer" class="footer_social-link__2uQBq">LinkedIn</a>');
 
 /* ---- route internal links to the real pages ---- */
 // "Work With Us" in the occupiers section goes to contact, not the old /join
@@ -271,6 +284,24 @@ const preloader = `<div class="preloader" id="preloader" role="presentation" ari
 body = body.replace('<div class="loading-line_loadingLine__br2iU">',
   preloader + '<div class="loading-line_loadingLine__br2iU">');
 
+/* ---- occupier-relevant alt text (replaces leftover template alts) ---- */
+function altFor(file, alt) {
+  const esc = file.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  body = body.replace(new RegExp('alt="[^"]*"([^>]*?src="images/' + esc + '")'), 'alt="' + alt + '"$1');
+}
+altFor('mortgage-services.jpg', 'Financing for a warehouse lease or purchase');
+altFor('property-management.jpg', 'Ongoing warehouse property management');
+altFor('development.jpg', 'Build-to-suit warehouse development');
+altFor('2 (1).jpg', 'Warehouse interior in the Netherlands');
+
+/* ---- swap heavy rasters to compressed WebP (cloud/smoke stay PNG — smaller) ---- */
+['warehouse.png', '2 (1).jpg', '1 (1).jpg', 'bg.jpg',
+ 'blog-q1-2026-nyc-market-report.png', 'blog-philly-winter-chill.jpg', 'blog-what-1m-buys.jpg',
+ 'buy.jpg', 'sell.jpg', 'rent.jpg', 'mortgage-services.jpg', 'property-management.jpg', 'development.jpg'
+].forEach(function (f) {
+  body = body.replaceAll('images/' + f, 'images/' + f.replace(/\.(png|jpe?g)$/i, '.webp'));
+});
+
 const head = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -278,11 +309,12 @@ const head = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${TITLE}</title>
     <meta name="description" content="${DESC}" />
-    <meta name="keywords" content="warehouse real estate Netherlands, logistics property Netherlands, industrial real estate advisor, occupier advisory, tenant representation, lease warehouse Netherlands, distribution centre, fulfilment space, e-commerce logistics real estate" />
     <meta name="author" content="Staal Real Estate" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="${ACCENT}" />
     <link rel="canonical" href="${SITE_URL}" />
+    <link rel="alternate" hreflang="en" href="${SITE_URL}" />
+    <link rel="alternate" hreflang="x-default" href="${SITE_URL}" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -310,6 +342,7 @@ const head = `<!DOCTYPE html>
 
     <link rel="preload" href="fonts/space-grotesk-400.woff2" as="font" crossorigin="" type="font/woff2" />
     <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" crossorigin="" type="font/woff2" />
+    <link rel="preload" as="image" href="images/warehouse.webp" type="image/webp" fetchpriority="high" />
     <link rel="stylesheet" href="css/a463080343a8b988.css" data-precedence="next" />
     <link rel="stylesheet" href="css/804a152dbcc38a56.css" data-precedence="next" />
     <link rel="stylesheet" href="css/5290e5f354def47d.css" data-precedence="next" />
@@ -323,7 +356,7 @@ const head = `<!DOCTYPE html>
     <link rel="stylesheet" href="css/17424100e880a33c.css" data-precedence="next" />
     <link rel="stylesheet" href="css/staal.css" />
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"RealEstateAgent","name":"Staal Real Estate","description":"${DESC}","url":"${SITE_URL}","email":"tex@staalre.com","telephone":"+31628363631","areaServed":"NL","address":{"@type":"PostalAddress","streetAddress":"Speerstraat 7-2","addressLocality":"Amsterdam","postalCode":"1076XM","addressCountry":"NL"},"knowsAbout":["Warehouse real estate","Logistics property","Tenant representation","Occupier advisory"]}
+    {"@context":"https://schema.org","@graph":[{"@type":["RealEstateAgent","Organization"],"@id":"${SITE_URL}#organization","name":"Staal Real Estate","description":"${DESC}","url":"${SITE_URL}","logo":{"@type":"ImageObject","url":"${SITE_URL}images/og-image.jpg","width":1200,"height":630},"image":"${SITE_URL}images/og-image.jpg","email":"tex@staalre.com","telephone":"+31659129127","areaServed":{"@type":"Country","name":"Netherlands"},"address":{"@type":"PostalAddress","streetAddress":"Speerstraat 7-2","addressLocality":"Amsterdam","postalCode":"1076XM","addressCountry":"NL"},"founder":{"@id":"${SITE_URL}#tex"},"sameAs":["https://www.linkedin.com/in/texstaal"],"knowsAbout":["Warehouse real estate","Tenant representation","Occupier advisory","Logistics property","Industrial real estate"]},{"@type":"WebSite","@id":"${SITE_URL}#website","url":"${SITE_URL}","name":"Staal Real Estate","publisher":{"@id":"${SITE_URL}#organization"},"inLanguage":"en"},{"@type":"Person","@id":"${SITE_URL}#tex","name":"Tex Staal","jobTitle":"Founder & Advisor","worksFor":{"@id":"${SITE_URL}#organization"},"url":"${SITE_URL}about","sameAs":["https://www.linkedin.com/in/texstaal"]}]}
     </script>
     <!-- Vercel Web Analytics (cookieless; enable Analytics on the Vercel project) -->
     <script defer src="/_vercel/insights/script.js"></script>
@@ -332,10 +365,10 @@ const head = `<!DOCTYPE html>
 
 const tail = `
 
-    <script src="js/lenis.min.js"></script>
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/forms.js"></script>
+    <script defer src="js/lenis.min.js"></script>
+    <script defer src="js/swiper-bundle.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/forms.js"></script>
   </body>
 </html>
 `;

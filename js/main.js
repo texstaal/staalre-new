@@ -203,7 +203,8 @@
       content: qs('.hero_content__DK_Ny', hero),
       title: qs('.hero_title__JpmHS', hero),
       text: qs('.hero_text__R6LQ5', hero),
-      actions: qs('.hero_actions__RlphJ', hero)
+      actions: qs('.hero_actions__RlphJ', hero),
+      top: qs('.hero_top__WegWw', hero)          // the sticky, pinned viewport
     };
     heroRefs.logoPaths = heroRefs.logo ? qsa('path', heroRefs.logo) : [];
 
@@ -291,14 +292,21 @@
   })();
 
   // cached metrics, refreshed on resize
-  var metrics = { remPx: 10, vh: 0, heroH: 0, heroEnd: 0, desktop: true, houseStart: 22 };
+  var metrics = { remPx: 10, vh: 0, pinH: 0, heroH: 0, heroEnd: 0, desktop: true, houseStart: 22 };
   function refreshMetrics() {
     metrics.remPx = parseFloat(getComputedStyle(doc).fontSize) || 10;
     metrics.vh = window.innerHeight;
     metrics.desktop = window.matchMedia('(min-width: 768px)').matches;
     if (hero) {
       metrics.heroH = hero.offsetHeight;
-      metrics.heroEnd = Math.max(1, metrics.heroH - metrics.vh);
+      // Scrub against the sticky element's ACTUAL pinned height, not
+      // window.innerHeight. On mobile the address bar makes innerHeight smaller
+      // than the CSS `vh` that sizes the hero, so scrubbing on innerHeight let p
+      // top out around 0.72 while the hero was still pinned — the building never
+      // finished rising and the letters never resolved. hero_top is `height:100vh`
+      // in the same vh basis as heroH, so heroH - pinH == the real pin travel.
+      metrics.pinH = (heroRefs && heroRefs.top) ? heroRefs.top.offsetHeight : metrics.vh;
+      metrics.heroEnd = Math.max(1, metrics.heroH - metrics.pinH);
       // the warehouse is bottom-anchored; pick the start offset (translateY %)
       // so the building's roofline (29.6% into the cutout) sits low in the
       // viewport with plenty of sky above it. End offset is 0 = doors at the
@@ -490,8 +498,8 @@
   function tick(t) {
     var y = window.scrollY;
     updateHeader(y);
-    if (hero && metrics.heroH > metrics.vh && !window.__pauseHeroFx) {
-      var p = clamp(y / (metrics.heroH - metrics.vh), 0, 1);
+    if (hero && metrics.heroH > metrics.pinH && !window.__pauseHeroFx) {
+      var p = clamp(y / metrics.heroEnd, 0, 1);
       renderHero(p, t);
     }
   }
