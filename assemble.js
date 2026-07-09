@@ -614,7 +614,7 @@ main{background:#fff}
    row, numbers stay on one line */
 .footer_contact__fFxbr{min-width:0}
 .footer_contact-value__e1jbK span{white-space:nowrap}
-@media(min-width:768px){.footer_contacts__HFiAl{gap:5rem;flex-wrap:wrap}}
+@media(min-width:768px){.footer_contacts__HFiAl{display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:5rem 3.75rem}}
 
 /* ---- inner-page components (original, same design tokens) ---- */
 /* editorial index: numbered giant words, light theme, arrow slides on hover */
