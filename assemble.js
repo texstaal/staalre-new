@@ -371,6 +371,9 @@ const head = `<!DOCTYPE html>
     </script>
     <!-- Vercel Web Analytics (cookieless; enable Analytics on the Vercel project) -->
     <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights (Core Web Vitals; cookieless) -->
+    <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
   </head>
 `;
 
