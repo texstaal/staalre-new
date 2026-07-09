@@ -24,7 +24,7 @@ body = body.replace(/(testimonials_preview___uhyO"[\s\S]*?src=")images\/1\.jpg/,
 
 /* ---- local media ---- */
 // compressed video + poster, and don't preload it (autoplays when scrolled into view)
-body = body.replace('src="/videos/why-us.mp4"', 'src="images/staalre-video.mp4" poster="images/staalre-poster.webp" preload="none"');
+body = body.replace('src="/videos/why-us.mp4"', 'src="images/staalre-video2.mp4" poster="images/staalre-poster.webp" preload="none"');
 // the video is played by JS after its wipe-reveal (js/main.js), so drop autoplay
 body = body.replace('preload="none" autoplay=""', 'preload="none"');
 body = body.replaceAll('images/house.png', 'images/warehouse.png');
