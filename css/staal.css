@@ -311,15 +311,18 @@ main{background:#fff}
    Any new section placed immediately after the hero must carry this class. */
 .after-hero{position:relative;background:#fff;box-shadow:0 -3px 0 0 #fff}
 
-/* ---- hero → white transition ----
-   The cloud bank sits at the bottom of .hero_overlap and is pushed down with
-   translateY; the smaller the percentage, the earlier the clouds rise into
-   view. Original was 70%, which left the very bottom of the transition thin
-   enough for a sliver of sky to show. Bringing it to 56% lifts the dense part
-   of the cloud over the seam, and the deeper white gradient finishes the fade
-   before the section below starts. */
-.hero_overlap__d3EJV .hero_smoke__8za_R{transform:translateY(56%)}
-.hero_overlay__7ubgG{height:42rem}
+/* The hero fades to white via .hero_overlay, but its gradient only reaches
+   solid white at its very last pixel. That left a band of sky visible between
+   the bottom of the cloud bank and the white — the blue bar. Reach full white
+   at 55% so that zone is opaque. Note: moving the clouds is the wrong lever
+   here; raising them exposes MORE of this semi-transparent zone, not less. */
+.hero_overlay__7ubgG{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 55%)}
+
+/* The hero's clouds deliberately bleed over the TOP of the following section.
+   The original next-section (.why-us_root) carries padding:15rem 0, so they
+   landed on empty space. .page-section only has 7rem, which let the clouds
+   wash straight over the heading — match the original breathing room. */
+.page-section.after-hero{padding-top:15rem}
 
 /* size ladder (lease landing page) */
 .size-ladder{display:grid;gap:1.6rem;grid-template-columns:1fr 1fr}
