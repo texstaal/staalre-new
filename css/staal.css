@@ -309,7 +309,7 @@ main{background:#fff}
    white instead of sky. A negative margin cannot be used here — it adjoins the
    hero's margin-bottom:-100vh and collapses to the more negative value.
    Any new section placed immediately after the hero must carry this class. */
-.after-hero{position:relative;background:#fff;box-shadow:0 -3px 0 0 #fff}
+.after-hero{position:relative;background:#fff;box-shadow:0 -24px 0 0 #fff}
 
 /* The hero fades to white via .hero_overlay, but its gradient only reaches
    solid white at its very last pixel. That left a band of sky visible between
