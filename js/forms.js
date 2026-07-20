@@ -140,4 +140,70 @@
       }
     });
   }
+
+  /* ---------- lease requirement form (/lease-warehouse-netherlands) ----------
+     Structured intake. Folds the size/region/timing/use answers plus the two
+     qualifiers (NL registration + Dutch bank account) into the message, and
+     tags `interest` so established occupiers are easy to triage. No DB change:
+     everything rides on the existing contact_requests columns. */
+  var leaseForm = document.getElementById('lease-form');
+  if (leaseForm) {
+    armSpamTrap(leaseForm);
+    leaseForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = leaseForm;
+      var status = document.getElementById('lease-status');
+      if (isBot(f)) {
+        f.reset();
+        setStatus(status, true, 'Thank you — your requirement was sent. We respond within one business day.');
+        return;
+      }
+      var val = function (n) { return (f[n] && f[n].value || '').trim(); };
+      var name = val('name1'), email = val('email'), size = val('size'), nl = val('nl_registered');
+      if (!name || email.indexOf('@') < 1 || !size || !nl) {
+        setStatus(status, false, 'Please add your name, a valid email, the size you need, and whether you’re registered in the Netherlands.');
+        return;
+      }
+      var lines = [
+        'Requirement: Lease warehouse space',
+        'Size: ' + size,
+        'Region: ' + (val('region') || 'No preference'),
+        'Timing: ' + (val('timing') || '—'),
+        'Use: ' + (val('use') || '—'),
+        'Registered in NL (KvK): ' + nl,
+        'Dutch bank account: ' + (val('dutch_bank') || '—')
+      ];
+      var extra = val('message');
+      if (extra) { lines.push('', extra); }
+      var established = /yes|progress/i.test(nl); // established or nearly so
+      var tag = established ? 'lease · NL-established' : 'lease · setup-stage';
+      var row = {
+        name: name,
+        company: val('company'),
+        email: email,
+        phone: val('phone'),
+        interest: (tag + ' · ' + size).slice(0, 120),
+        message: lines.join('\n').slice(0, 5000),
+        source: location.pathname
+      };
+      var btn = f.querySelector('button[type="submit"]');
+      var mailtoFallback = function () {
+        location.href = 'mailto:tex@staalre.com?subject=' +
+          encodeURIComponent('Warehouse requirement — ' + (row.company || row.name)) +
+          '&body=' + encodeURIComponent(row.message);
+      };
+      if (configured) {
+        if (btn) btn.disabled = true;
+        insertRow('contact_requests', row)
+          .then(function () {
+            f.reset();
+            setStatus(status, true, 'Thank you — your requirement was sent. We respond within one business day.');
+          })
+          .catch(mailtoFallback)
+          .finally(function () { if (btn) btn.disabled = false; });
+      } else {
+        mailtoFallback();
+      }
+    });
+  }
 })();

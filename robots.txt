@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://staalre.com/sitemap.xml
+Sitemap: https://www.staalre.com/sitemap.xml

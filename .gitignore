@@ -5,3 +5,7 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# large source assets not used by the site (kept locally, not deployed)
+images/_candidates/
+images/StaalRE video.mp4

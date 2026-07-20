@@ -265,6 +265,12 @@ main{background:#fff}
 .nl-hub-row:hover{color:#151717}
 .nl-hub-row.-active{color:#151717}
 .nl-hub-row.-active .nl-hub-tick{width:2.6rem}
+/* inline "Explore ->" affordance: sits at the end of the row, reveals on hover
+   or when the hub is active (also fired by hovering the matching map pin) */
+.nl-hub-row{text-decoration:none}
+.nl-hub-go{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;font-size:1.4rem;font-weight:600;color:#1F4257;opacity:0;transform:translateX(-.6rem);transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);white-space:nowrap;pointer-events:none}
+@media(min-width:768px){.nl-hub-go{font-size:1.6rem}}
+.nl-hub-row:hover .nl-hub-go,.nl-hub-row.-active .nl-hub-go{opacity:1;transform:none}
 /* all notes share one grid cell so the panel height never changes between hubs
    (a taller note no longer re-centers the grid and nudges the map sideways) */
 .nl-map-notes{margin-top:2.4rem;display:grid}
@@ -291,6 +297,15 @@ main{background:#fff}
 @media(min-width:768px){.stat-num{font-size:9.6rem}}
 .stat-label{margin-top:1.4rem;font-weight:500;font-size:1.5rem;line-height:1.5;color:#7a7a7a}
 @media(min-width:768px){.stat-label{font-size:2rem}}
+
+/* size ladder (lease landing page) */
+.size-ladder{display:grid;gap:1.6rem;grid-template-columns:1fr 1fr}
+@media(min-width:768px){.size-ladder{grid-template-columns:repeat(4,1fr);gap:2rem}}
+.size-card{border:1px solid rgba(21,23,23,.14);border-radius:.6rem;padding:2.4rem 2rem;transition:border-color .25s,transform .25s}
+.size-card:hover{border-color:#1F4257;transform:translateY(-3px)}
+.size-card .sz{font-weight:700;font-size:2.6rem;letter-spacing:-.02em;color:#151717}
+@media(min-width:768px){.size-card .sz{font-size:3rem}}
+.size-card .szl{margin-top:.8rem;font-weight:500;font-size:1.5rem;color:#6f7070;line-height:1.4}
 
 /* FAQ (native details/summary, styled like the numbered rows) */
 .faq{border-bottom:1px solid rgba(21,23,23,.1)}

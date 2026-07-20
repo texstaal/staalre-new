@@ -464,12 +464,15 @@
         group.forEach(function (el) { el.classList.toggle('-active', +el.dataset.i === i); });
       });
     }
-    // both the map pins and the list rows drive (and stay in sync with) each other
+    // hovering a pin or a row highlights that hub (and reveals its inline "Explore")
     pins.concat(rows).forEach(function (el) {
       var i = +el.dataset.i;
       el.addEventListener('mouseenter', function () { activate(i); });
-      el.addEventListener('click', function (e) { e.preventDefault(); activate(i); });
       el.addEventListener('focus', function () { activate(i); });
+    });
+    // clicking navigates to the hub page: rows are <a> (native), pins navigate via JS
+    pins.forEach(function (el) {
+      el.addEventListener('click', function () { var h = el.dataset.href; if (h) window.location.href = h; });
     });
   });
 
