@@ -316,7 +316,7 @@ main{background:#fff}
    the bottom of the cloud bank and the white — the blue bar. Reach full white
    at 55% so that zone is opaque. Note: moving the clouds is the wrong lever
    here; raising them exposes MORE of this semi-transparent zone, not less. */
-.hero_overlay__7ubgG{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 15%)}
+.hero_overlay__7ubgG{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 5%)}
 
 /* The hero's clouds deliberately bleed over the TOP of the following section.
    The original next-section (.why-us_root) carries padding:15rem 0, so they
