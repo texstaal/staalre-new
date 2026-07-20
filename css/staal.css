@@ -298,6 +298,19 @@ main{background:#fff}
 .stat-label{margin-top:1.4rem;font-weight:500;font-size:1.5rem;line-height:1.5;color:#7a7a7a}
 @media(min-width:768px){.stat-label{font-size:2rem}}
 
+/* ---- the section directly after the hero ----
+   The hero is 500vh tall with a sticky 100vh inner and margin-bottom:-100vh,
+   which pulls the following section UP over the pinned sky. That section must
+   therefore be positioned AND opaque, or the sky shows straight through it.
+   The box-shadow paints a 3px white bar directly above the section. The hero's
+   white gradient and this section meet on a fractional pixel (e.g. 3984.25);
+   the browser anti-aliases that row, so a blue hairline of sky leaks through.
+   The bar puts white BEHIND that semi-transparent row so it composites to
+   white instead of sky. A negative margin cannot be used here — it adjoins the
+   hero's margin-bottom:-100vh and collapses to the more negative value.
+   Any new section placed immediately after the hero must carry this class. */
+.after-hero{position:relative;background:#fff;box-shadow:0 -3px 0 0 #fff}
+
 /* size ladder (lease landing page) */
 .size-ladder{display:grid;gap:1.6rem;grid-template-columns:1fr 1fr}
 @media(min-width:768px){.size-ladder{grid-template-columns:repeat(4,1fr);gap:2rem}}
