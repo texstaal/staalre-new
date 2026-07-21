@@ -9,3 +9,9 @@ Thumbs.db
 # large source assets not used by the site (kept locally, not deployed)
 images/_candidates/
 images/StaalRE video.mp4
+
+# audit output and local-only dev tooling (not for the public site)
+www.staalre.com-audit/
+seo-crawl.js
+seo-analyse.js
+.codex/

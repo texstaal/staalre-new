@@ -1,13 +1,13 @@
 # Staal Real Estate
 
-> Boutique, occupier-side warehouse real estate advisory based in Amsterdam, the Netherlands. We represent tenants and buyers only — never landlords — helping international e-commerce, fulfilment, logistics and distribution companies find, lease and acquire warehouse space across the Netherlands.
+> Boutique, tenant-side warehouse real estate advisory based in Amsterdam, the Netherlands. We represent tenants and buyers only — never landlords — helping international e-commerce, fulfilment, logistics and distribution companies find, lease and acquire warehouse space across the Netherlands.
 
 Founder & advisor: Tex Staal · tex@staalre.com · +31 6 59 12 91 27
 Office: Speerstraat 7-2, 1076XM Amsterdam, Netherlands (working nationwide)
-Independent and occupier-only: we never act for the landlord.
+Independent and tenant-only: we never act for the landlord.
 
 ## Services
-- [Lease advisory](https://www.staalre.com/lease-warehouse-netherlands) — warehouse leases from 500 m² to XXL: full market search, shortlisting, viewings, and negotiation of Dutch (ROZ-model) leases on the occupier's side. This is our main focus.
+- [Lease advisory](https://www.staalre.com/lease-warehouse-netherlands) — warehouse leases from 500 m² to XXL: full market search, shortlisting, viewings, and negotiation of Dutch (ROZ-model) leases on the tenant's side. This is our main focus.
 - Acquisition support — sourcing, due-diligence support and price negotiation for owner-occupiers.
 - Renewals & relocations — renegotiation, expansion, and stay-or-go advice ahead of break dates.
 - Market-entry guidance — location strategy and remote viewings for international teams deciding from abroad, in English.

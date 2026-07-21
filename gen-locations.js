@@ -228,7 +228,7 @@ const hubs = [
     hero: 'hub-rotterdam.jpg',
     heroAlt: 'Loading docks at a logistics warehouse near the Port of Rotterdam',
     subtitle: 'Europe’s largest seaport and the Netherlands’ biggest distribution gateway.',
-    lede: 'Rotterdam is the Netherlands’ largest logistics gateway and home to Europe’s biggest seaport, which handled 435.8 million tonnes of cargo in 2024. For occupiers, warehousing here means direct access to deep-sea container flows, port drayage and the A15 corridor — at the highest rents and tightest land availability in the country.',
+    lede: 'Rotterdam is the Netherlands’ largest logistics gateway and home to Europe’s biggest seaport, which handled 435.8 million tonnes of cargo in 2024. For tenants, warehousing here means direct access to deep-sea container flows, port drayage and the A15 corridor — at the highest rents and tightest land availability in the country.',
     stats: [
       { num: '435.8M', unit: 'tonnes', label: 'Cargo through the Port of Rotterdam in 2024 — Europe’s largest port.', src: 'Port of Rotterdam, 2024' },
       { num: '13.8M', unit: 'TEU', label: 'Container throughput in 2024, up 2.8% year on year.', src: 'Port of Rotterdam, 2024' },
@@ -247,7 +247,7 @@ const hubs = [
     ],
     faq: [
       { q: 'Where do warehouses cluster around Rotterdam?', a: 'The heaviest concentration sits on the port itself — Maasvlakte, Botlek and Waalhaven — and along the A15 corridor east of the port toward Ridderkerk, Barendrecht and Dordrecht, where larger modern units and better land availability are found.' },
-      { q: 'Why are Rotterdam warehouse rents higher than the rest of the Netherlands?', a: 'Land next to the terminals is scarce and demand from port-related occupiers is constant. That scarcity keeps prime Rotterdam logistics rents among the highest in the country, so structuring the lease well matters more here than almost anywhere else.' },
+      { q: 'Why are Rotterdam warehouse rents higher than the rest of the Netherlands?', a: 'Land next to the terminals is scarce and demand from port-related tenants is constant. That scarcity keeps prime Rotterdam logistics rents among the highest in the country, so structuring the lease well matters more here than almost anywhere else.' },
     ],
   },
   {
@@ -272,11 +272,11 @@ const hubs = [
     suits: [
       'Pharma, life-sciences and cold-chain operations',
       'E-commerce express and high-value, time-critical goods',
-      'Occupiers that must be minutes from the freight terminals',
+      'Tenants that must be minutes from the freight terminals',
     ],
     faq: [
       { q: 'What kind of warehousing does Schiphol specialise in?', a: 'Air-freight-adjacent space: temperature-controlled and pharma handling, high-value and time-critical goods, and express e-commerce. Because proximity to the cargo terminals is the whole point, units are smaller and command the highest rents in the Netherlands.' },
-      { q: 'Is space available directly at Schiphol, or nearby?', a: 'On-airport cargo space is limited and tightly held. Most occupiers take modern units in the surrounding Randstad — Hoofddorp, Aalsmeer, Amsterdam Westpoort and along the A4/A9 — within a short drive of the terminals.' },
+      { q: 'Is space available directly at Schiphol, or nearby?', a: 'On-airport cargo space is limited and tightly held. Most tenants take modern units in the surrounding Randstad — Hoofddorp, Aalsmeer, Amsterdam Westpoort and along the A4/A9 — within a short drive of the terminals.' },
     ],
   },
   {
@@ -304,8 +304,8 @@ const hubs = [
       'XXL distribution centres needing land and modern stock',
     ],
     faq: [
-      { q: 'Why is Venlo rated Europe’s best logistics location?', a: 'In Prologis’s European ranking, Venlo came out first overall, scoring highest on availability of land, road access, transport cost and regulation. Its position directly on the German border, with road, rail and barge connections, lets occupiers serve the Netherlands and the German hinterland from one site.' },
-      { q: 'What does tri-modal mean for a Venlo warehouse?', a: 'Tri-modal means goods can move by road (the A67 and A73), by rail, and by barge through Trade Port Noord. That gives occupiers cheaper long-haul options and resilience when one mode is congested — a real advantage for high-volume distribution.' },
+      { q: 'Why is Venlo rated Europe’s best logistics location?', a: 'In Prologis’s European ranking, Venlo came out first overall, scoring highest on availability of land, road access, transport cost and regulation. Its position directly on the German border, with road, rail and barge connections, lets tenants serve the Netherlands and the German hinterland from one site.' },
+      { q: 'What does tri-modal mean for a Venlo warehouse?', a: 'Tri-modal means goods can move by road (the A67 and A73), by rail, and by barge through Trade Port Noord. That gives tenants cheaper long-haul options and resilience when one mode is congested — a real advantage for high-volume distribution.' },
     ],
   },
   {
@@ -357,10 +357,10 @@ const hubs = [
     suits: [
       'Cross-border Benelux distribution',
       'Container barge and multimodal supply chains',
-      'Industrial and chemical-adjacent occupiers',
+      'Industrial and chemical-adjacent tenants',
     ],
     faq: [
-      { q: 'What makes Breda–Moerdijk useful for cross-border logistics?', a: 'It lies on the A16 corridor between Rotterdam and Antwerp, so occupiers can draw on both ports from one location and serve the Netherlands, Belgium and northern France with ease. The Port of Moerdijk adds barge and rail options on the doorstep.' },
+      { q: 'What makes Breda–Moerdijk useful for cross-border logistics?', a: 'It lies on the A16 corridor between Rotterdam and Antwerp, so tenants can draw on both ports from one location and serve the Netherlands, Belgium and northern France with ease. The Port of Moerdijk adds barge and rail options on the doorstep.' },
       { q: 'Is the Port of Moerdijk a seaport or an inland port?', a: 'Both — it is a combined sea and inland port, one of the largest industrial port areas in the Netherlands, handling seagoing and barge traffic alongside a large logistics and manufacturing estate.' },
     ],
   },
@@ -389,7 +389,7 @@ const hubs = [
     ],
     faq: [
       { q: 'What drives warehouse demand in Eindhoven?', a: 'The Brainport high-tech cluster — ASML and its extensive supply chain — generates steady demand for high-value, spare-parts and manufacturing-adjacent warehousing. That has made Eindhoven the fastest-growing Dutch logistics rental market since 2017.' },
-      { q: 'Is Eindhoven only for high-tech occupiers?', a: 'No. While high-tech supply chains dominate, its central-south position and A2/A67 access also make it a strong general distribution location for southern Netherlands and cross-border Belgian and German flows.' },
+      { q: 'Is Eindhoven only for high-tech tenants?', a: 'No. While high-tech supply chains dominate, its central-south position and A2/A67 access also make it a strong general distribution location for southern Netherlands and cross-border Belgian and German flows.' },
     ],
   },
   {
@@ -399,7 +399,7 @@ const hubs = [
     hero: 'hub-nijmegen-arnhem.jpg',
     heroAlt: 'Distribution warehouse in the Nijmegen – Arnhem eastern corridor',
     subtitle: 'The eastern corridor into the German market.',
-    lede: 'Nijmegen–Arnhem, in Gelderland, is a fast-growing logistics region on the eastern corridor toward Germany. On the A15, A12, A50 and A73 with barge terminals on the Waal and Rhine, it offers newer XXL stock and better availability than the crowded Randstad — useful for occupiers serving the German hinterland.',
+    lede: 'Nijmegen–Arnhem, in Gelderland, is a fast-growing logistics region on the eastern corridor toward Germany. On the A15, A12, A50 and A73 with barge terminals on the Waal and Rhine, it offers newer XXL stock and better availability than the crowded Randstad — useful for tenants serving the German hinterland.',
     stats: [
       { num: 'A15/A12', unit: 'corridor', label: 'Eastern motorway corridor toward the German border and the Ruhr.', src: 'Geography' },
       { num: 'Growing', unit: 'region', label: 'A fast-growing logistics region with newer XXL developments.', src: 'Regional market data' },
@@ -412,11 +412,11 @@ const hubs = [
     ],
     suits: [
       'German-hinterland and eastern-Netherlands distribution',
-      'Growth-stage occupiers seeking modern space and availability',
+      'Growth-stage tenants seeking modern space and availability',
       'Multimodal supply chains using Rhine barge',
     ],
     faq: [
-      { q: 'Why choose Nijmegen–Arnhem over a Randstad location?', a: 'For occupiers serving eastern Netherlands and Germany, it is closer to the market and typically offers newer stock and better availability than the congested Randstad — often at more workable rents, with barge access on the Rhine.' },
+      { q: 'Why choose Nijmegen–Arnhem over a Randstad location?', a: 'For tenants serving eastern Netherlands and Germany, it is closer to the market and typically offers newer stock and better availability than the congested Randstad — often at more workable rents, with barge access on the Rhine.' },
       { q: 'How good is the German-market access from here?', a: 'Very good. The A15 and A12 run east toward the German border and the Ruhr conurbation, one of Europe’s densest industrial and consumer markets, so a single site here can serve both eastern Netherlands and western Germany.' },
     ],
   },
@@ -444,7 +444,7 @@ const hubs = [
       'Retail and outlet-linked logistics',
     ],
     faq: [
-      { q: 'What is Roermond–Maastricht best suited for?', a: 'Cross-border distribution. Its tri-border position lets occupiers serve southern Netherlands, western Germany and Belgian Limburg from one base, on the A2/A73/A76 and within reach of the larger Venlo logistics cluster.' },
+      { q: 'What is Roermond–Maastricht best suited for?', a: 'Cross-border distribution. Its tri-border position lets tenants serve southern Netherlands, western Germany and Belgian Limburg from one base, on the A2/A73/A76 and within reach of the larger Venlo logistics cluster.' },
       { q: 'Does it connect to the rest of the Dutch logistics network?', a: 'Yes. It sits on the same Limburg corridor as Venlo, with motorway and Maas barge links north toward the Randstad and the other main hubs, so it works as a southern node in a national network rather than in isolation.' },
     ],
   },
@@ -469,11 +469,11 @@ const hubs = [
     suits: [
       'National distribution and e-commerce fulfilment from one central site',
       'Cross-dock and high-throughput operations',
-      'Occupiers optimising next-day coverage of the whole country',
+      'Tenants optimising next-day coverage of the whole country',
     ],
     faq: [
       { q: 'Why choose the central Utrecht–Tiel–Geldermalsen corridor?', a: 'Because it is the most central logistics position in the Netherlands. On the A2 spine between Amsterdam and Eindhoven, a single distribution centre here reaches the entire country within a short drive — which is why it is favoured for national e-commerce fulfilment and cross-dock operations.' },
-      { q: 'What transport links does the A2 corridor offer?', a: 'Road on the A2 (Amsterdam–Utrecht–’s-Hertogenbosch–Eindhoven), rail-linked distribution zones, and inland barge access on the Waal near Tiel — giving occupiers multimodal options alongside a large regional labour pool.' },
+      { q: 'What transport links does the A2 corridor offer?', a: 'Road on the A2 (Amsterdam–Utrecht–’s-Hertogenbosch–Eindhoven), rail-linked distribution zones, and inland barge access on the Waal near Tiel — giving tenants multimodal options alongside a large regional labour pool.' },
     ],
   },
   {
@@ -496,12 +496,12 @@ const hubs = [
     ],
     suits: [
       'E-commerce and high-volume fulfilment near Amsterdam',
-      'Occupiers with strong sustainability requirements (BREEAM, gasless)',
+      'Tenants with strong sustainability requirements (BREEAM, gasless)',
       'Build-to-suit projects needing scalable land',
     ],
     faq: [
       { q: 'What makes Almere–Lelystad attractive for logistics?', a: 'Space and sustainability. As the growth extension of the Amsterdam metropolitan area, Flevoland offers the region’s most available development land and its newest, greenest stock — BREEAM-certified, gasless and automation-ready — with A6/A27 access into the Randstad.' },
-      { q: 'How close is it to Amsterdam and the ports?', a: 'Almere is on Amsterdam’s doorstep via the A6, with Lelystad and the Flevokust inland port a little further north. That puts occupiers within easy reach of the Randstad consumer market while keeping the space and cost advantages of Flevoland.' },
+      { q: 'How close is it to Amsterdam and the ports?', a: 'Almere is on Amsterdam’s doorstep via the A6, with Lelystad and the Flevokust inland port a little further north. That puts tenants within easy reach of the Randstad consumer market while keeping the space and cost advantages of Flevoland.' },
     ],
   },
 ];
@@ -539,8 +539,8 @@ function siblingLinks(current) {
 
 function hubPage(h) {
   const canonical = `${BASE}/locations/${h.slug}`;
-  const title = `Warehouse Space in ${h.name} | Staal Real Estate`;
-  const description = `${h.subtitle} Independent, occupier-only advice on leasing and buying warehouse space in ${h.name}, the Netherlands.`;
+  const title = `Warehouse Space for Rent in ${h.name}`;
+  const description = `${h.subtitle} Independent tenant-side warehouse advice in ${h.name}.`;
   const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -552,9 +552,13 @@ function hubPage(h) {
       },
       {
         '@type': 'Service', name: `Warehouse tenant & buyer representation in ${h.name}`,
-        serviceType: 'Occupier-side warehouse real estate advisory',
+        serviceType: 'Tenant-side warehouse real estate advisory',
         provider: { '@id': BASE + '/#organization' },
         areaServed: { '@type': 'Place', name: `${h.name}, ${h.region}, Netherlands` },
+      },
+      {
+        '@type': 'FAQPage', '@id': canonical + '#faq',
+        mainEntity: h.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
       },
       {
         '@type': 'BreadcrumbList', itemListElement: [
@@ -623,8 +627,8 @@ ${siblingLinks(h.slug)}
 /* ------------------------------- index -------------------------------- */
 function indexPage() {
   const canonical = `${BASE}/locations`;
-  const title = 'Dutch Logistics Hubs — Where We Find Warehouse Space | Staal Real Estate';
-  const description = 'The main logistics hubs of the Netherlands — Rotterdam, Schiphol, Venlo, Tilburg–Waalwijk and more — and what each is best for. Independent, occupier-only warehouse advice nationwide.';
+  const title = 'Dutch Logistics Hubs — Where to Rent Warehouse Space';
+  const description = 'The main Dutch logistics hubs — Rotterdam, Schiphol, Venlo, Tilburg and more — and what each is best for. Independent tenant-side warehouse advice, nationwide.';
   const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -646,7 +650,7 @@ function indexPage() {
       <section class="page-hero">
         <div class="container_container__v5gtR">
           <h1>Where We Work</h1>
-          <div class="page-hero-sub">We advise occupiers nationwide — these are the hubs that drive Dutch logistics. <span class="em">Each has its own strengths, rents and stock.</span></div>
+          <div class="page-hero-sub">We advise tenants nationwide — these are the hubs that drive Dutch logistics. <span class="em">Each has its own strengths, rents and stock.</span></div>
         </div>
       </section>
 
@@ -683,8 +687,8 @@ ${'      <div class="index-list">\n' + rows + '\n      </div>'}
 /* ---------------------- lease landing page --------------------------- */
 function leasePage() {
   const canonical = `${BASE}/lease-warehouse-netherlands`;
-  const title = 'Lease Warehouse Space in the Netherlands — From 500 m² | Staal Real Estate';
-  const description = 'Independent, occupier-only help leasing warehouse space in the Netherlands, from 500 m² to XXL. We run the search, negotiate the ROZ lease, and represent you — never the landlord.';
+  const title = 'Lease Warehouse Space in the Netherlands — From 500 m²';
+  const description = 'Lease warehouse space in the Netherlands from 500 m² to XXL. Independent tenant representation — we run the search and negotiate the ROZ lease on your side.';
   const faq = [
     { q: 'Can you rent a small warehouse in the Netherlands?', a: 'Yes. Staal Real Estate arranges warehouse leases from 500 m² upward, all the way to XXL. Smaller units (roughly 500–1,500 m²) are scarcer and let quickly, so early, well-defined representation is often the difference between securing space and missing it.' },
     { q: 'What is the minimum warehouse size you can lease?', a: 'We advise on warehouse leases from 500 m². Below that, self-storage or flex business-centre units are usually a better fit; from 500 m² up to 100,000 m²+ XXL distribution centres, we run the full search and negotiation for you.' },
@@ -697,7 +701,7 @@ function leasePage() {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'WebPage', '@id': canonical + '#webpage', url: canonical, name: title, description: description, isPartOf: { '@id': BASE + '/#website' }, inLanguage: 'en' },
-      { '@type': 'Service', '@id': canonical + '#service', name: 'Warehouse leasing — occupier representation', serviceType: 'Warehouse tenant representation', provider: { '@id': BASE + '/#organization' }, areaServed: { '@type': 'Country', name: 'Netherlands' }, description: 'Occupier-only advisory for leasing warehouse space in the Netherlands from 500 m² to XXL: market search, shortlisting, viewings and ROZ lease negotiation on the tenant’s side.' },
+      { '@type': 'Service', '@id': canonical + '#service', name: 'Warehouse leasing — tenant representation', serviceType: 'Warehouse tenant representation', provider: { '@id': BASE + '/#organization' }, areaServed: { '@type': 'Country', name: 'Netherlands' }, description: 'Tenant-only advisory for leasing warehouse space in the Netherlands from 500 m² to XXL: market search, shortlisting, viewings and ROZ lease negotiation on the tenant’s side.' },
       { '@type': 'FAQPage', '@id': canonical + '#faq', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
       { '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: BASE + '/' },
@@ -735,13 +739,13 @@ function leasePage() {
         <div class="container_container__v5gtR">
           <div style="font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:1.6rem">Leasing · Netherlands</div>
           <h1>Lease Warehouse Space in the Netherlands — From 500 m²</h1>
-          <div class="page-hero-sub">Independent, occupier-only advice on leasing warehouse space nationwide — from a first 500 m² unit to XXL. <span class="em">We work for you, never the landlord.</span></div>
+          <div class="page-hero-sub">Independent, tenant-only advice on leasing warehouse space nationwide — from a first 500 m² unit to XXL. <span class="em">We work for you, never the landlord.</span></div>
         </div>
       </section>
 
       <section class="page-section" style="padding-top:0">
         <div class="container_container__v5gtR">
-          <p class="statement">Staal Real Estate arranges warehouse leases across the Netherlands from 500 m² to XXL. We represent the occupier only — running the full market search, shortlisting the best-fit units, arranging viewings, and negotiating the standardised Dutch (ROZ) lease on your side. One point of contact, from first brief to the day you collect the keys.</p>
+          <p class="statement">Staal Real Estate arranges warehouse leases across the Netherlands from 500 m² to XXL. We represent the tenant only — running the full market search, shortlisting the best-fit units, arranging viewings, and negotiating the standardised Dutch (ROZ) lease on your side. One point of contact, from first brief to the day you collect the keys.</p>
           <div style="margin-top:3rem">${ctaButton('Send Your Requirement', '#requirement', false)}</div>
         </div>
       </section>
