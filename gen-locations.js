@@ -739,22 +739,15 @@ function leasePage() {
         <div class="container_container__v5gtR">
           <div style="font-weight:600;font-size:1.4rem;color:#b3b3b3;margin-bottom:1.6rem">Leasing · Netherlands</div>
           <h1>Lease Warehouse Space in the Netherlands, From 500 m²</h1>
-          <div class="page-hero-sub">Independent, tenant-only advice on leasing warehouse space nationwide, from a first 500 m² unit to XXL. <span class="em">We work for you, never the landlord.</span></div>
+          <div class="page-hero-sub">Warehouse leases from a first 500 m² unit to XXL, nationwide. <span class="em">We work for you, never the landlord.</span></div>
         </div>
       </section>
 
       <section class="page-section" style="padding-top:0">
         <div class="container_container__v5gtR">
-          <p class="statement">Staal Real Estate arranges warehouse leases across the Netherlands from 500 m² to XXL. We represent the tenant only, running the full market search, shortlisting the best-fit units, arranging viewings, and negotiating the standardised Dutch (ROZ) lease on your side. One point of contact, from first brief to the day you collect the keys.</p>
-          <div style="margin-top:3rem">${ctaButton('Send Your Requirement', '#requirement', false)}</div>
-        </div>
-      </section>
-
-      <section class="page-section -grey">
-        <div class="container_container__v5gtR">
-          <div class="nl-map-eyebrow" style="margin-bottom:2.4rem">Whatever your size</div>
-          <h2 style="font-weight:700;font-size:3.4rem;letter-spacing:-.02em;margin:0 0 3rem">From 500 m² to XXL</h2>
+          <p style="font-weight:500;font-size:2rem;line-height:1.45;color:#3c3e3e;max-width:66rem;margin:0 0 4rem">Whatever your size, we run the full search and negotiate the Dutch (ROZ) lease on your side, with one point of contact from first brief to keys.</p>
           <div class="size-ladder">${ladder}</div>
+          <div style="margin-top:3.5rem">${ctaButton('Send Your Requirement', '#requirement', false)}</div>
         </div>
       </section>
 
