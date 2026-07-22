@@ -151,7 +151,7 @@ const FOOTER = `    <div class="footer_wrapper__9GQwi">
               <a class="footer_nav-link__LFUNG" href="/contact"><span data-text="Contact">Contact</span></a>
             </div>
             <div class="footer_socials__4JfcA">
-              <a href="https://www.linkedin.com/in/texstaal" target="_blank" rel="noopener noreferrer" class="footer_social-link__2uQBq">LinkedIn</a>
+              <a href="https://www.linkedin.com/company/staal-real-estate" target="_blank" rel="noopener noreferrer" class="footer_social-link__2uQBq">LinkedIn</a>
             </div>
           </div>
           <div class="footer_logo__5ncK8">
