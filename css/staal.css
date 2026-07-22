@@ -43,7 +43,7 @@ main{background:#fff}
 .footer_input-wrapper__1l5CZ:focus-within{border-bottom-color:#6FA0C0}
 
 /* ====================================================================
-   SUBPAGE STYLES — same tokens as the FIND modules (rem scale, #14171a,
+   SUBPAGE STYLES — same tokens as the FIND modules (rem scale, #22272f,
    #f1f1f1, .em grey). Used by the generated inner pages.
    ==================================================================== */
 .page-hero{padding:6rem 0 4rem}
@@ -55,7 +55,7 @@ main{background:#fff}
 .page-section{padding:4rem 0}
 @media(min-width:768px){.page-section{padding:7rem 0}}
 .page-section.-grey{background:#f1f1f1}
-.page-section.-dark{background:#14171a;color:#fff}
+.page-section.-dark{background:#22272f;color:#fff}
 .page-section.-dark .em{color:hsla(0,0%,100%,.4)}
 
 /* split rows (label left, content right) — mirrors labeled-section */
@@ -115,16 +115,16 @@ main{background:#fff}
 .contact-block+.contact-block{margin-top:3.6rem}
 .contact-label{font-size:1.4rem;color:#b3b3b3;margin-bottom:1rem}
 @media(min-width:768px){.contact-label{font-size:1.8rem}}
-.contact-value,.contact-value a{font-weight:500;font-size:1.8rem;line-height:1.5;color:#14171a}
+.contact-value,.contact-value a{font-weight:500;font-size:1.8rem;line-height:1.5;color:#22272f}
 @media(min-width:768px){.contact-value,.contact-value a{font-size:2.2rem}}
 .contact-value a:hover{color:#1F4257}
 .contact-form{display:grid;gap:2.4rem}
 @media(min-width:768px){.contact-form{grid-template-columns:1fr 1fr;gap:3rem}}
 .form-field{display:flex;flex-direction:column;gap:.8rem}
 .form-field.-full{grid-column:1/-1}
-.form-field label{font-weight:500;font-size:1.4rem;color:#14171a}
+.form-field label{font-weight:500;font-size:1.4rem;color:#22272f}
 @media(min-width:768px){.form-field label{font-size:1.6rem}}
-.form-field input,.form-field select,.form-field textarea{appearance:none;border:1px solid rgba(21,23,23,.25);background:#fff;border-radius:.4rem;padding:1.5rem 1.8rem;font-family:var(--font-primary);font-size:1.6rem;color:#14171a;outline:none;transition:border-color .2s}
+.form-field input,.form-field select,.form-field textarea{appearance:none;border:1px solid rgba(21,23,23,.25);background:#fff;border-radius:.4rem;padding:1.5rem 1.8rem;font-family:var(--font-primary);font-size:1.6rem;color:#22272f;outline:none;transition:border-color .2s}
 @media(min-width:768px){.form-field input,.form-field select,.form-field textarea{font-size:1.8rem}}
 .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:#1F4257}
 .form-field textarea{min-height:14rem;resize:vertical}
@@ -173,7 +173,7 @@ main{background:#fff}
 /* ---- inner-page components (original, same design tokens) ---- */
 /* editorial index: numbered giant words, light theme, arrow slides on hover */
 .index-list{border-top:1px solid rgba(21,23,23,.12)}
-.index-item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2rem;padding:2.6rem 0;border-bottom:1px solid rgba(21,23,23,.12);color:#14171a}
+.index-item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2rem;padding:2.6rem 0;border-bottom:1px solid rgba(21,23,23,.12);color:#22272f}
 @media(min-width:768px){.index-item{grid-template-columns:8rem 1fr auto auto;gap:4rem;padding:4rem 0}}
 .index-num{font-size:1.4rem;font-weight:500;color:#b3b3b3}
 @media(min-width:768px){.index-num{font-size:1.8rem}}
@@ -188,11 +188,11 @@ main{background:#fff}
 
 /* step pills: compact anchored overview; active state follows scroll */
 .step-pills{display:flex;flex-wrap:wrap;gap:1rem}
-.step-pill{display:inline-flex;align-items:center;gap:1rem;padding:1.1rem 1.8rem;border:1px solid rgba(21,23,23,.25);border-radius:100px;font-weight:500;font-size:1.4rem;line-height:1;color:#14171a;transition:background .25s,color .25s,border-color .25s}
+.step-pill{display:inline-flex;align-items:center;gap:1rem;padding:1.1rem 1.8rem;border:1px solid rgba(21,23,23,.25);border-radius:100px;font-weight:500;font-size:1.4rem;line-height:1;color:#22272f;transition:background .25s,color .25s,border-color .25s}
 @media(min-width:768px){.step-pill{padding:1.4rem 2.4rem;font-size:1.7rem}}
 .step-pill .n{font-size:1.1rem;color:#b3b3b3;transition:color .25s}
-.step-pill:hover{border-color:#14171a}
-.step-pill.-active{background:#14171a;border-color:#14171a;color:#fff}
+.step-pill:hover{border-color:#22272f}
+.step-pill.-active{background:#22272f;border-color:#22272f;color:#fff}
 .step-pill.-active .n{color:hsla(0,0%,100%,.5)}
 
 /* sector tabs: underlined tab row + image/text panel */
@@ -201,7 +201,7 @@ main{background:#fff}
 .tab-btn{appearance:none;background:none;border:none;cursor:pointer;padding:1.4rem 0;font-family:var(--font-primary);font-weight:500;font-size:1.6rem;color:#8a8b8b;position:relative;transition:color .25s}
 @media(min-width:768px){.tab-btn{font-size:2.2rem;padding:1.8rem 0}}
 .tab-btn:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#1F4257;transform:scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.16,1,.3,1)}
-.tab-btn.-active{color:#14171a}
+.tab-btn.-active{color:#22272f}
 .tab-btn.-active:after{transform:scaleX(1)}
 .tab-panel{display:none;padding:4rem 0 0}
 .tab-panel.-active{display:grid;gap:3rem;animation:tabIn .5s cubic-bezier(.16,1,.3,1)}
@@ -244,7 +244,7 @@ main{background:#fff}
 .nl-pin{cursor:pointer}
 .nl-pin-hit{fill:transparent}
 .nl-pin-ring{fill:none;stroke:#1F4257;stroke-width:1.4;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.45);transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1)}
-.nl-pin-dot{fill:#14171a;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .25s}
+.nl-pin-dot{fill:#22272f;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .25s}
 .nl-pin-halo{fill:#1F4257;opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}
 .nl-pin:hover .nl-pin-dot{fill:#1F4257;transform:scale(1.2)}
 .nl-pin:hover .nl-pin-ring{opacity:.4;transform:scale(1)}
@@ -262,8 +262,8 @@ main{background:#fff}
 @media(min-width:768px){.nl-hub-row{font-size:2.6rem;padding:1.8rem 0}}
 .nl-hub-list li:last-child .nl-hub-row{border-bottom:1px solid rgba(21,23,23,.1)}
 .nl-hub-tick{flex:0 0 auto;width:0;height:2px;background:#1F4257;transition:width .35s cubic-bezier(.16,1,.3,1)}
-.nl-hub-row:hover{color:#14171a}
-.nl-hub-row.-active{color:#14171a}
+.nl-hub-row:hover{color:#22272f}
+.nl-hub-row.-active{color:#22272f}
 .nl-hub-row.-active .nl-hub-tick{width:2.6rem}
 /* inline "Explore ->" affordance: sits at the end of the row, reveals on hover
    or when the hub is active (also fired by hovering the matching map pin) */
@@ -329,7 +329,7 @@ main{background:#fff}
 @media(min-width:768px){.size-ladder{grid-template-columns:repeat(4,1fr);gap:2rem}}
 .size-card{border:1px solid rgba(21,23,23,.14);border-radius:.6rem;padding:2.4rem 2rem;transition:border-color .25s,transform .25s}
 .size-card:hover{border-color:#1F4257;transform:translateY(-3px)}
-.size-card .sz{font-weight:700;font-size:2.6rem;letter-spacing:-.02em;color:#14171a}
+.size-card .sz{font-weight:700;font-size:2.6rem;letter-spacing:-.02em;color:#22272f}
 @media(min-width:768px){.size-card .sz{font-size:3rem}}
 .size-card .szl{margin-top:.8rem;font-weight:500;font-size:1.5rem;color:#6f7070;line-height:1.4}
 
@@ -339,7 +339,7 @@ main{background:#fff}
 .faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:3rem;padding:2.6rem 0;font-weight:500;font-size:1.9rem;line-height:1.25;letter-spacing:-.01em}
 @media(min-width:768px){.faq-item summary{padding:3.6rem 0;font-size:3rem;letter-spacing:-.02em}}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary:after{content:"";flex:0 0 auto;width:2rem;height:2rem;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2314171a" d="M11 5h2v14h-2z"/><path fill="%2314171a" d="M5 11h14v2H5z"/></svg>') center/contain no-repeat;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.faq-item summary:after{content:"";flex:0 0 auto;width:2rem;height:2rem;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2322272f" d="M11 5h2v14h-2z"/><path fill="%2322272f" d="M5 11h14v2H5z"/></svg>') center/contain no-repeat;transition:transform .35s cubic-bezier(.16,1,.3,1)}
 @media(min-width:768px){.faq-item summary:after{width:2.6rem;height:2.6rem}}
 .faq-item[open] summary:after{transform:rotate(45deg)}
 .faq-item summary:hover{color:#1F4257}

@@ -1,26 +1,26 @@
 # Staal Real Estate
 
-> Boutique, tenant-side warehouse real estate advisory based in Amsterdam, the Netherlands. We represent tenants and buyers only — never landlords — helping international e-commerce, fulfilment, logistics and distribution companies find, lease and acquire warehouse space across the Netherlands.
+> Boutique, tenant-side warehouse real estate advisory based in Amsterdam, the Netherlands. We represent tenants and buyers only, never landlords, helping international e-commerce, fulfilment, logistics and distribution companies find, lease and acquire warehouse space across the Netherlands.
 
 Founder & advisor: Tex Staal · tex@staalre.com · +31 6 59 12 91 27
-Office: Speerstraat 7-2, 1076XM Amsterdam, Netherlands (working nationwide)
+Office: Speerstraat 7, 1076XM Amsterdam, Netherlands (working nationwide)
 Independent and tenant-only: we never act for the landlord.
 
 ## Services
-- [Lease advisory](https://www.staalre.com/lease-warehouse-netherlands) — warehouse leases from 500 m² to XXL: full market search, shortlisting, viewings, and negotiation of Dutch (ROZ-model) leases on the tenant's side. This is our main focus.
-- Acquisition support — sourcing, due-diligence support and price negotiation for owner-occupiers.
-- Renewals & relocations — renegotiation, expansion, and stay-or-go advice ahead of break dates.
-- Market-entry guidance — location strategy and remote viewings for international teams deciding from abroad, in English.
+- [Lease advisory](https://www.staalre.com/lease-warehouse-netherlands), warehouse leases from 500 m² to XXL: full market search, shortlisting, viewings, and negotiation of Dutch (ROZ-model) leases on the tenant's side. This is our main focus.
+- Acquisition support, sourcing, due-diligence support and price negotiation for owner-occupiers.
+- Renewals & relocations, renegotiation, expansion, and stay-or-go advice ahead of break dates.
+- Market-entry guidance, location strategy and remote viewings for international teams deciding from abroad, in English.
 
 ## Dutch warehouse hubs we cover
-- Rotterdam & the port corridor — container/deep-sea flows, A15 corridor; premium rents, tight land.
-- Venlo & the southeast — German-border, tri-modal (road/rail/barge); often ranked Europe's top logistics location.
-- Tilburg–Waalwijk & central Brabant — XXL warehousing and the e-commerce fulfilment cluster.
-- Schiphol & the Randstad — air cargo, high-value/time-critical goods; highest rents, smallest units.
+- Rotterdam & the port corridor, container/deep-sea flows, A15 corridor; premium rents, tight land.
+- Venlo & the southeast, German-border, tri-modal (road/rail/barge); often ranked Europe's top logistics location.
+- Tilburg–Waalwijk & central Brabant, XXL warehousing and the e-commerce fulfilment cluster.
+- Schiphol & the Randstad, air cargo, high-value/time-critical goods; highest rents, smallest units.
 - Also: Breda–Moerdijk, Eindhoven (Brainport), Nijmegen–Arnhem, Roermond–Maastricht.
 
 ## Location guides (full pages)
-- [Where we work — Dutch logistics hubs](https://www.staalre.com/locations): index of the main hubs, with what each is best for.
+- [Where we work, Dutch logistics hubs](https://www.staalre.com/locations): index of the main hubs, with what each is best for.
 - [Rotterdam](https://www.staalre.com/locations/rotterdam): Europe's largest seaport (435.8M tonnes, 2024); deep-sea containers, A15 corridor; highest rents, tightest land.
 - [Schiphol / Amsterdam](https://www.staalre.com/locations/schiphol-amsterdam): air-cargo gateway (1.5M tonnes, 2024); pharma, perishables, express e-commerce; smallest, priciest units.
 - [Venlo](https://www.staalre.com/locations/venlo): ranked Europe's most desirable logistics location (Prologis); tri-modal, German-border, 3PL/fashion cluster.
@@ -33,10 +33,10 @@ Independent and tenant-only: we never act for the landlord.
 - [Almere–Lelystad](https://www.staalre.com/locations/almere-lelystad): sustainable, scalable Flevoland fulfilment near Amsterdam; Flevokust inland port.
 
 ## Insights (full articles)
-- [Leasing warehouse space in the Netherlands](https://www.staalre.com/insights/leasing-warehouse-space-netherlands): Dutch leases use the standardised ROZ model and almost everything is negotiable — break options, CPI-indexation caps (3–4%), service-charge scope, and reinstatement. Incentives (rent-free periods, fit-out contributions) are not public and require representation to access.
-- [Rotterdam, Venlo or Tilburg — choosing a Dutch logistics hub](https://www.staalre.com/insights/dutch-logistics-hub-comparison): Rotterdam for containers, Venlo for the German market, Tilburg–Waalwijk for e-commerce fulfilment, Schiphol for air cargo. Price labour and grid capacity (netcongestie), not just rent.
+- [Leasing warehouse space in the Netherlands](https://www.staalre.com/insights/leasing-warehouse-space-netherlands): Dutch leases use the standardised ROZ model and almost everything is negotiable, break options, CPI-indexation caps (3–4%), service-charge scope, and reinstatement. Incentives (rent-free periods, fit-out contributions) are not public and require representation to access.
+- [Rotterdam, Venlo or Tilburg, choosing a Dutch logistics hub](https://www.staalre.com/insights/dutch-logistics-hub-comparison): Rotterdam for containers, Venlo for the German market, Tilburg–Waalwijk for e-commerce fulfilment, Schiphol for air cargo. Price labour and grid capacity (netcongestie), not just rent.
 - [Lease or buy a distribution warehouse](https://www.staalre.com/insights/lease-or-buy-distribution): Lease for speed, flexibility and capital efficiency; buy for specialised fit-out, scarce locations, or long-horizon sites. Most institutional Dutch stock is leasable, not buyable.
-- [Getting set up to lease in the Netherlands](https://www.staalre.com/insights/getting-set-up-to-lease-netherlands): what a foreign company needs before it can sign — a Dutch legal entity (BV or registered branch), KvK registration, a Dutch business bank account, a VAT number, and the covenant or bank guarantee landlords require. Setup can run in parallel with the search.
+- [Getting set up to lease in the Netherlands](https://www.staalre.com/insights/getting-set-up-to-lease-netherlands): what a foreign company needs before it can sign, a Dutch legal entity (BV or registered branch), KvK registration, a Dutch business bank account, a VAT number, and the covenant or bank guarantee landlords require. Setup can run in parallel with the search.
 
 ## Contact
 Send your requirement (location, approximate size in m², timing) via https://www.staalre.com/contact or tex@staalre.com. We respond within one business day.
