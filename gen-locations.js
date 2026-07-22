@@ -688,12 +688,12 @@ ${'      <div class="index-list">\n' + rows + '\n      </div>'}
 function leasePage() {
   const canonical = `${BASE}/lease-warehouse-netherlands`;
   const title = 'Lease Warehouse Space in the Netherlands, From 500 m²';
-  const description = 'Lease warehouse space in the Netherlands from 500 m² to XXL. Independent tenant representation, we run the search and negotiate the ROZ lease on your side.';
+  const description = 'Lease warehouse space in the Netherlands from 500 m² to XXL. Independent tenant representation, we run the search and negotiate the lease on your side.';
   const faq = [
     { q: 'Can you rent a small warehouse in the Netherlands?', a: 'Yes. Staal Real Estate arranges warehouse leases from 500 m² upward, all the way to XXL. Smaller units (roughly 500–1,500 m²) are scarcer and let quickly, so early, well-defined representation is often the difference between securing space and missing it.' },
     { q: 'What is the minimum warehouse size you can lease?', a: 'We advise on warehouse leases from 500 m². Below that, self-storage or flex business-centre units are usually a better fit; from 500 m² up to 100,000 m²+ XXL distribution centres, we run the full search and negotiation for you.' },
     { q: 'How much does it cost to rent warehouse space in the Netherlands?', a: 'Indicative prime logistics rents run from roughly €50–65/m²/year in secondary regions to €75–95/m²/year in Rotterdam and €90–115/m²/year around Schiphol (CBRE / Savills / Statista, 2024–25). Smaller units carry a higher rate per m². Budget total occupancy cost, service charges, energy and municipal taxes, not just the headline rent.' },
-    { q: 'How long does it take to lease a warehouse in the Netherlands?', a: 'A straightforward lease can complete in a matter of weeks once the requirement is clear; complex or build-to-suit deals take months. Search and shortlisting typically take two to four weeks, followed by viewings, heads of terms and the ROZ lease.' },
+    { q: 'How long does it take to lease a warehouse in the Netherlands?', a: 'A straightforward lease can complete in a matter of weeks once the requirement is clear; complex or build-to-suit deals take months. Search and shortlisting typically take two to four weeks, followed by viewings, heads of terms and the lease.' },
     { q: 'Do I need a Dutch company to lease a warehouse in the Netherlands?', a: 'In almost all cases, yes. Dutch landlords expect the tenant to be a registered legal entity, a Dutch BV or a registered branch with a KvK number, and will assess covenant strength; a Dutch business bank account is normally needed for the deposit and rent. If you are already established we move straight to search and terms; if you are still setting up, we time the search around it. See our setup guide.' },
     { q: 'Which regions of the Netherlands do you cover?', a: 'All of them. We work nationwide across the main logistics hubs, Rotterdam, Schiphol/Amsterdam, Venlo, Tilburg–Waalwijk, Eindhoven and more, so we can match the region to your labour, transport and cost needs rather than to one patch. See our location guides.' },
   ];
@@ -701,7 +701,7 @@ function leasePage() {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'WebPage', '@id': canonical + '#webpage', url: canonical, name: title, description: description, isPartOf: { '@id': BASE + '/#website' }, inLanguage: 'en' },
-      { '@type': 'Service', '@id': canonical + '#service', name: 'Warehouse leasing, tenant representation', serviceType: 'Warehouse tenant representation', provider: { '@id': BASE + '/#organization' }, areaServed: { '@type': 'Country', name: 'Netherlands' }, description: 'Tenant-only advisory for leasing warehouse space in the Netherlands from 500 m² to XXL: market search, shortlisting, viewings and ROZ lease negotiation on the tenant’s side.' },
+      { '@type': 'Service', '@id': canonical + '#service', name: 'Warehouse leasing, tenant representation', serviceType: 'Warehouse tenant representation', provider: { '@id': BASE + '/#organization' }, areaServed: { '@type': 'Country', name: 'Netherlands' }, description: 'Tenant-only advisory for leasing warehouse space in the Netherlands from 500 m² to XXL: market search, shortlisting, viewings and lease negotiation on the tenant’s side.' },
       { '@type': 'FAQPage', '@id': canonical + '#faq', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
       { '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: BASE + '/' },
@@ -745,7 +745,7 @@ function leasePage() {
 
       <section class="page-section" style="padding-top:0">
         <div class="container_container__v5gtR">
-          <p style="font-weight:500;font-size:2rem;line-height:1.45;color:#3c3e3e;max-width:66rem;margin:0 0 4rem">Whatever your size, we run the full search and negotiate the Dutch (ROZ) lease on your side, with one point of contact from first brief to keys.</p>
+          <p style="font-weight:500;font-size:2rem;line-height:1.45;color:#3c3e3e;max-width:66rem;margin:0 0 4rem">Whatever your size, we run the full search and negotiate the Dutch lease on your side, with one point of contact from first brief to keys.</p>
           <div class="size-ladder">${ladder}</div>
           <div style="margin-top:3.5rem">${ctaButton('Send Your Requirement', '#requirement', false)}</div>
         </div>
@@ -757,7 +757,7 @@ function leasePage() {
           <div class="mini-steps">
             <div class="mini-step"><div class="ms-num">01</div><h3>Brief</h3><p>We map exactly what your operation needs, size from 500 m², location, clear height, docks, power, timing and budget.</p></div>
             <div class="mini-step"><div class="ms-num">02</div><h3>Search &amp; shortlist</h3><p>We scan the market, including units never openly advertised, and shortlist the best fits for viewings.</p></div>
-            <div class="mini-step"><div class="ms-num">03</div><h3>Negotiate</h3><p>We negotiate the ROZ lease on your side, term, break options, indexation caps, incentives and service charges.</p></div>
+            <div class="mini-step"><div class="ms-num">03</div><h3>Negotiate</h3><p>We negotiate the lease on your side, term, break options, indexation caps, incentives and service charges.</p></div>
             <div class="mini-step"><div class="ms-num">04</div><h3>Hand over</h3><p>We support the documentation, coordinate handover, and stay involved as your operation grows.</p></div>
           </div>
         </div>
