@@ -6,6 +6,12 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "staalre-new.vercel.app" }],
+      "destination": "https://www.staalre.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "staalre-new.vercel.app" }],
       "destination": "https://www.staalre.com/:path*",
