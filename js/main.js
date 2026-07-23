@@ -470,9 +470,25 @@
       el.addEventListener('mouseenter', function () { activate(i); });
       el.addEventListener('focus', function () { activate(i); });
     });
-    // clicking navigates to the hub page: rows are <a> (native), pins navigate via JS
+    // desktop: a click navigates (pins via JS, rows are native <a>).
+    // mobile: a tap only SELECTS the hub; you go to the page via the "Explore" link.
+    var isMobile = function () { return window.matchMedia('(max-width: 767px)').matches; };
     pins.forEach(function (el) {
-      el.addEventListener('click', function () { var h = el.dataset.href; if (h) window.location.href = h; });
+      var i = +el.dataset.i;
+      el.addEventListener('click', function () {
+        if (isMobile()) { activate(i); return; }
+        var h = el.dataset.href; if (h) window.location.href = h;
+      });
+    });
+    rows.forEach(function (el) {
+      var i = +el.dataset.i;
+      el.addEventListener('click', function (e) {
+        // on mobile, tapping the row (but not the Explore link) just selects it
+        if (isMobile() && !(e.target.closest && e.target.closest('.nl-hub-go'))) {
+          e.preventDefault();
+          activate(i);
+        }
+      });
     });
   });
 
