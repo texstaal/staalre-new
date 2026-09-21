@@ -397,3 +397,10 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 .cmp-table tbody tr:nth-child(even){background:#F7F8F9}
 .cmp-table caption{caption-side:bottom;text-align:left;font-size:1.3rem;color:#8a8c8c;padding-top:1rem;line-height:1.5}
 @media(min-width:768px){.cmp-table caption{font-size:1.5rem}}
+
+/* Hero cloud → white transition: a tall, gentle multi-stop gradient so the
+   white bleeds up UNDER the drifting clouds instead of presenting a hard-edged
+   white block against the cloud texture (the old 30.9rem transparent→#fff ramp
+   ended in flat white that read as a rectangular block over the letters). */
+.hero_overlay__7ubgG{height:44rem;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.25) 45%,rgba(255,255,255,.75) 72%,#fff 100%)}
+@media(min-width:768px){.hero_overlay__7ubgG{height:72rem}}
