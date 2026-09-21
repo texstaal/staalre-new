@@ -376,3 +376,24 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 
 /* centre the NL map in its column and against the hub list (desktop) */
 @media(min-width:768px){.nl-map-stage{align-self:center}.nl-map-notes{justify-items:center;text-align:center}}
+
+/* TL;DR summary box — sits above the fold so the answer loads before any image */
+.tldr{max-width:81.2rem;background:#F4F6F7;border-left:4px solid #1F4257;border-radius:.6rem;padding:2.2rem 2.4rem;margin:3.2rem 0 0}
+@media(min-width:768px){.tldr{padding:3rem 3.4rem;margin:4rem 0 0}}
+.tldr-label{display:inline-block;font-weight:700;font-size:1.2rem;letter-spacing:.14em;text-transform:uppercase;color:#1F4257;margin-bottom:1.2rem}
+@media(min-width:768px){.tldr-label{font-size:1.4rem}}
+.tldr ul{margin:0;padding-left:2rem;list-style:disc}
+.tldr li,.tldr p{font-weight:500;font-size:1.6rem;line-height:1.55;margin:.6rem 0;color:#2b2d2d}
+.tldr p{margin:0}
+@media(min-width:768px){.tldr li,.tldr p{font-size:1.9rem}}
+.tldr a{color:#1F4257;text-decoration:underline}
+
+/* comparison / data table (rent-by-region etc.) */
+.cmp-table-wrap{overflow-x:auto;margin:0 0 2.8rem;-webkit-overflow-scrolling:touch}
+.cmp-table{width:100%;border-collapse:collapse;font-size:1.5rem;min-width:44rem}
+@media(min-width:768px){.cmp-table{font-size:1.8rem}}
+.cmp-table th,.cmp-table td{text-align:left;padding:1.3rem 1.6rem;border-bottom:1px solid rgba(21,23,23,.12);vertical-align:top}
+.cmp-table thead th{font-weight:700;color:#151717;border-bottom:2px solid #1F4257;white-space:nowrap}
+.cmp-table tbody tr:nth-child(even){background:#F7F8F9}
+.cmp-table caption{caption-side:bottom;text-align:left;font-size:1.3rem;color:#8a8c8c;padding-top:1rem;line-height:1.5}
+@media(min-width:768px){.cmp-table caption{font-size:1.5rem}}
