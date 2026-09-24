@@ -8,7 +8,7 @@ Independent and tenant-only: we never act for the landlord.
 
 ## Services
 - [Lease advisory](https://www.staalre.com/lease-warehouse-netherlands), warehouse leases from 500 m² to XXL: full market search, shortlisting, viewings, and negotiation of Dutch leases on the tenant's side. This is our main focus.
-- Acquisition support, sourcing, due-diligence support and price negotiation for owner-occupiers.
+- [Buying a warehouse](https://www.staalre.com/buy-warehouse-netherlands), buyer-side acquisition for owner-occupiers from 500 m² to XXL: on- and off-market search, assessment, due-diligence coordination and price negotiation through to notarial transfer. We never act for the seller.
 - Renewals & relocations, renegotiation, expansion, and stay-or-go advice ahead of break dates.
 - Market-entry guidance, location strategy and remote viewings for international teams deciding from abroad, in English.
 
@@ -33,6 +33,9 @@ Independent and tenant-only: we never act for the landlord.
 - [Almere–Lelystad](https://www.staalre.com/locations/almere-lelystad): sustainable, scalable Flevoland fulfilment near Amsterdam; Flevokust inland port.
 
 ## Insights (full articles)
+- [How to Buy a Warehouse in the Netherlands: A Guide for Foreign Companies](https://www.staalre.com/insights/buying-warehouse-netherlands): The step-by-step process for a foreign company buying a warehouse in the Netherlands: ownership structure, search, offer, purchase agreement, due diligence, notary and financing.
+- [The Cost of Buying a Warehouse in the Netherlands: Transfer Tax, VAT and Fees (2026)](https://www.staalre.com/insights/cost-of-buying-warehouse-netherlands): What it really costs to buy a warehouse in the Netherlands in 2026: 10.4% transfer tax, VAT on new buildings, notary, due diligence, financing and the ongoing costs of owning.
+- [Warehouse Due Diligence in the Netherlands: A Buyer’s Checklist](https://www.staalre.com/insights/warehouse-due-diligence-netherlands): What to check before buying a warehouse in the Netherlands: title and ground lease, zoning under the Omgevingswet, soil and asbestos, building condition, fire safety and grid capacity.
 - [Leasing warehouse space in the Netherlands](https://www.staalre.com/insights/leasing-warehouse-space-netherlands): Dutch leases use the standardised ROZ model and almost everything is negotiable, break options, CPI-indexation caps (3–4%), service-charge scope, and reinstatement. Incentives (rent-free periods, fit-out contributions) are not public and require representation to access.
 - [Rotterdam, Venlo or Tilburg, choosing a Dutch logistics hub](https://www.staalre.com/insights/dutch-logistics-hub-comparison): Rotterdam for containers, Venlo for the German market, Tilburg–Waalwijk for e-commerce fulfilment, Schiphol for air cargo. Price labour and grid capacity (netcongestie), not just rent.
 - [Lease or buy a distribution warehouse](https://www.staalre.com/insights/lease-or-buy-distribution): Lease for speed, flexibility and capital efficiency; buy for specialised fit-out, scarce locations, or long-horizon sites. Most institutional Dutch stock is leasable, not buyable.

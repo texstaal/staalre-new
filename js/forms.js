@@ -52,6 +52,32 @@
     });
   }
 
+  /* ---------- lead attribution ----------
+     Where the enquiry came from: the previous page (internal article or
+     external referrer) and any utm_* tags on this URL. Read only at submit
+     time and sent with the enquiry itself; nothing is stored in the browser,
+     so the cookie policy's "no tracking storage" still holds. */
+  function attribution() {
+    var out = [];
+    try {
+      var ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref) {
+        out.push('Came from: ' + (ref.host === location.host ? ref.pathname : ref.host + ref.pathname));
+      } else {
+        out.push('Came from: direct / unknown');
+      }
+      var q = new URLSearchParams(location.search), utm = [];
+      q.forEach(function (v, k) { if (/^utm_/.test(k)) utm.push(k.slice(4) + '=' + v); });
+      if (utm.length) out.push('Campaign: ' + utm.join(', '));
+    } catch (e) { /* attribution is best-effort */ }
+    return out.join('\n').slice(0, 400);
+  }
+
+  // Vercel Web Analytics custom event (no-op if analytics isn't loaded/enabled).
+  function trackLead(form) {
+    try { if (window.va) window.va('event', { name: 'Lead', data: { form: form } }); } catch (e) {}
+  }
+
   function setStatus(el, ok, msg) {
     if (!el) return;
     el.textContent = msg;
@@ -119,6 +145,7 @@
         setStatus(status, false, 'Please fill in your name, a valid email, and a short description of your requirement.');
         return;
       }
+      row.message = (row.message + '\n\n' + attribution()).slice(0, 5000);
       var mailtoFallback = function () {
         var bodyTxt = 'Name: ' + row.name + '\nCompany: ' + row.company + '\nEmail: ' + row.email +
           '\nPhone: ' + row.phone + '\nInterest: ' + row.interest + '\n\n' + row.message;
@@ -131,6 +158,7 @@
         insertRow('contact_requests', row)
           .then(function () {
             f.reset();
+            trackLead('contact · ' + (row.interest || 'none'));
             setStatus(status, true, 'Thank you — your requirements were sent. We respond within one business day.');
           })
           .catch(mailtoFallback)
@@ -175,6 +203,7 @@
       ];
       var extra = val('message');
       if (extra) { lines.push('', extra); }
+      lines.push('', attribution());
       var established = /yes|progress/i.test(nl); // established or nearly so
       var tag = established ? 'lease · NL-established' : 'lease · setup-stage';
       var row = {
@@ -197,7 +226,74 @@
         insertRow('contact_requests', row)
           .then(function () {
             f.reset();
+            trackLead('lease');
             setStatus(status, true, 'Thank you — your requirement was sent. We respond within one business day.');
+          })
+          .catch(mailtoFallback)
+          .finally(function () { if (btn) btn.disabled = false; });
+      } else {
+        mailtoFallback();
+      }
+    });
+  }
+
+  /* ---------- buy requirement form (/buy-warehouse-netherlands) ----------
+     Owner-occupier acquisition intake. Same pattern as the lease form: the
+     answers fold into the message, and `interest` starts with "buy" so the
+     CRM trigger files the lead as deal type Buy. */
+  var buyForm = document.getElementById('buy-form');
+  if (buyForm) {
+    armSpamTrap(buyForm);
+    buyForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = buyForm;
+      var status = document.getElementById('buy-status');
+      if (isBot(f)) {
+        f.reset();
+        setStatus(status, true, 'Thank you — your acquisition brief was sent. We respond within one business day.');
+        return;
+      }
+      var val = function (n) { return (f[n] && f[n].value || '').trim(); };
+      var name = val('name1'), email = val('email'), size = val('size'), budget = val('budget');
+      if (!name || email.indexOf('@') < 1 || !size || !budget) {
+        setStatus(status, false, 'Please add your name, a valid email, the size you need and an indicative budget.');
+        return;
+      }
+      var lines = [
+        'Requirement: Buy a warehouse (owner-occupier)',
+        'Size: ' + size,
+        'Budget: ' + budget,
+        'Region: ' + (val('region') || 'No preference'),
+        'Timing: ' + (val('timing') || '—'),
+        'Use: ' + (val('use') || '—'),
+        'Financing: ' + (val('financing') || '—'),
+        'Also open to leasing: ' + (val('lease_ok') || '—')
+      ];
+      var extra = val('message');
+      if (extra) { lines.push('', extra); }
+      lines.push('', attribution());
+      var row = {
+        name: name,
+        company: val('company'),
+        email: email,
+        phone: val('phone'),
+        interest: ('buy · owner-occupier · ' + budget + ' · ' + size).slice(0, 120),
+        message: lines.join('\n').slice(0, 5000),
+        source: location.pathname
+      };
+      var btn = f.querySelector('button[type="submit"]');
+      var mailtoFallback = function () {
+        location.href = 'mailto:tex@staalre.com?subject=' +
+          encodeURIComponent('Acquisition brief — ' + (row.company || row.name)) +
+          '&body=' + encodeURIComponent(row.message);
+      };
+      if (configured) {
+        if (btn) btn.disabled = true;
+        insertRow('contact_requests', row)
+          .then(function () {
+            f.reset();
+            trackLead('buy');
+            setStatus(status, true, 'Thank you — your acquisition brief was sent. We respond within one business day.');
           })
           .catch(mailtoFallback)
           .finally(function () { if (btn) btn.disabled = false; });

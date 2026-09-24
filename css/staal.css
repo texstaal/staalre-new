@@ -335,6 +335,10 @@ main{background:#fff}
 .size-card:hover{border-color:#1F4257;transform:translateY(-3px)}
 .size-card .sz{font-weight:700;font-size:2.6rem;letter-spacing:-.02em;color:#22272f}
 @media(min-width:768px){.size-card .sz{font-size:3rem}}
+.size-ladder.-reasons{grid-template-columns:1fr}
+@media(min-width:768px){.size-ladder.-reasons{grid-template-columns:repeat(4,1fr)}}
+.size-ladder.-reasons .size-card .sz{font-size:2.1rem;line-height:1.2}
+@media(min-width:768px){.size-ladder.-reasons .size-card .sz{font-size:2.4rem}}
 .size-card .szl{margin-top:.8rem;font-weight:500;font-size:1.5rem;color:#6f7070;line-height:1.4}
 
 /* FAQ (native details/summary, styled like the numbered rows) */
@@ -387,6 +391,20 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 .tldr p{margin:0}
 @media(min-width:768px){.tldr li,.tldr p{font-size:1.9rem}}
 .tldr a{color:#1F4257;text-decoration:underline}
+/* service callout: clickable card linking insights to the lease money page */
+.service-cta{display:block;max-width:81.2rem;margin:4rem auto 0;padding:2.4rem 2.6rem;background:#1F4257;color:#fff;border-radius:.6rem;text-decoration:none;transition:background .2s ease}
+@media(min-width:768px){.service-cta{padding:3.2rem 3.6rem;margin-top:5.5rem}}
+.service-cta:hover,.service-cta:focus-visible{background:#163244}
+.article-prose a.service-cta{color:#fff;text-decoration:none}
+.service-cta-label{display:block;font-weight:700;font-size:1.2rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:1rem}
+@media(min-width:768px){.service-cta-label{font-size:1.4rem}}
+.service-cta-title{display:block;font-weight:600;font-size:2.2rem;line-height:1.2;letter-spacing:-.01em;margin-bottom:1rem}
+@media(min-width:768px){.service-cta-title{font-size:3rem}}
+.service-cta-text{display:block;font-weight:400;font-size:1.5rem;line-height:1.55;opacity:.9}
+@media(min-width:768px){.service-cta-text{font-size:1.8rem}}
+.service-cta-arrow{display:inline-block;margin-left:.4rem;transition:transform .2s ease}
+.service-cta:hover .service-cta-arrow{transform:translateX(.4rem)}
+.latest-posts_root__W0OHF .service-cta{margin-top:6rem}
 
 /* comparison / data table (rent-by-region etc.) */
 .cmp-table-wrap{overflow-x:auto;margin:0 0 2.8rem;-webkit-overflow-scrolling:touch}
