@@ -134,6 +134,7 @@
       }
       var status = document.getElementById('contact-status');
       var btn = f.querySelector('button[type="submit"]');
+      var size = (f.size && f.size.value || '').trim();
       var row = {
         name: (f.name1 && f.name1.value || '').trim(),
         company: (f.company && f.company.value || '').trim(),
@@ -143,11 +144,18 @@
         message: (f.message && f.message.value || '').trim(),
         source: location.pathname
       };
-      if (!row.name || row.email.indexOf('@') < 1 || !row.message) {
-        setStatus(status, false, 'Please fill in your name, a valid email, and a short description of your requirement.');
+      // We only serve companies needing 500 m²+; say so instead of collecting the lead
+      if (size === 'private') {
+        setStatus(status, false, 'We only work with companies that need 500 m² or more, so we can’t help with this one. For smaller or private storage, a self-storage provider is the better fit.');
         return;
       }
-      row.message = (row.message + '\n\n' + attribution()).slice(0, 5000);
+      if (!row.name || !row.company || row.email.indexOf('@') < 1 || !size || !row.message) {
+        setStatus(status, false, 'Please fill in your name, company, a valid email, the space you need and a short description of your requirement.');
+        return;
+      }
+      // "lease · 1,500–5,000 m²": the CRM trigger matches the interest prefix
+      row.interest = (row.interest + ' · ' + size).slice(0, 120);
+      row.message = ('Size: ' + size + '\n\n' + row.message + '\n\n' + attribution()).slice(0, 5000);
       var mailtoFallback = function () {
         var bodyTxt = 'Name: ' + row.name + '\nCompany: ' + row.company + '\nEmail: ' + row.email +
           '\nPhone: ' + row.phone + '\nInterest: ' + row.interest + '\n\n' + row.message;
@@ -190,8 +198,8 @@
       }
       var val = function (n) { return (f[n] && f[n].value || '').trim(); };
       var name = val('name1'), email = val('email'), size = val('size'), nl = val('nl_registered');
-      if (!name || email.indexOf('@') < 1 || !size || !nl) {
-        setStatus(status, false, 'Please add your name, a valid email, the size you need, and whether you’re registered in the Netherlands.');
+      if (!name || !val('company') || email.indexOf('@') < 1 || !size || !nl) {
+        setStatus(status, false, 'Please add your name, company, a valid email, the size you need, and whether you’re registered in the Netherlands.');
         return;
       }
       var lines = [
@@ -257,8 +265,8 @@
       }
       var val = function (n) { return (f[n] && f[n].value || '').trim(); };
       var name = val('name1'), email = val('email'), size = val('size'), budget = val('budget');
-      if (!name || email.indexOf('@') < 1 || !size || !budget) {
-        setStatus(status, false, 'Please add your name, a valid email, the size you need and an indicative budget.');
+      if (!name || !val('company') || email.indexOf('@') < 1 || !size || !budget) {
+        setStatus(status, false, 'Please add your name, company, a valid email, the size you need and an indicative budget.');
         return;
       }
       var lines = [

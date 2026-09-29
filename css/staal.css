@@ -466,3 +466,7 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 .article-prose .cookie-btn{flex:none}
 @keyframes cookieIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.cookie-banner{animation:none}}
+
+/* contact form: who we serve, shown above the form */
+.form-qualifier{font-weight:500;font-size:1.5rem;line-height:1.5;color:#1F4257;background:#F4F6F7;border-left:4px solid #1F4257;border-radius:.6rem;padding:1.4rem 1.8rem;margin:0 0 2.4rem}
+@media(min-width:768px){.form-qualifier{font-size:1.6rem}}

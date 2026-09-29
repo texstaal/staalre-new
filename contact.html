@@ -177,9 +177,10 @@
         </div>
       </div>
       <div>
+        <p class="form-qualifier">We work for companies leasing or buying warehouse space from 500 m². We can’t help with private storage, residential property or job applications.</p>
         <form id="contact-form" class="contact-form" novalidate>
           <div class="form-field"><label for="cf-name">Your name *</label><input id="cf-name" name="name1" type="text" autocomplete="name" required /></div>
-          <div class="form-field"><label for="cf-company">Company</label><input id="cf-company" name="company" type="text" autocomplete="organization" /></div>
+          <div class="form-field"><label for="cf-company">Company *</label><input id="cf-company" name="company" type="text" autocomplete="organization" required /></div>
           <div class="form-field"><label for="cf-email">Email *</label><input id="cf-email" name="email" type="email" autocomplete="email" required /></div>
           <div class="form-field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" autocomplete="tel" /></div>
           <div class="form-field -full"><label for="cf-interest">I’m looking to</label>
@@ -190,6 +191,7 @@
               <option value="other">Something else</option>
             </select>
           </div>
+          <div class="form-field -full"><label for="cf-size">Space needed *</label><select id="cf-size" name="size" required><option value="">Select…</option><option>500–1,500 m²</option><option>1,500–5,000 m²</option><option>5,000–15,000 m²</option><option>15,000 m²+</option><option>Not sure yet</option><option value="private">Less than 500 m² or private storage</option></select></div>
           <div class="form-field -full"><label for="cf-message">Your requirement *</label><textarea id="cf-message" name="message" placeholder="Location(s), approximate size in m², timing, and anything we should know."></textarea></div>
           <div id="contact-status" class="form-status" role="status"></div>
           <div class="form-actions">
