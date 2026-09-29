@@ -10,7 +10,7 @@
   // Google Ads conversion for a submitted enquiry: paste the "send_to" value
   // from Google Ads (Goals > Conversions > the lead action > Tag setup), e.g.
   // 'AW-18344770449/AbCdEfGhIjK'. Leave empty to skip conversion events.
-  var ADS_LEAD_SEND_TO = '';
+  var ADS_LEAD_SEND_TO = 'AW-18344770449/btU8CJ6Ky4odEJH3u6tE'; // "Aanvraag website (alle formulieren)"
 
   var KEY = 'staal_consent';
   var MAX_AGE = 365 * 24 * 60 * 60 * 1000;
