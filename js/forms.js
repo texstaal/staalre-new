@@ -76,6 +76,8 @@
   // Vercel Web Analytics custom event (no-op if analytics isn't loaded/enabled).
   function trackLead(form) {
     try { if (window.va) window.va('event', { name: 'Lead', data: { form: form } }); } catch (e) {}
+    // Google Ads conversion (only fires with cookie consent; see js/consent.js)
+    try { if (window.staalConsent) window.staalConsent.lead(form); } catch (e) {}
   }
 
   function setStatus(el, ok, msg) {
