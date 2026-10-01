@@ -18,3 +18,7 @@ seo-analyse.js
 images/Foto Tex.jpg
 
 images/STAAL Clouds.png
+
+# property proposals: client data + generated PDFs stay local
+tools/proposals/clients/
+tools/proposals/.cache/
