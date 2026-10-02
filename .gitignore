@@ -22,3 +22,6 @@ images/STAAL Clouds.png
 # property proposals: client data + generated PDFs stay local
 tools/proposals/clients/
 tools/proposals/.cache/
+
+# referral partner programme: strategy, partner list, agreements (internal, never public)
+marketing/
