@@ -73,11 +73,11 @@
     banner.setAttribute('aria-live', 'polite');
     banner.setAttribute('aria-label', 'Cookie consent');
     banner.innerHTML =
-      '<p class="cookie-banner-text">We use Google Ads cookies to measure which of our ads lead to enquiries. ' +
-      'They are only set if you accept. <a href="/cookie-policy">Cookie policy</a></p>' +
+      '<p class="cookie-banner-text">We use cookies to understand how visitors find us and to measure our marketing. ' +
+      'Optional cookies are only set if you accept. <a href="/cookie-policy">Cookie policy</a></p>' +
       '<div class="cookie-banner-actions">' +
-      '<button type="button" class="cookie-btn" data-choice="denied">Decline</button>' +
-      '<button type="button" class="cookie-btn" data-choice="granted">Accept</button>' +
+      '<button type="button" class="cookie-btn" data-choice="denied">Reject all</button>' +
+      '<button type="button" class="cookie-btn" data-choice="granted">Accept all</button>' +
       '</div>';
     banner.addEventListener('click', function (e) {
       var btn = e.target.closest('[data-choice]');

@@ -69,6 +69,10 @@
       var q = new URLSearchParams(location.search), utm = [];
       q.forEach(function (v, k) { if (/^utm_/.test(k)) utm.push(k.slice(4) + '=' + v); });
       if (utm.length) out.push('Campaign: ' + utm.join(', '));
+      // Google Ads auto-tagging adds gclid (or gbraid/wbraid on iOS) to the
+      // landing URL. Only the fact is recorded, not the ID, and only when the
+      // form is sent from the page the ad opened.
+      if (q.has('gclid') || q.has('gbraid') || q.has('wbraid')) out.push('Google Ads click: yes');
     } catch (e) { /* attribution is best-effort */ }
     return out.join('\n').slice(0, 400);
   }
