@@ -18,12 +18,34 @@
       steps.forEach(function (s) { s.hidden = s.getAttribute('data-step') !== String(n); });
       label.textContent = label.getAttribute('data-step' + n);
       bar.classList.toggle('-step2', n === 2);
-      if (n === 2) {
+      if (n === 2 && window.innerWidth >= 768) { // on phones focus would open the keyboard over the step
         var first = form.querySelector('.lp-step[data-step="2"] input:not([type=radio])');
         if (first) first.focus({ preventScroll: true });
       }
-      if (card.getBoundingClientRect().top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      fit();
     }
+    // Phones: line the card up with the top of the screen so a whole step is in view
+    function fit() {
+      var top = card.getBoundingClientRect().top;
+      if (window.innerWidth >= 768) {
+        if (top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      if (Math.abs(top - 6) > 4) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // main.js shows the header on any upward scroll; once we're in place, tuck it
+      // away again so it doesn't cover the step (it returns when the visitor scrolls up)
+      setTimeout(function () {
+        var header = document.querySelector('.header_wrapper__MJ5bn');
+        if (header && window.scrollY > 250) header.classList.add('header_-hidden__CVUoR');
+      }, 700);
+    }
+    document.querySelectorAll('a[href="#requirement"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (window.innerWidth >= 768) return;
+        e.preventDefault();
+        fit();
+      });
+    });
     function missing() {
       return required.filter(function (n) { return !form.querySelector('input[name="' + n + '"]:checked'); });
     }

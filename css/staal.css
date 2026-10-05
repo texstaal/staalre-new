@@ -543,3 +543,30 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
   .cookie-btn{font-size:1.4rem;padding:.9rem 1.2rem}
 }
 @media(max-width:767px){.lp-hero{padding-top:3.2rem;padding-bottom:3.2rem}.lp-hero h1{font-size:3.6rem}.lp-hero .page-hero-sub{font-size:1.6rem;margin-top:1.4rem}.lp-trust{margin-top:1.8rem}.lp-cta-row{margin-top:2rem}}
+
+/* phones: each form step fits one screen (header slides away on scroll; target 375x667) */
+@media(max-width:767px){
+  .lp-form-section{padding-top:1.2rem;padding-bottom:3rem}
+  .lp-form-section .container_container__v5gtR{padding-left:1rem;padding-right:1rem}
+  .lp-card{padding:1.6rem 1.4rem;border-radius:.8rem;scroll-margin-top:.6rem}
+  .lp-card .nl-map-eyebrow,.lp-lead{display:none}
+  .lp-h2{font-size:2.2rem;margin:0 0 1rem}
+  .lp-step-label{font-size:1.1rem;margin:.7rem 0 1.2rem}
+  .lp-q{font-size:1.45rem;margin:0 0 .7rem}
+  .lp-form .lp-q[style],.lp-form .form-field[style]{margin-top:1.3rem!important}
+  .lp-chips{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+  .lp-chips.-cols3{grid-template-columns:repeat(3,1fr)}
+  .lp-chip span{display:block;width:100%;text-align:center;font-size:1.35rem;padding:.85rem .4rem;white-space:nowrap}
+  .lp-chips .lp-chip:last-child:nth-child(odd){grid-column:1/-1}
+  .lp-chips.-cols3 .lp-chip:last-child:nth-child(odd){grid-column:auto}
+  .lp-form .form-field{gap:.4rem}
+  .lp-form .form-field label{font-size:1.3rem}
+  .lp-form .form-field input,.lp-form .form-field select{padding:1rem 1.2rem;font-size:1.6rem}
+  .lp-fields{gap:1rem}
+  .lp-error{font-size:1.3rem;margin:1rem 0 0}
+  .lp-actions{margin-top:1.4rem;gap:1.2rem 1.6rem}
+  .lp-more{margin-top:1.2rem;padding-top:1rem}
+  .lp-more summary{font-size:1.4rem}
+  .lp-form .form-note{font-size:1.15rem;margin-top:.8rem!important}
+  .lp-form .form-status:empty{display:none}
+}
