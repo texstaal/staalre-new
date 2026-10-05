@@ -11,6 +11,9 @@
   // from Google Ads (Goals > Conversions > the lead action > Tag setup), e.g.
   // 'AW-18344770449/AbCdEfGhIjK'. Leave empty to skip conversion events.
   var ADS_LEAD_SEND_TO = 'AW-18344770449/btU8CJ6Ky4odEJH3u6tE'; // "Aanvraag website (alle formulieren)"
+  // Separate conversion for WhatsApp / phone / email taps. Create a second
+  // conversion action in Google Ads and paste its send_to here; empty = off.
+  var ADS_CONTACT_SEND_TO = '';
 
   var KEY = 'staal_consent';
   var MAX_AGE = 365 * 24 * 60 * 60 * 1000;
@@ -113,4 +116,15 @@
       gtag('event', 'conversion', { send_to: ADS_LEAD_SEND_TO });
     }
   };
+
+  // WhatsApp, phone and email taps: a Vercel Analytics event always (cookieless),
+  // and a Google Ads conversion only with consent and once a label is set above.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href*="wa.me/"], a[href^="tel:"], a[href^="mailto:"]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    var type = /wa\.me/.test(href) ? 'whatsapp' : /^tel:/.test(href) ? 'phone' : 'email';
+    try { if (window.va) window.va('event', { name: 'Contact', data: { type: type, page: location.pathname } }); } catch (err) {}
+    if (read() === 'granted' && ADS_CONTACT_SEND_TO) gtag('event', 'conversion', { send_to: ADS_CONTACT_SEND_TO });
+  });
 })();

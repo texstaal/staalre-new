@@ -470,3 +470,76 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 /* contact form: who we serve, shown above the form */
 .form-qualifier{font-weight:500;font-size:1.5rem;line-height:1.5;color:#1F4257;background:#F4F6F7;border-left:4px solid #1F4257;border-radius:.6rem;padding:1.4rem 1.8rem;margin:0 0 2.4rem}
 @media(min-width:768px){.form-qualifier{font-size:1.6rem}}
+
+/* lease landing page: conversion layout (hero CTAs, two-step form, mobile quick-contact bar) */
+.lp-trust{list-style:none;display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;margin:2.4rem 0 0;padding:0}
+.lp-trust li{position:relative;padding-left:2.2rem;font-weight:500;font-size:1.5rem;color:#22272f}
+.lp-trust li:before{content:"";position:absolute;left:0;top:.35rem;width:1.4rem;height:1.4rem;border-radius:50%;background:#1F4257 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6L21 7.5l-1.4-1.4z'/%3E%3C/svg%3E") center/1rem no-repeat}
+@media(min-width:768px){.lp-trust{margin-top:3.2rem}.lp-trust li{font-size:1.7rem}}
+.lp-cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2rem;margin-top:2.8rem}
+.lp-wa{display:inline-flex;align-items:center;gap:.8rem;font-weight:600;font-size:1.6rem;color:#1F4257;border:1.5px solid #1F4257;border-radius:10rem;padding:1.2rem 2rem;text-decoration:none;transition:background .2s,color .2s}
+.lp-wa:hover,.lp-wa:focus-visible{background:#1F4257;color:#fff}
+.lp-form-section{scroll-margin-top:7rem}
+.lp-form-grid{display:grid;gap:3rem}
+@media(min-width:1024px){.lp-form-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:4rem;align-items:start}}
+.lp-card{background:#fff;border-radius:1.2rem;padding:2.8rem 2rem;box-shadow:0 1rem 4rem rgba(21,23,23,.08);scroll-margin-top:8rem}
+@media(min-width:768px){.lp-card{padding:4.8rem}}
+.lp-h2{font-weight:700;font-size:2.8rem;line-height:1.1;letter-spacing:-.02em;margin:0 0 1rem}
+@media(min-width:768px){.lp-h2{font-size:3.8rem}}
+.lp-lead{font-weight:500;font-size:1.6rem;line-height:1.5;color:#3c3e3e;margin:0 0 2.4rem}
+@media(min-width:768px){.lp-lead{font-size:1.8rem}}
+.lp-progress{height:.4rem;border-radius:1rem;background:#e6ebee;overflow:hidden}
+.lp-progress-bar{display:block;height:100%;width:50%;background:#1F4257;border-radius:1rem;transition:width .35s ease}
+.lp-progress.-step2 .lp-progress-bar{width:100%}
+.lp-step-label{font-weight:600;font-size:1.3rem;letter-spacing:.04em;text-transform:uppercase;color:#6f7070;margin:1.2rem 0 2.4rem}
+.lp-step{border:0;margin:0;padding:0;min-width:0}
+.lp-q{display:block;font-weight:600;font-size:1.7rem;color:#22272f;margin:0 0 1.2rem;padding:0}
+@media(min-width:768px){.lp-q{font-size:1.9rem}}
+.lp-chips{display:flex;flex-wrap:wrap;gap:1rem}
+.lp-chip{position:relative;cursor:pointer}
+.lp-chip input{position:absolute;opacity:0;width:1px;height:1px}
+.lp-chip span{display:inline-block;font-weight:500;font-size:1.5rem;padding:1.15rem 1.8rem;border:1.5px solid rgba(21,23,23,.2);border-radius:10rem;background:#fff;color:#22272f;transition:border-color .15s,background .15s,color .15s}
+@media(min-width:768px){.lp-chip span{font-size:1.6rem}}
+.lp-chip:hover span{border-color:#1F4257}
+.lp-chip input:checked+span{background:#1F4257;border-color:#1F4257;color:#fff}
+.lp-chip input:focus-visible+span{outline:2px solid #1F4257;outline-offset:2px}
+.lp-fields{display:grid;gap:2rem}
+@media(min-width:768px){.lp-fields{grid-template-columns:1fr 1fr;gap:2.4rem}}
+.lp-error{color:#b3261e;font-weight:500;font-size:1.5rem;margin:1.6rem 0 0}
+.lp-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.6rem 2.4rem;margin-top:3rem}
+.lp-back{background:none;border:0;font:inherit;font-weight:500;font-size:1.5rem;color:#6f7070;cursor:pointer;padding:.6rem 0}
+.lp-back:hover{color:#1F4257}
+.lp-more{margin-top:2.4rem;border-top:1px solid rgba(21,23,23,.1);padding-top:1.6rem}
+.lp-more summary{cursor:pointer;font-weight:600;font-size:1.5rem;color:#1F4257}
+.lp-done h3{font-weight:700;font-size:2.4rem;margin:0 0 1.2rem}
+.lp-done p{font-size:1.7rem;line-height:1.55;color:#3c3e3e;margin:0 0 2rem}
+.lp-done:focus{outline:none}
+.lp-aside{padding:0 .4rem}
+.lp-person{display:flex;align-items:center;gap:1.6rem;margin-bottom:2.8rem}
+.lp-person img{width:7.2rem;height:7.2rem;border-radius:50%;object-fit:cover;object-position:50% 18%;flex:none}
+.lp-person strong{display:block;font-size:1.8rem}
+.lp-person span{display:block;font-size:1.4rem;color:#6f7070}
+.lp-aside-h{font-weight:700;font-size:1.8rem;margin:0 0 1.4rem}
+.lp-next{list-style:none;counter-reset:n;margin:0;padding:0}
+.lp-next li{counter-increment:n;position:relative;padding-left:4rem;margin:0 0 1.8rem;font-size:1.5rem;line-height:1.55;color:#3c3e3e}
+.lp-next li:before{content:counter(n);position:absolute;left:0;top:0;width:2.6rem;height:2.6rem;border-radius:50%;background:#1F4257;color:#fff;font-weight:700;font-size:1.3rem;display:flex;align-items:center;justify-content:center}
+.lp-next strong{color:#22272f}
+.lp-aside-note{font-size:1.5rem;color:#3c3e3e;margin:1rem 0 0}
+.lp-aside-note a{color:#1F4257;text-decoration:underline}
+.lp-sticky{display:none}
+@media(max-width:767px){
+  .lp-sticky{display:flex;gap:.8rem;position:fixed;left:1.2rem;right:1.2rem;bottom:1.2rem;z-index:900;padding:.8rem;background:#fff;border-radius:10rem;box-shadow:0 .8rem 3rem rgba(21,23,23,.22);transform:translateY(150%);transition:transform .3s ease}
+  .lp-sticky.-on{transform:none}
+  .lp-sticky-main{flex:1;display:flex;align-items:center;justify-content:center;background:#1F4257;color:#fff;font-weight:600;font-size:1.6rem;border-radius:10rem;padding:1.3rem 1.6rem;text-decoration:none}
+  .lp-sticky-icon{flex:none;display:flex;align-items:center;justify-content:center;width:4.8rem;height:4.8rem;border-radius:50%;border:1.5px solid #1F4257;color:#1F4257}
+  body:has(.cookie-banner) .lp-sticky{display:none}
+}
+@media(prefers-reduced-motion:reduce){.lp-sticky,.lp-progress-bar{transition:none}}
+
+/* cookie banner: compact on phones so it doesn't cover a third of the screen */
+@media(max-width:767px){
+  .cookie-banner{left:1rem;right:1rem;bottom:1rem;padding:1.4rem 1.6rem}
+  .cookie-banner-text{font-size:1.3rem;line-height:1.45;margin:0 0 1rem}
+  .cookie-btn{font-size:1.4rem;padding:.9rem 1.2rem}
+}
+@media(max-width:767px){.lp-hero{padding-top:3.2rem;padding-bottom:3.2rem}.lp-hero h1{font-size:3.6rem}.lp-hero .page-hero-sub{font-size:1.6rem;margin-top:1.4rem}.lp-trust{margin-top:1.8rem}.lp-cta-row{margin-top:2rem}}
