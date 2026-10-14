@@ -1,7 +1,7 @@
 # STAAL Real Estate
 
-Marketing site for STAAL Real Estate — boutique warehouse & logistics real estate
-advisory in the Netherlands, acting for occupiers (tenants/buyers).
+Marketing site for Staal Real Estate, a boutique warehouse agency in the Netherlands:
+lease, buy, rent out and sell warehouse space (one side per deal).
 
 ## Static site
 
@@ -16,7 +16,8 @@ No build is required to deploy; Vercel serves the files as-is.
 ## Pages
 
 - `/` (index.html) — homepage with the hero scroll sequence
-- `/services`, `/process`, `/sectors`, `/partners`, `/about`, `/contact`
+- `/lease-warehouse-netherlands`, `/buy-warehouse-netherlands`, `/rent-out-warehouse-netherlands`,
+  `/sell-warehouse-netherlands` (the four services), `/services`, `/about`, `/contact`, `/locations`
 - `/insights` + three articles under `/insights/<slug>`
 - `/terms`, `/privacy`, `/cookie-policy`, `/disclaimer`, `404.html`
 - `sitemap.xml`, `robots.txt`; clean URLs via `vercel.json` (`cleanUrls: true`)

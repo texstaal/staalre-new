@@ -16,7 +16,10 @@
       "has": [{ "type": "host", "value": "staalre-new.vercel.app" }],
       "destination": "https://www.staalre.com/:path*",
       "permanent": true
-    }
+    },
+    { "source": "/process", "destination": "/services", "permanent": true },
+    { "source": "/sectors", "destination": "/lease-warehouse-netherlands", "permanent": true },
+    { "source": "/partners", "destination": "/about", "permanent": true }
   ],
   "headers": [
     {

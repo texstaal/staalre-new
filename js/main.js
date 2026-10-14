@@ -126,17 +126,7 @@
     });
   }
 
-  /* ---------- CTA routing ----------
-     The FIND site opened dialogs from these buttons; the dialog markup was
-     client-rendered and isn't in the static DOM, so they route to pages. */
-  qsa('button[aria-haspopup="dialog"]').forEach(function (btn) {
-    var to = '/contact';
-    if (btn.closest('.services_item__D_u7g')) to = '/services';
-    else if (btn.closest('.features_item-more__MtYBo')) to = '/partners';
-    if (btn.classList.contains('services_item__D_u7g')) to = '/services';
-    btn.addEventListener('click', function () { window.location.href = to; });
-  });
-  // (newsletter + contact submission live in js/forms.js)
+  // (the enquiry forms live in js/intake.js and js/forms.js)
 
   /* ---------- reveal-on-scroll ---------- */
   var revealGroups = [

@@ -479,7 +479,7 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 .lp-cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2rem;margin-top:2.8rem}
 .lp-wa{display:inline-flex;align-items:center;gap:.8rem;font-weight:600;font-size:1.6rem;color:#1F4257;border:1.5px solid #1F4257;border-radius:10rem;padding:1.2rem 2rem;text-decoration:none;transition:background .2s,color .2s}
 .lp-wa:hover,.lp-wa:focus-visible{background:#1F4257;color:#fff}
-.lp-form-section{scroll-margin-top:7rem}
+.lp-form-section{position:relative;scroll-margin-top:7rem}
 .lp-form-grid{display:grid;gap:3rem}
 @media(min-width:1024px){.lp-form-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:4rem;align-items:start}}
 .lp-card{background:#fff;border-radius:1.2rem;padding:2.8rem 2rem;box-shadow:0 1rem 4rem rgba(21,23,23,.08);scroll-margin-top:8rem}
@@ -570,3 +570,21 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
   .lp-form .form-note{font-size:1.15rem;margin-top:.8rem!important}
   .lp-form .form-status:empty{display:none}
 }
+
+/* four services: the general enquiry form's first question (2x2 tap buttons), the
+   homepage door cards, the owner note on location pages and the grouped phone menu */
+.lp-chips.-intent{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.lp-chips.-intent .lp-chip span{display:flex;align-items:center;justify-content:center;height:100%;text-align:center;font-weight:600;line-height:1.25;border-radius:1rem;padding:1.4rem 1.2rem}
+@media(min-width:768px){.lp-chips.-intent .lp-chip span{font-size:1.7rem;padding:1.8rem 1.6rem}}
+@media(max-width:767px){.lp-chips.-intent{gap:.6rem}.lp-chips.-intent .lp-chip span{white-space:normal;padding:.9rem .6rem}}
+.door-kicker{display:block;font-weight:600;font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8c8c;margin-bottom:1rem}
+a.size-card .sz,a.size-card .szl{display:block}
+.owner-note{max-width:81.2rem;margin:0;padding:1.6rem 2rem;font-weight:500;font-size:1.6rem;line-height:1.5;color:#22272f;background:#F4F6F7;border-left:4px solid #1F4257;border-radius:.6rem}
+@media(min-width:768px){.owner-note{font-size:1.8rem}}
+.owner-note a{color:#1F4257;text-decoration:underline}
+.lp-aside .contact-block{margin-bottom:2.4rem}
+.lp-aside .contact-block+.contact-block{margin-top:0}
+.lp-aside .contact-value,.lp-aside .contact-value a{font-size:1.8rem}
+.burger-menu_nav__dAhwA{gap:2rem}
+.burger-menu_group-label{font-weight:600;font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8c8c;margin-bottom:-1.2rem}
+.burger-menu_group-label:not(:first-child){margin-top:1.2rem}

@@ -122,58 +122,60 @@
     }, true);
   }
 
-  /* ---------- contact form (/contact) ---------- */
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    armSpamTrap(contactForm);
-    contactForm.addEventListener('submit', function (e) {
+  /* ---------- enquiry forms ----------
+     The two-step forms share one submit path: the four service pages (lease,
+     buy, rent out, sell) and the general enquiry form on every other page.
+     Each form's answers are folded into the message, and `interest` starts
+     with the deal type (lease, buy, let, sell) because the CRM trigger files
+     leads on that prefix. No DB change: everything rides on the existing
+     contact_requests columns. `read` returns null when a required answer is
+     missing, otherwise { interest, track, subject, lines }. */
+  function wireForm(id, opts) {
+    var f = document.getElementById(id);
+    if (!f) return;
+    armSpamTrap(f);
+    f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var f = contactForm;
+      var status = f.querySelector('.form-status');
       if (isBot(f)) {
         // Mimic the success path so bots get no feedback to optimise against.
-        var s = document.getElementById('contact-status');
         f.reset();
-        setStatus(s, true, 'Thank you — your requirements were sent. We respond within one business day.');
+        setStatus(status, true, opts.ok);
         return;
       }
-      var status = document.getElementById('contact-status');
-      var btn = f.querySelector('button[type="submit"]');
-      var size = (f.size && f.size.value || '').trim();
+      var val = function (n) { var el = f.elements[n]; return (el && el.value || '').trim(); };
+      var name = val('name1'), email = val('email');
+      var lead = opts.read(val);
+      if (!name || !val('company') || email.indexOf('@') < 1 || !lead) {
+        setStatus(status, false, opts.missing);
+        return;
+      }
+      var lines = lead.lines.slice();
+      var extra = val('message');
+      if (extra) { lines.push('', extra); }
+      lines.push('', attribution());
       var row = {
-        name: (f.name1 && f.name1.value || '').trim(),
-        company: (f.company && f.company.value || '').trim(),
-        email: (f.email && f.email.value || '').trim(),
-        phone: (f.phone && f.phone.value || '').trim(),
-        interest: (f.interest && f.interest.value || '').trim(),
-        message: (f.message && f.message.value || '').trim(),
+        name: name,
+        company: val('company'),
+        email: email,
+        phone: val('phone'),
+        interest: lead.interest.slice(0, 120),
+        message: lines.join('\n').slice(0, 5000),
         source: location.pathname
       };
-      // We only serve companies needing 500 m²+; say so instead of collecting the lead
-      if (size === 'private') {
-        setStatus(status, false, 'We only work with companies that need 500 m² or more, so we can’t help with this one. For smaller or private storage, a self-storage provider is the better fit.');
-        return;
-      }
-      if (!row.name || !row.company || row.email.indexOf('@') < 1 || !size || !row.message) {
-        setStatus(status, false, 'Please fill in your name, company, a valid email, the space you need and a short description of your requirement.');
-        return;
-      }
-      // "lease · 1,500–5,000 m²": the CRM trigger matches the interest prefix
-      row.interest = (row.interest + ' · ' + size).slice(0, 120);
-      row.message = ('Size: ' + size + '\n\n' + row.message + '\n\n' + attribution()).slice(0, 5000);
+      var btn = f.querySelector('button[type="submit"]');
       var mailtoFallback = function () {
-        var bodyTxt = 'Name: ' + row.name + '\nCompany: ' + row.company + '\nEmail: ' + row.email +
-          '\nPhone: ' + row.phone + '\nInterest: ' + row.interest + '\n\n' + row.message;
         location.href = 'mailto:tex@staalre.com?subject=' +
-          encodeURIComponent('Requirement — ' + (row.company || row.name)) +
-          '&body=' + encodeURIComponent(bodyTxt);
+          encodeURIComponent(lead.subject + ' — ' + (row.company || row.name)) +
+          '&body=' + encodeURIComponent(row.message);
       };
       if (configured) {
         if (btn) btn.disabled = true;
         insertRow('contact_requests', row)
           .then(function () {
             f.reset();
-            trackLead('contact · ' + (row.interest || 'none'));
-            setStatus(status, true, 'Thank you — your requirements were sent. We respond within one business day.');
+            trackLead(lead.track);
+            setStatus(status, true, opts.ok);
           })
           .catch(mailtoFallback)
           .finally(function () { if (btn) btn.disabled = false; });
@@ -183,137 +185,132 @@
     });
   }
 
-  /* ---------- lease requirement form (/lease-warehouse-netherlands) ----------
-     Structured intake. Folds the size/region/timing/use answers plus the two
-     qualifiers (NL registration + Dutch bank account) into the message, and
-     tags `interest` so established occupiers are easy to triage. No DB change:
-     everything rides on the existing contact_requests columns. */
-  var leaseForm = document.getElementById('lease-form');
-  if (leaseForm) {
-    armSpamTrap(leaseForm);
-    leaseForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var f = leaseForm;
-      var status = document.getElementById('lease-status');
-      if (isBot(f)) {
-        f.reset();
-        setStatus(status, true, 'Thank you — your requirement was sent. We respond within one business day.');
-        return;
-      }
-      var val = function (n) { return (f[n] && f[n].value || '').trim(); };
-      var name = val('name1'), email = val('email'), size = val('size'), nl = val('nl_registered');
-      if (!name || !val('company') || email.indexOf('@') < 1 || !size || !nl) {
-        setStatus(status, false, 'Please add your name, company, a valid email, the size you need, and whether you’re registered in the Netherlands.');
-        return;
-      }
-      var lines = [
-        'Requirement: Lease warehouse space',
-        'Size: ' + size,
-        'Region: ' + (val('region') || 'No preference'),
-        'Timing: ' + (val('timing') || '—'),
-        'Use: ' + (val('use') || '—'),
-        'Registered in NL (KvK): ' + nl,
-        'Dutch bank account: ' + (val('dutch_bank') || '—')
-      ];
-      var extra = val('message');
-      if (extra) { lines.push('', extra); }
-      lines.push('', attribution());
+  /* /lease-warehouse-netherlands: the two qualifiers (NL registration + Dutch
+     bank account) tag `interest` so established occupiers are easy to triage. */
+  wireForm('lease-form', {
+    ok: 'Thank you — your requirement was sent. We respond within one business day.',
+    missing: 'Please add your name, company, a valid email, the size you need, and whether you’re registered in the Netherlands.',
+    read: function (val) {
+      var size = val('size'), nl = val('nl_registered');
+      if (!size || !nl) return null;
       var established = /yes|progress/i.test(nl); // established or nearly so
-      var tag = established ? 'lease · NL-established' : 'lease · setup-stage';
-      var row = {
-        name: name,
-        company: val('company'),
-        email: email,
-        phone: val('phone'),
-        interest: (tag + ' · ' + size).slice(0, 120),
-        message: lines.join('\n').slice(0, 5000),
-        source: location.pathname
+      return {
+        interest: (established ? 'lease · NL-established' : 'lease · setup-stage') + ' · ' + size,
+        track: 'lease',
+        subject: 'Warehouse requirement',
+        lines: [
+          'Requirement: Lease warehouse space',
+          'Size: ' + size,
+          'Region: ' + (val('region') || 'No preference'),
+          'Timing: ' + (val('timing') || '—'),
+          'Use: ' + (val('use') || '—'),
+          'Registered in NL (KvK): ' + nl,
+          'Dutch bank account: ' + (val('dutch_bank') || '—')
+        ]
       };
-      var btn = f.querySelector('button[type="submit"]');
-      var mailtoFallback = function () {
-        location.href = 'mailto:tex@staalre.com?subject=' +
-          encodeURIComponent('Warehouse requirement — ' + (row.company || row.name)) +
-          '&body=' + encodeURIComponent(row.message);
-      };
-      if (configured) {
-        if (btn) btn.disabled = true;
-        insertRow('contact_requests', row)
-          .then(function () {
-            f.reset();
-            trackLead('lease');
-            setStatus(status, true, 'Thank you — your requirement was sent. We respond within one business day.');
-          })
-          .catch(mailtoFallback)
-          .finally(function () { if (btn) btn.disabled = false; });
-      } else {
-        mailtoFallback();
-      }
-    });
-  }
+    }
+  });
 
-  /* ---------- buy requirement form (/buy-warehouse-netherlands) ----------
-     Owner-occupier acquisition intake. Same pattern as the lease form: the
-     answers fold into the message, and `interest` starts with "buy" so the
-     CRM trigger files the lead as deal type Buy. */
-  var buyForm = document.getElementById('buy-form');
-  if (buyForm) {
-    armSpamTrap(buyForm);
-    buyForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var f = buyForm;
-      var status = document.getElementById('buy-status');
-      if (isBot(f)) {
-        f.reset();
-        setStatus(status, true, 'Thank you — your acquisition brief was sent. We respond within one business day.');
-        return;
-      }
-      var val = function (n) { return (f[n] && f[n].value || '').trim(); };
-      var name = val('name1'), email = val('email'), size = val('size'), budget = val('budget');
-      if (!name || !val('company') || email.indexOf('@') < 1 || !size || !budget) {
-        setStatus(status, false, 'Please add your name, company, a valid email, the size you need and an indicative budget.');
-        return;
-      }
-      var lines = [
-        'Requirement: Buy a warehouse (owner-occupier)',
-        'Size: ' + size,
-        'Budget: ' + budget,
-        'Region: ' + (val('region') || 'No preference'),
-        'Timing: ' + (val('timing') || '—'),
-        'Use: ' + (val('use') || '—'),
-        'Financing: ' + (val('financing') || '—'),
-        'Also open to leasing: ' + (val('lease_ok') || '—')
-      ];
-      var extra = val('message');
-      if (extra) { lines.push('', extra); }
-      lines.push('', attribution());
-      var row = {
-        name: name,
-        company: val('company'),
-        email: email,
-        phone: val('phone'),
-        interest: ('buy · owner-occupier · ' + budget + ' · ' + size).slice(0, 120),
-        message: lines.join('\n').slice(0, 5000),
-        source: location.pathname
+  /* /buy-warehouse-netherlands: owner-occupier acquisition brief. */
+  wireForm('buy-form', {
+    ok: 'Thank you — your acquisition brief was sent. We respond within one business day.',
+    missing: 'Please add your name, company, a valid email, the size you need and an indicative budget.',
+    read: function (val) {
+      var size = val('size'), budget = val('budget');
+      if (!size || !budget) return null;
+      return {
+        interest: 'buy · owner-occupier · ' + budget + ' · ' + size,
+        track: 'buy',
+        subject: 'Acquisition brief',
+        lines: [
+          'Requirement: Buy a warehouse (owner-occupier)',
+          'Size: ' + size,
+          'Budget: ' + budget,
+          'Region: ' + (val('region') || 'No preference'),
+          'Timing: ' + (val('timing') || '—'),
+          'Use: ' + (val('use') || '—'),
+          'Financing: ' + (val('financing') || '—'),
+          'Also open to leasing: ' + (val('lease_ok') || '—')
+        ]
       };
-      var btn = f.querySelector('button[type="submit"]');
-      var mailtoFallback = function () {
-        location.href = 'mailto:tex@staalre.com?subject=' +
-          encodeURIComponent('Acquisition brief — ' + (row.company || row.name)) +
-          '&body=' + encodeURIComponent(row.message);
+    }
+  });
+
+  /* /rent-out-warehouse-netherlands: owners, and tenants subletting surplus space. */
+  wireForm('let-form', {
+    ok: 'Thank you, your building details were sent. We respond within one business day.',
+    missing: 'Please add your name, company, a valid email, the space you want to rent out and who you are.',
+    read: function (val) {
+      var size = val('size'), role = val('role');
+      if (!size || !role) return null;
+      return {
+        interest: 'let · ' + (/tenant/i.test(role) ? 'sublet' : /owner/i.test(role) ? 'owner' : 'adviser') + ' · ' + size,
+        track: 'let',
+        subject: 'Letting enquiry',
+        lines: [
+          'Requirement: Rent out a warehouse',
+          'You are: ' + role,
+          'Space to let: ' + size,
+          'Available: ' + (val('availability') || '—'),
+          'Region: ' + (val('region') || '—'),
+          'Town / business park: ' + (val('town') || '—'),
+          'Current or target rent: ' + (val('rent') || '—')
+        ]
       };
-      if (configured) {
-        if (btn) btn.disabled = true;
-        insertRow('contact_requests', row)
-          .then(function () {
-            f.reset();
-            trackLead('buy');
-            setStatus(status, true, 'Thank you — your acquisition brief was sent. We respond within one business day.');
-          })
-          .catch(mailtoFallback)
-          .finally(function () { if (btn) btn.disabled = false; });
-      } else {
-        mailtoFallback();
-      }
-    });
-  }
+    }
+  });
+
+  /* /sell-warehouse-netherlands: vacant buildings go to owner-occupiers, let ones to investors. */
+  wireForm('sell-form', {
+    ok: 'Thank you, your building details were sent. We respond within one business day.',
+    missing: 'Please add your name, company, a valid email, the size of the building and whether it is let.',
+    read: function (val) {
+      var size = val('size'), occupancy = val('occupancy');
+      if (!size || !occupancy) return null;
+      return {
+        interest: 'sell · ' + (/partly/i.test(occupancy) ? 'partly let' : /^let/i.test(occupancy) ? 'let' : 'vacant') + ' · ' + size,
+        track: 'sell',
+        subject: 'Sale enquiry',
+        lines: [
+          'Requirement: Sell a warehouse',
+          'Building size: ' + size,
+          'Occupancy: ' + occupancy,
+          'Timing: ' + (val('timing') || '—'),
+          'Region: ' + (val('region') || '—'),
+          'Town / business park: ' + (val('town') || '—'),
+          'Price idea: ' + (val('price') || '—'),
+          'Sale and leaseback: ' + (val('leaseback') || '—')
+        ]
+      };
+    }
+  });
+
+  /* The general enquiry form (/contact, the homepage and the end of every other
+     page): the first question says which of the four services it is. */
+  var INTENTS = {
+    lease: ['Lease warehouse space', 'Warehouse requirement'],
+    buy: ['Buy a warehouse', 'Acquisition brief'],
+    let: ['Rent out a warehouse', 'Letting enquiry'],
+    sell: ['Sell a warehouse', 'Sale enquiry']
+  };
+  wireForm('enquiry-form', {
+    ok: 'Thank you, your enquiry was sent. We respond within one business day.',
+    missing: 'Please choose what we can help with and the size, and add your name, company and a valid email.',
+    read: function (val) {
+      var intent = val('intent'), size = val('size'), it = INTENTS[intent];
+      if (!it || !size) return null;
+      var owner = intent === 'let' || intent === 'sell';
+      return {
+        interest: intent + ' · enquiry · ' + size,
+        track: 'enquiry · ' + intent,
+        subject: it[1],
+        lines: [
+          'Requirement: ' + it[0],
+          (owner ? 'Building size: ' : 'Size: ') + size,
+          (owner ? 'Location: ' : 'Region: ') + (val('region') || (owner ? '—' : 'No preference')),
+          'Timing: ' + (val('timing') || '—')
+        ]
+      };
+    }
+  });
 })();
