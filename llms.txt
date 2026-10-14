@@ -1,13 +1,13 @@
 # Staal Real Estate
 
-> Boutique warehouse real estate agency based in Amsterdam, the Netherlands. Four services, from 500 m²: we help companies lease and buy warehouse space, and we help owners rent out and sell it. In every deal we act for one side only: we never represent both the owner and the tenant or buyer in the same transaction.
+> Boutique warehouse real estate agency based in Amsterdam, the Netherlands. Four services, from 500 m²: we help companies lease and buy warehouse space, and we help owners rent out and sell it. One advisor handles every step, is reachable seven days a week and usually replies within hours. We never represent both sides of the same transaction.
 
 Founder & advisor: Tex Staal · tex@staalre.com · +31 6 59 12 91 27
 Office: Speerstraat 7, 1076XM Amsterdam, Netherlands (working nationwide)
-One deal, one client: one side per transaction, never both.
+Promise: One advisor. Every step. Every day.
 
 ## Services
-- [Lease warehouse space](https://www.staalre.com/lease-warehouse-netherlands), tenant representation from 500 m² to XXL: full market search, shortlisting, viewings and negotiation of Dutch leases on the tenant's side. No lease, no fee: 10% of the first year's rent plus 15% of what we negotiate off the landlord's first offer, capped at 20% of one year's rent.
+- [Lease warehouse space](https://www.staalre.com/lease-warehouse-netherlands), tenant representation from 500 m² to XXL: full market search, shortlisting, viewings and negotiation of Dutch leases on the tenant's side. No lease, no fee; part of the fee depends on what we negotiate off the landlord's first offer.
 - [Buy a warehouse](https://www.staalre.com/buy-warehouse-netherlands), buyer representation for owner-occupiers from 500 m² to XXL: on- and off-market search, viewings, assessment, due-diligence coordination and price negotiation through to notarial transfer.
 - [Rent out a warehouse](https://www.staalre.com/rent-out-warehouse-netherlands), letting for owners and for tenants with surplus space, from 500 m²: rental value, marketing to Dutch and international tenants, viewings, tenant checks and lease negotiation on the owner's side. No tenant, no fee.
 - [Sell a warehouse](https://www.staalre.com/sell-warehouse-netherlands), sales for owner-occupiers and private owners, from 500 m²: price advice, sale to an owner-occupier or an investor, on or off the market, sale and leaseback, through to transfer at the notary. No sale, no fee.
@@ -46,5 +46,24 @@ One deal, one client: one side per transaction, never both.
 - [Lease or buy a distribution warehouse](https://www.staalre.com/insights/lease-or-buy-distribution): Lease for speed, flexibility and capital efficiency; buy for specialised fit-out, scarce locations, or long-horizon sites. Most institutional Dutch stock is leasable, not buyable.
 - [Getting set up to lease in the Netherlands](https://www.staalre.com/insights/getting-set-up-to-lease-netherlands): what a foreign company needs before it can sign, a Dutch legal entity (BV or registered branch), KvK registration, a Dutch business bank account, a VAT number, and the covenant or bank guarantee landlords require. Setup can run in parallel with the search.
 
+## Nederlandse versie (Dutch pages)
+The full site is also available in Dutch under https://www.staalre.com/nl, with the same services and the same promise ("Eén adviseur. Elke stap. Elke dag."). Dutch enquiries are answered in Dutch.
+- [Bedrijfshal huren](https://www.staalre.com/nl/bedrijfshal-huren): Bedrijfshal, magazijn of distributiecentrum huren vanaf 500 m²? Wij zoeken, bezichtigen en onderhandelen voor u. Geen huurcontract, geen kosten.
+- [Bedrijfshal of bedrijfspand kopen](https://www.staalre.com/nl/bedrijfshal-kopen): Een bedrijfshal of bedrijfspand kopen voor uw eigen bedrijf? Wij zoeken op en buiten de markt, begeleiden het onderzoek en onderhandelen de prijs voor u.
+- [Bedrijfspand verhuren](https://www.staalre.com/nl/bedrijfspand-verhuren): Uw bedrijfspand of bedrijfshal verhuren vanaf 500 m²? Wij vinden en toetsen de huurder en onderhandelen het huurcontract voor u. Geen huurder, geen kosten.
+- [Bedrijfspand verkopen](https://www.staalre.com/nl/bedrijfspand-verkopen): Uw bedrijfspand of bedrijfshal verkopen aan een gebruiker of belegger? Wij vinden de koper en onderhandelen voor u, vanaf 500 m². Geen verkoop, geen kosten.
+- [Locaties (logistieke regio’s)](https://www.staalre.com/nl/locaties): De logistieke regio’s van Nederland, van Rotterdam en Schiphol tot Venlo en Tilburg, en waar elke regio goed in is. Huren, kopen, verhuren of verkopen.
+- [Kennisbank](https://www.staalre.com/nl/kennisbank): Gidsen over bedrijfshallen voor bedrijven en eigenaren: huurprijzen per regio, huren, kopen, verhuren en verkopen, en wat u controleert voordat u tekent.
+- [Bedrijfspand of bedrijfshal verhuren: het stappenplan voor eigenaren (2026)](https://www.staalre.com/nl/kennisbank/bedrijfspand-verhuren-stappenplan): Een bedrijfshal of bedrijfspand verhuren in 2026: de juiste huurprijs, met of zonder btw, het ROZ-huurcontract, de huurderstoets en het energielabel.
+- [Bedrijfspand verkopen: proces, kosten en belasting (2026)](https://www.staalre.com/nl/kennisbank/bedrijfspand-verkopen-belasting-kosten): Een bedrijfspand verkopen in 2026: eigen gebruiker of belegger, de prijs op basis van rendement, sale-and-leaseback, en de kosten en belasting voor de verkoper.
+- [Het ROZ-huurcontract voor bedrijfsruimte, artikel voor artikel](https://www.staalre.com/nl/kennisbank/roz-huurovereenkomst-bedrijfsruimte): Looptijd en verlenging, indexatie, btw, servicekosten, zekerheid en oplevering: het ROZ-model voor bedrijfsruimte (230a) uitgelegd voor huurder en verhuurder.
+- [Huurprijs bedrijfshal per m² in 2026: alle regio’s op een rij](https://www.staalre.com/nl/kennisbank/huurprijs-bedrijfshal-per-m2): Wat kost een bedrijfshal huren per m² in 2026? Indicatieve huurprijzen per regio, van Rotterdam en Schiphol tot Venlo en Tilburg, en wat de prijs bepaalt.
+- [Kosten bedrijfspand kopen: overdrachtsbelasting, btw en bijkomende kosten (2026)](https://www.staalre.com/nl/kennisbank/kosten-bedrijfspand-kopen): Wat kost een bedrijfspand kopen bovenop de koopprijs? 10,4% overdrachtsbelasting, btw bij nieuwbouw, notaris, due diligence en de kosten van eigendom in 2026.
+- [Due diligence bij een bedrijfspand: de checklist voor kopers](https://www.staalre.com/nl/kennisbank/due-diligence-bedrijfspand): Wat controleert u voordat u een bedrijfspand of bedrijfshal koopt? Eigendom, bestemming, bodem, asbest, bouwkundige staat, netaansluiting en huurcontracten.
+- [Tijdelijke bedrijfsruimte of opslagruimte huren: de opties op een rij (2026)](https://www.staalre.com/nl/kennisbank/tijdelijke-bedrijfsruimte-huren): Tijdelijk bedrijfsruimte of opslag nodig? Kortlopende huur, onderhuur, flexibele opslag bij een 3PL of self-storage: wat elke optie kost en wanneer die past.
+- [Koelcel, vriescel of koelhuis huren: kosten, locaties en aandachtspunten (2026)](https://www.staalre.com/nl/kennisbank/koelcel-vriescel-huren): Een koelcel, vriescel of koelhuis huren in Nederland? Wat gekoelde en bevroren ruimte kost, waar het aanbod zit en wat u controleert voordat u tekent.
+- [Bedrijfspand huren of kopen: wat past bij uw bedrijf?](https://www.staalre.com/nl/kennisbank/bedrijfspand-huren-of-kopen): Een bedrijfshal huren of kopen? Wanneer huren de betere keuze is, wanneer eigendom loont, en hoe u de afweging maakt op totale kosten en flexibiliteit.
+- [Rotterdam, Venlo of Tilburg: welke logistieke regio past bij u?](https://www.staalre.com/nl/kennisbank/logistieke-hotspots-nederland): De logistieke hotspots van Nederland vergeleken op ligging, personeel, verbindingen en aanbod, en hoe u de juiste regio kiest voor uw bedrijfshal.
+
 ## Contact
-Send your enquiry (what you need or what you own, approximate size in m², location, timing) via https://www.staalre.com/contact or tex@staalre.com. We respond within one business day.
+Send your enquiry (what you need or what you own, approximate size in m², location, timing) via https://www.staalre.com/contact or tex@staalre.com. We usually reply within a few hours, always within one business day, and are reachable 7 days a week.

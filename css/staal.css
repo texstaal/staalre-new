@@ -588,3 +588,8 @@ a.size-card .sz,a.size-card .szl{display:block}
 .burger-menu_nav__dAhwA{gap:2rem}
 .burger-menu_group-label{font-weight:600;font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8c8c;margin-bottom:-1.2rem}
 .burger-menu_group-label:not(:first-child){margin-top:1.2rem}
+/* EN | NL language switch: header (desktop), phone menu and footer (footer uses the social-link style) */
+.header_actions__Sv09J .lang-switch{margin-right:2.8rem;font-weight:500;letter-spacing:.04em}
+.burger-menu_actions__In3qE .lang-switch{display:block;margin-top:2.4rem;text-align:center;font-weight:600;font-size:1.6rem;color:#5a5c5c;text-decoration:underline;text-underline-offset:.3em}
+.header_actions__Sv09J .button_button-round-text__IEwW5,.burger-menu_actions__In3qE .button_button-round-text__IEwW5{white-space:nowrap}
+.header_actions__Sv09J [data-enquiry-cta],.header_actions__Sv09J .lang-switch{flex-shrink:0}

@@ -74,14 +74,22 @@
     banner.className = 'cookie-banner';
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-live', 'polite');
-    banner.setAttribute('aria-label', 'Cookie consent');
-    banner.innerHTML =
-      '<p class="cookie-banner-text">We use cookies to understand how visitors find us and to measure our marketing. ' +
-      'Optional cookies are only set if you accept. <a href="/cookie-policy">Cookie policy</a></p>' +
-      '<div class="cookie-banner-actions">' +
-      '<button type="button" class="cookie-btn" data-choice="denied">Reject all</button>' +
-      '<button type="button" class="cookie-btn" data-choice="granted">Accept all</button>' +
-      '</div>';
+    // Dutch pages (<html lang="nl">) get the Dutch banner
+    var nl = document.documentElement.lang === 'nl';
+    banner.setAttribute('aria-label', nl ? 'Toestemming voor cookies' : 'Cookie consent');
+    banner.innerHTML = nl
+      ? '<p class="cookie-banner-text">We gebruiken cookies om te zien hoe bezoekers ons vinden en om onze marketing te meten. ' +
+        'Optionele cookies plaatsen we alleen als u ze accepteert. <a href="/nl/cookiebeleid">Cookiebeleid</a></p>' +
+        '<div class="cookie-banner-actions">' +
+        '<button type="button" class="cookie-btn" data-choice="denied">Alles weigeren</button>' +
+        '<button type="button" class="cookie-btn" data-choice="granted">Alles accepteren</button>' +
+        '</div>'
+      : '<p class="cookie-banner-text">We use cookies to understand how visitors find us and to measure our marketing. ' +
+        'Optional cookies are only set if you accept. <a href="/cookie-policy">Cookie policy</a></p>' +
+        '<div class="cookie-banner-actions">' +
+        '<button type="button" class="cookie-btn" data-choice="denied">Reject all</button>' +
+        '<button type="button" class="cookie-btn" data-choice="granted">Accept all</button>' +
+        '</div>';
     banner.addEventListener('click', function (e) {
       var btn = e.target.closest('[data-choice]');
       if (!btn) return;

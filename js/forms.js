@@ -10,6 +10,10 @@
 
   var configured = SUPABASE_URL && SUPABASE_ANON_KEY;
 
+  // Dutch pages (<html lang="nl">) get Dutch messages, and the enquiry says so for the CRM
+  var NL = document.documentElement.lang === 'nl';
+  var t = function (en, nl) { return NL ? nl : en; };
+
   /* ---------- spam protection ----------
      Injected at runtime (the forms only submit via JS anyway). A hidden
      "website" field is a honeypot: real users never see it, bots fill it.
@@ -104,8 +108,8 @@
       var done = function () {
         if (input) {
           input.value = '';
-          input.placeholder = 'Thanks — you’re on the list.';
-          setTimeout(function () { input.placeholder = 'Enter your email'; }, 4000);
+          input.placeholder = t('Thanks — you’re on the list.', 'Bedankt, u staat op de lijst.');
+          setTimeout(function () { input.placeholder = t('Enter your email', 'Uw e-mailadres'); }, 4000);
         }
       };
       if (configured) {
@@ -153,6 +157,7 @@
       var lines = lead.lines.slice();
       var extra = val('message');
       if (extra) { lines.push('', extra); }
+      if (NL) lines.push('', 'Language: Dutch (reply in Dutch)');
       lines.push('', attribution());
       var row = {
         name: name,
@@ -188,8 +193,8 @@
   /* /lease-warehouse-netherlands: the two qualifiers (NL registration + Dutch
      bank account) tag `interest` so established occupiers are easy to triage. */
   wireForm('lease-form', {
-    ok: 'Thank you — your requirement was sent. We respond within one business day.',
-    missing: 'Please add your name, company, a valid email, the size you need, and whether you’re registered in the Netherlands.',
+    ok: t('Thank you, your requirement was sent. We usually reply within a few hours.', 'Bedankt, uw aanvraag is verstuurd. We reageren meestal binnen een paar uur.'),
+    missing: t('Please add your name, company, a valid email, the size you need, and whether you’re registered in the Netherlands.', 'Vul uw naam, bedrijf, een geldig e-mailadres en de gewenste oppervlakte in, en geef aan of uw bedrijf in Nederland is ingeschreven.'),
     read: function (val) {
       var size = val('size'), nl = val('nl_registered');
       if (!size || !nl) return null;
@@ -213,8 +218,8 @@
 
   /* /buy-warehouse-netherlands: owner-occupier acquisition brief. */
   wireForm('buy-form', {
-    ok: 'Thank you — your acquisition brief was sent. We respond within one business day.',
-    missing: 'Please add your name, company, a valid email, the size you need and an indicative budget.',
+    ok: t('Thank you, your acquisition brief was sent. We usually reply within a few hours.', 'Bedankt, uw zoekopdracht is verstuurd. We reageren meestal binnen een paar uur.'),
+    missing: t('Please add your name, company, a valid email, the size you need and an indicative budget.', 'Vul uw naam, bedrijf, een geldig e-mailadres, de gewenste oppervlakte en een indicatief budget in.'),
     read: function (val) {
       var size = val('size'), budget = val('budget');
       if (!size || !budget) return null;
@@ -238,8 +243,8 @@
 
   /* /rent-out-warehouse-netherlands: owners, and tenants subletting surplus space. */
   wireForm('let-form', {
-    ok: 'Thank you, your building details were sent. We respond within one business day.',
-    missing: 'Please add your name, company, a valid email, the space you want to rent out and who you are.',
+    ok: t('Thank you, your building details were sent. We usually reply within a few hours.', 'Bedankt, de gegevens van uw pand zijn verstuurd. We reageren meestal binnen een paar uur.'),
+    missing: t('Please add your name, company, a valid email, the space you want to rent out and who you are.', 'Vul uw naam, bedrijf, een geldig e-mailadres, de oppervlakte die u wilt verhuren en uw rol in.'),
     read: function (val) {
       var size = val('size'), role = val('role');
       if (!size || !role) return null;
@@ -262,8 +267,8 @@
 
   /* /sell-warehouse-netherlands: vacant buildings go to owner-occupiers, let ones to investors. */
   wireForm('sell-form', {
-    ok: 'Thank you, your building details were sent. We respond within one business day.',
-    missing: 'Please add your name, company, a valid email, the size of the building and whether it is let.',
+    ok: t('Thank you, your building details were sent. We usually reply within a few hours.', 'Bedankt, de gegevens van uw pand zijn verstuurd. We reageren meestal binnen een paar uur.'),
+    missing: t('Please add your name, company, a valid email, the size of the building and whether it is let.', 'Vul uw naam, bedrijf, een geldig e-mailadres, de oppervlakte van het pand en de verhuurstatus in.'),
     read: function (val) {
       var size = val('size'), occupancy = val('occupancy');
       if (!size || !occupancy) return null;
@@ -294,8 +299,8 @@
     sell: ['Sell a warehouse', 'Sale enquiry']
   };
   wireForm('enquiry-form', {
-    ok: 'Thank you, your enquiry was sent. We respond within one business day.',
-    missing: 'Please choose what we can help with and the size, and add your name, company and a valid email.',
+    ok: t('Thank you, your enquiry was sent. We usually reply within a few hours.', 'Bedankt, uw aanvraag is verstuurd. We reageren meestal binnen een paar uur.'),
+    missing: t('Please choose what we can help with and the size, and add your name, company and a valid email.', 'Kies waarmee we u kunnen helpen en de oppervlakte, en vul uw naam, bedrijf en een geldig e-mailadres in.'),
     read: function (val) {
       var intent = val('intent'), size = val('size'), it = INTENTS[intent];
       if (!it || !size) return null;
