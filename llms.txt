@@ -3,6 +3,7 @@
 > Boutique warehouse real estate agency based in Amsterdam, the Netherlands. Four services, from 500 m²: we help companies lease and buy warehouse space, and we help owners rent out and sell it. One advisor handles every step, is reachable seven days a week and usually replies within hours. We never represent both sides of the same transaction.
 
 Founder & advisor: Tex Staal · tex@staalre.com · +31 6 59 12 91 27
+Expertise: years in Dutch warehouse real estate, specialising in acquiring and leasing small hubs around the Netherlands.
 Office: Speerstraat 7, 1076XM Amsterdam, Netherlands (working nationwide)
 Promise: One advisor. Every step. Every day.
 
@@ -11,6 +12,11 @@ Promise: One advisor. Every step. Every day.
 - [Buy a warehouse](https://www.staalre.com/buy-warehouse-netherlands), buyer representation for owner-occupiers from 500 m² to XXL: on- and off-market search, viewings, assessment, due-diligence coordination and price negotiation through to notarial transfer.
 - [Rent out a warehouse](https://www.staalre.com/rent-out-warehouse-netherlands), letting for owners and for tenants with surplus space, from 500 m²: rental value, marketing to Dutch and international tenants, viewings, tenant checks and lease negotiation on the owner's side. No tenant, no fee.
 - [Sell a warehouse](https://www.staalre.com/sell-warehouse-netherlands), sales for owner-occupiers and private owners, from 500 m²: price advice, sale to an owner-occupier or an investor, on or off the market, sale and leaseback, through to transfer at the notary. No sale, no fee.
+
+## Specialist pages (lease or buy)
+- [Cold storage space](https://www.staalre.com/cold-storage-space-netherlands): chilled and frozen warehouse space to lease or buy from 500 m². What we check: refrigerant (EU F-gas Regulation 2024/573), ammonia and PGS 13, freezer floor heating, panels and sprinklers, grid connection, docks and ante-room, who owns the plant and who pays when the cooling fails. Pallet places are a 3PL service, not ours.
+- [Small warehouses, 500–1,500 m²](https://www.staalre.com/small-warehouse-for-rent-netherlands): small warehouses and business units with office; the founder’s specialism (acquiring and leasing small hubs). What we negotiate: all-in cost per m², term and break option, indexation cap, service charges, zoning, reinstatement. Nothing under 500 m².
+- [Industrial space](https://www.staalre.com/industrial-space-netherlands): light-industrial units, production halls and workshops to lease or buy from 500 m². Checks: zoning in the omgevingsplan, grid connection (more than 15,000 requests in the large-consumer queue at regional grid operators at the end of 2025), floor load, cranes, permits, reinstatement. Not heavy industry.
 
 ## Dutch warehouse hubs we cover
 - Rotterdam & the port corridor, container/deep-sea flows, A15 corridor; premium rents, tight land.
@@ -31,6 +37,7 @@ Promise: One advisor. Every step. Every day.
 - [Roermond–Maastricht](https://www.staalre.com/locations/roermond-maastricht): tri-border southern gateway into Germany and Belgium.
 - [Utrecht–Tiel–Geldermalsen](https://www.staalre.com/locations/utrecht-tiel-geldermalsen): central A2 corridor; nationwide next-day distribution and e-commerce fulfilment.
 - [Almere–Lelystad](https://www.staalre.com/locations/almere-lelystad): sustainable, scalable Flevoland fulfilment near Amsterdam; Flevokust inland port.
+- [Amsterdam](https://www.staalre.com/locations/amsterdam): our home market. Westpoort and the port, Sloterdijk, Noord, Zaandam and the south-east; zero-emission zone inside the S100 ring since 1 Jan 2025 (A10 intended in 2028); Haven-Stad (up to 70,000 homes by 2050) on business parks inside the A10; most land in municipal or port leasehold (erfpacht).
 
 ## Insights (full articles)
 - [How to rent out a warehouse in the Netherlands (2026)](https://www.staalre.com/insights/how-to-rent-out-a-warehouse-netherlands): an owner's guide in six steps: realistic rent (Dutch logistics vacancy 6.8% in Q1 2026 per Savills), lease terms on the ROZ model (5+5 years common, bank guarantee of about three months), VAT-taxed lease only if the tenant uses the building at least 90% for VAT-taxed activities, energy label rules, tenant checks, subletting and costs.
@@ -50,9 +57,13 @@ Promise: One advisor. Every step. Every day.
 The full site is also available in Dutch under https://www.staalre.com/nl, with the same services and the same promise ("Eén adviseur. Elke stap. Elke dag."). Dutch enquiries are answered in Dutch.
 - [Bedrijfshal huren](https://www.staalre.com/nl/bedrijfshal-huren): Bedrijfshal, magazijn of distributiecentrum huren vanaf 500 m²? Wij zoeken, bezichtigen en onderhandelen voor u. Geen huurcontract, geen kosten.
 - [Bedrijfshal of bedrijfspand kopen](https://www.staalre.com/nl/bedrijfshal-kopen): Een bedrijfshal of bedrijfspand kopen voor uw eigen bedrijf? Wij zoeken op en buiten de markt, begeleiden het onderzoek en onderhandelen de prijs voor u.
+- [Koelhuis of vrieshal huren of kopen](https://www.staalre.com/nl/koelhuis-huren): gekoelde en bevroren bedrijfsruimte vanaf 500 m², met controle van koudemiddel, vloer, panelen, netaansluiting en wie de installatie onderhoudt.
+- [Kleine bedrijfshal huren](https://www.staalre.com/nl/kleine-bedrijfshal-huren): kleine bedrijfshallen en bedrijfsruimte met kantoor, 500 tot 1.500 m²; ons specialisme.
+- [Productieruimte huren of kopen](https://www.staalre.com/nl/productieruimte-huren): lichte industrie, productiehallen en werkplaatsen vanaf 500 m²; bestemming, stroom en vloerbelasting eerst getoetst.
 - [Bedrijfspand verhuren](https://www.staalre.com/nl/bedrijfspand-verhuren): Uw bedrijfspand of bedrijfshal verhuren vanaf 500 m²? Wij vinden en toetsen de huurder en onderhandelen het huurcontract voor u. Geen huurder, geen kosten.
 - [Bedrijfspand verkopen](https://www.staalre.com/nl/bedrijfspand-verkopen): Uw bedrijfspand of bedrijfshal verkopen aan een gebruiker of belegger? Wij vinden de koper en onderhandelen voor u, vanaf 500 m². Geen verkoop, geen kosten.
 - [Locaties (logistieke regio’s)](https://www.staalre.com/nl/locaties): De logistieke regio’s van Nederland, van Rotterdam en Schiphol tot Venlo en Tilburg, en waar elke regio goed in is. Huren, kopen, verhuren of verkopen.
+- [Bedrijfsruimte in Amsterdam](https://www.staalre.com/nl/locaties/amsterdam): onze thuismarkt, van Westpoort en de haven tot Zuidoost; zero-emissiezone, Haven-Stad en erfpacht.
 - [Kennisbank](https://www.staalre.com/nl/kennisbank): Gidsen over bedrijfshallen voor bedrijven en eigenaren: huurprijzen per regio, huren, kopen, verhuren en verkopen, en wat u controleert voordat u tekent.
 - [Bedrijfspand of bedrijfshal verhuren: het stappenplan voor eigenaren (2026)](https://www.staalre.com/nl/kennisbank/bedrijfspand-verhuren-stappenplan): Een bedrijfshal of bedrijfspand verhuren in 2026: de juiste huurprijs, met of zonder btw, het ROZ-huurcontract, de huurderstoets en het energielabel.
 - [Bedrijfspand verkopen: proces, kosten en belasting (2026)](https://www.staalre.com/nl/kennisbank/bedrijfspand-verkopen-belasting-kosten): Een bedrijfspand verkopen in 2026: eigen gebruiker of belegger, de prijs op basis van rendement, sale-and-leaseback, en de kosten en belasting voor de verkoper.
