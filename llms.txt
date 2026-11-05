@@ -29,7 +29,7 @@ Promise: One advisor. Every step. Every day.
 - [Where we work, Dutch logistics hubs](https://www.staalre.com/locations): index of the main hubs, with what each is best for.
 - [Rotterdam](https://www.staalre.com/locations/rotterdam): Europe's largest seaport (435.8M tonnes, 2024); deep-sea containers, A15 corridor; highest rents, tightest land.
 - [Schiphol / Amsterdam](https://www.staalre.com/locations/schiphol-amsterdam): air-cargo gateway (1.5M tonnes, 2024); pharma, perishables, express e-commerce; smallest, priciest units.
-- [Venlo](https://www.staalre.com/locations/venlo): ranked Europe's most desirable logistics location (Prologis); tri-modal, German-border, 3PL/fashion cluster.
+- [Venlo](https://www.staalre.com/locations/venlo): ranked first in Prologis's European location studies (2013, 2016, 2017); tri-modal, German-border, 3PL/fashion cluster.
 - [Tilburg–Waalwijk](https://www.staalre.com/locations/tilburg-waalwijk): the XXL e-commerce fulfilment cluster of central Brabant; central to the Dutch population.
 - [Breda–Moerdijk](https://www.staalre.com/locations/breda-moerdijk): on the Rotterdam–Antwerp axis; Port of Moerdijk sea+inland, barge and rail.
 - [Eindhoven](https://www.staalre.com/locations/eindhoven): Brainport high-tech supply chains; strongest Dutch logistics rental growth since 2017.

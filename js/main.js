@@ -213,7 +213,7 @@
     // sub-text and button fade + slide + un-blur in a gentle stagger.
     hero.style.visibility = 'visible';
     if (!reduceMotion) {
-      var titleH1 = heroRefs.title ? heroRefs.title.querySelector('h1') : null;
+      var titleH1 = heroRefs.title ? heroRefs.title.querySelector('.hero-slogan') : null;
       if (heroRefs.title) heroRefs.title.style.overflow = 'hidden';
       if (titleH1) {
         titleH1.style.transform = 'translateY(108%)';

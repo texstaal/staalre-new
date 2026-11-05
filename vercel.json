@@ -7,44 +7,117 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "staalre-new.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "staalre-new.vercel.app"
+        }
+      ],
       "destination": "https://www.staalre.com/",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "staalre-new.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "staalre-new.vercel.app"
+        }
+      ],
       "destination": "https://www.staalre.com/:path*",
       "permanent": true
     },
-    { "source": "/process", "destination": "/services", "permanent": true },
-    { "source": "/sectors", "destination": "/lease-warehouse-netherlands", "permanent": true },
-    { "source": "/partners", "destination": "/about", "permanent": true }
+    {
+      "source": "/process",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/sectors",
+      "destination": "/lease-warehouse-netherlands",
+      "permanent": true
+    },
+    {
+      "source": "/partners",
+      "destination": "/about",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/fonts/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/images/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
     },
     {
-      "source": "/(.*)",
+      "source": "/css/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.nl; font-src 'self'; media-src 'self'; connect-src 'self' https://*.supabase.co https://vitals.vercel-insights.com https://www.googletagmanager.com https://www.google.com https://www.google.nl https://www.googleadservices.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com; frame-src 'self' https://td.doubleclick.net https://bid.g.doubleclick.net https://www.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "staalre-new.vercel.app" }],
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.nl; font-src 'self' data:; media-src 'self'; connect-src 'self' https://*.supabase.co https://vitals.vercel-insights.com https://www.googletagmanager.com https://www.google.com https://www.google.nl https://www.googleadservices.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com; frame-src 'self' https://td.doubleclick.net https://bid.g.doubleclick.net https://www.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "staalre-new.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
       ]
     }
   ]

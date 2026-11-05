@@ -1,3 +1,18 @@
 # local-only tooling, not part of the public site
 tools/
 marketing/
+
+# internal documents, build scripts and source files, not part of the public site
+/GEO-ANALYSIS.md
+/Staal-SEO-Audit.pdf
+/supabase-schema.sql
+/assemble.js
+/pages.js
+/gen-*.js
+/gen-*.py
+/optimize-images.js
+/nl-map.json
+/staal-logo.json
+/InstrumentSans-var.ttf
+/SpaceGrotesk-var.ttf
+/saved/

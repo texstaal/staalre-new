@@ -70,6 +70,7 @@
       } else {
         out.push('Came from: direct / unknown');
       }
+      out.push('Enquiry page: ' + location.pathname);
       var q = new URLSearchParams(location.search), utm = [];
       q.forEach(function (v, k) { if (/^utm_/.test(k)) utm.push(k.slice(4) + '=' + v); });
       if (utm.length) out.push('Campaign: ' + utm.join(', '));

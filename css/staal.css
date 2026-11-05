@@ -593,3 +593,10 @@ a.size-card .sz,a.size-card .szl{display:block}
 .burger-menu_actions__In3qE .lang-switch{display:block;margin-top:2.4rem;text-align:center;font-weight:600;font-size:1.6rem;color:#5a5c5c;text-decoration:underline;text-underline-offset:.3em}
 .header_actions__Sv09J .button_button-round-text__IEwW5,.burger-menu_actions__In3qE .button_button-round-text__IEwW5{white-space:nowrap}
 .header_actions__Sv09J [data-enquiry-cta],.header_actions__Sv09J .lang-switch{flex-shrink:0}
+/* home hero: slogan keeps the big display style, the H1 says what the site offers */
+.hero-slogan{font-weight:700;font-size:5.4rem;line-height:100%;letter-spacing:-.02em;text-align:center}
+@media(min-width:768px){.hero-slogan{font-size:14rem}}
+.hero-h1{font:inherit;font-weight:700;margin:0 0 .6rem;color:#151717}
+.footer-ids{opacity:.75}
+.home-specialist{margin:2.4rem 0 0;font-weight:500;font-size:1.6rem;line-height:1.7;color:#3c3e3e}
+.home-specialist a{color:#1F4257;text-decoration:underline;white-space:nowrap}
