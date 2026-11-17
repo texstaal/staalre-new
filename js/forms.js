@@ -212,7 +212,7 @@
           'Use: ' + (val('use') || '—'),
           'Registered in NL (KvK): ' + nl,
           'Dutch bank account: ' + (val('dutch_bank') || '—')
-        ]
+        ].concat(val('home_country') ? ['Company based in: ' + val('home_country')] : [])
       };
     }
   });
