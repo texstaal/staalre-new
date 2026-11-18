@@ -207,7 +207,6 @@
         lines: [
           'Requirement: Lease warehouse space',
           'Size: ' + size,
-          'Region: ' + (val('region') || 'No preference'),
           'Timing: ' + (val('timing') || '—'),
           'Use: ' + (val('use') || '—'),
           'Registered in NL (KvK): ' + nl,
@@ -232,7 +231,6 @@
           'Requirement: Buy a warehouse (owner-occupier)',
           'Size: ' + size,
           'Budget: ' + budget,
-          'Region: ' + (val('region') || 'No preference'),
           'Timing: ' + (val('timing') || '—'),
           'Use: ' + (val('use') || '—'),
           'Financing: ' + (val('financing') || '—'),
@@ -258,7 +256,6 @@
           'You are: ' + role,
           'Space to let: ' + size,
           'Available: ' + (val('availability') || '—'),
-          'Region: ' + (val('region') || '—'),
           'Town / business park: ' + (val('town') || '—'),
           'Current or target rent: ' + (val('rent') || '—')
         ]
@@ -282,7 +279,6 @@
           'Building size: ' + size,
           'Occupancy: ' + occupancy,
           'Timing: ' + (val('timing') || '—'),
-          'Region: ' + (val('region') || '—'),
           'Town / business park: ' + (val('town') || '—'),
           'Price idea: ' + (val('price') || '—'),
           'Sale and leaseback: ' + (val('leaseback') || '—')
@@ -313,7 +309,6 @@
         lines: [
           'Requirement: ' + it[0],
           (owner ? 'Building size: ' : 'Size: ') + size,
-          (owner ? 'Location: ' : 'Region: ') + (val('region') || (owner ? '—' : 'No preference')),
           'Timing: ' + (val('timing') || '—')
         ]
       };

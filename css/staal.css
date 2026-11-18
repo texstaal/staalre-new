@@ -514,6 +514,16 @@ html.-preloading,html.-preloading body{overflow:hidden!important;height:100%}
 .lp-done h3{font-weight:700;font-size:2.4rem;margin:0 0 1.2rem}
 .lp-done p{font-size:1.7rem;line-height:1.55;color:#3c3e3e;margin:0 0 2rem}
 .lp-done:focus{outline:none}
+/* one-question-at-a-time flow */
+.lp-track{min-height:9rem}
+.lp-slide[hidden]{display:none}
+.lp-slide{animation:lp-slide-in .32s ease both}
+.lp-slide>.form-field{max-width:46rem}
+.lp-slide .lp-fields>.form-field{max-width:none}
+@keyframes lp-slide-in{from{opacity:0;transform:translateY(.8rem)}to{opacity:1;transform:none}}
+.lp-nav .lp-actions{margin-top:2.6rem}
+.lp-nav .button_button-round__TFjlU[hidden],.lp-nav .lp-back[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){.lp-slide{animation:none}}
 .lp-aside{padding:0 .4rem}
 .lp-person{display:flex;align-items:center;gap:1.6rem;margin-bottom:2.8rem}
 .lp-person img{width:7.2rem;height:7.2rem;border-radius:50%;object-fit:cover;object-position:50% 18%;flex:none}

@@ -1,11 +1,17 @@
-/* Two-step forms (.lp-card > form.lp-form): the lease, buy, rent-out and sell landing
-   pages (#requirement) and the general enquiry form at the end of the other pages
-   (#enquiry). Step 1 asks what is needed (tap buttons), step 2 who to reply to. The form
-   keeps its id and field names, so js/forms.js submits it as before; this file handles
-   the steps, the thank-you panel, the owner wording of the general form, the header's
-   "Send enquiry" button and the mobile quick-contact bar. */
+/* One-question-at-a-time forms (.lp-card > form.lp-form): the lease, buy, rent-out and
+   sell landing pages (#requirement) and the general enquiry form at the end of the other
+   pages (#enquiry). Each required answer is shown on its own screen to cut the friction of
+   a long form; tapping a choice chip moves straight to the next question, free-text fields
+   advance with Next or Enter, and the optional extras sit behind one final skippable step.
+   The form keeps its id and field names, so js/forms.js submits it exactly as before; this
+   file only re-presents the existing fields as a step-by-step flow, keeps the thank-you
+   panel, the owner wording of the general form, the header "Send enquiry" button and the
+   mobile quick-contact bar. */
 (function () {
   'use strict';
+
+  var NL = document.documentElement.lang === 'nl';
+  var t = function (en, nl) { return NL ? nl : en; };
 
   // main.js shows the header on any upward scroll; once a step is lined up, tuck it
   // away again so it doesn't cover the step (it returns when the visitor scrolls up)
@@ -16,59 +22,219 @@
     }, 700);
   }
 
-  document.querySelectorAll('.lp-card').forEach(function (card) {
+  var ADVANCE_ICON = '<span class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061"></path></svg></span>';
+  function roundButton(type, text, extraClass) {
+    var b = document.createElement('button');
+    b.type = type;
+    b.className = 'button_button-round__TFjlU button_color-primary__JJ7Hh' + (extraClass ? ' ' + extraClass : '');
+    b.innerHTML = '<div class="button_content__6Zh3n"><div class="button_button-round-text__IEwW5"><span data-text="' + text + '">' + text + '</span></div>' + ADVANCE_ICON + '</div>';
+    return b;
+  }
+
+  function wizard(card) {
     var form = card.querySelector('form.lp-form');
     if (!form) return;
-    var steps = form.querySelectorAll('.lp-step');
+
     var label = card.querySelector('.lp-step-label');
     var bar = card.querySelector('.lp-progress');
-    var err = card.querySelector('.lp-error');
-    var errText = err.textContent;
-    var required = (form.getAttribute('data-step1-required') || '').split(',').filter(Boolean);
+    var errText = t('Please answer this to continue.', 'Beantwoord dit om verder te gaan.');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var status = form.querySelector('.form-status');
+    var formNote = form.querySelector('.form-note');
+    var step1Required = (form.getAttribute('data-step1-required') || '').split(',').filter(Boolean);
 
-    function show(n) {
-      steps.forEach(function (s) { s.hidden = s.getAttribute('data-step') !== String(n); });
-      label.textContent = label.getAttribute('data-step' + n);
-      bar.classList.toggle('-step2', n === 2);
-      if (n === 2 && window.innerWidth >= 768) { // on phones focus would open the keyboard over the step
-        var first = form.querySelector('.lp-step[data-step="2"] input:not([type=radio])');
-        if (first) first.focus({ preventScroll: true });
+    // ---- collect the form's questions in document order ----
+    // A question is either a choice group (.lp-chips with its .lp-q label) or a single
+    // field (.form-field). Required ones each get their own screen; the optional ones are
+    // gathered behind one final "add detail" screen.
+    var units = [];
+    var anchors = form.querySelectorAll('.lp-chips, .form-field');
+    anchors.forEach(function (el) {
+      if (el.classList.contains('lp-chips')) {
+        var lbl = el.previousElementSibling;
+        if (lbl && !lbl.classList.contains('lp-q')) lbl = null;
+        var radios = el.querySelectorAll('input[type="radio"]');
+        if (!radios.length) return;
+        var name = radios[0].name;
+        var req = step1Required.indexOf(name) > -1 ||
+          Array.prototype.some.call(radios, function (r) { return r.required; });
+        units.push({ kind: 'chips', name: name, label: lbl, node: el, required: req, radios: radios });
+      } else { // .form-field
+        var ctrl = el.querySelector('input, select, textarea');
+        if (!ctrl || ctrl.name === 'region') return; // region question removed
+        units.push({ kind: 'field', name: ctrl.name, node: el, control: ctrl, required: ctrl.required });
       }
-      fit();
+    });
+    if (!units.length) return;
+
+    var requiredUnits = units.filter(function (u) { return u.required; });
+    var optionalUnits = units.filter(function (u) { return !u.required; });
+
+    // ---- build the step track ----
+    var track = document.createElement('div');
+    track.className = 'lp-track';
+    var slides = [];
+
+    function makeSlide() {
+      var s = document.createElement('div');
+      s.className = 'lp-slide';
+      s.hidden = true;
+      track.appendChild(s);
+      slides.push(s);
+      return s;
     }
-    // Phones: line the card up with the top of the screen so a whole step is in view
+
+    requiredUnits.forEach(function (u) {
+      var s = makeSlide();
+      if (u.label) s.appendChild(u.label);
+      s.appendChild(u.node);
+      u.slide = s;
+    });
+
+    var optionalSlide = null;
+    if (optionalUnits.length) {
+      optionalSlide = makeSlide();
+      var h = document.createElement('p');
+      h.className = 'lp-q';
+      h.textContent = t('Anything else? (optional)', 'Nog iets toe te voegen? (optioneel)');
+      optionalSlide.appendChild(h);
+      var wrap = document.createElement('div');
+      wrap.className = 'lp-fields';
+      optionalUnits.forEach(function (u) {
+        if (u.kind === 'chips' && u.label) wrap.appendChild(u.label);
+        wrap.appendChild(u.node);
+      });
+      optionalSlide.appendChild(wrap);
+    }
+
+    // Put the track where the first fieldset was, then drop the now-empty scaffolding.
+    var firstStep = form.querySelector('.lp-step');
+    form.insertBefore(track, firstStep);
+    form.querySelectorAll('.lp-step').forEach(function (fs) { fs.remove(); });
+
+    // ---- navigation footer (shared across slides) ----
+    var nav = document.createElement('div');
+    nav.className = 'lp-nav';
+    var err = document.createElement('p');
+    err.className = 'lp-error';
+    err.setAttribute('role', 'alert');
+    err.hidden = true;
+    var actions = document.createElement('div');
+    actions.className = 'lp-actions';
+    var backBtn = document.createElement('button');
+    backBtn.type = 'button';
+    backBtn.className = 'lp-back';
+    backBtn.textContent = t('← Back', '← Terug');
+    var nextBtn = roundButton('button', t('Next', 'Volgende'));
+    actions.appendChild(submitBtn);   // real submit (moved out of the old step 2)
+    actions.appendChild(nextBtn);
+    actions.appendChild(backBtn);
+    nav.appendChild(err);
+    if (status) nav.appendChild(status);
+    nav.appendChild(actions);
+    if (formNote) nav.appendChild(formNote);
+    form.appendChild(nav);
+
+    var N = slides.length;
+    var at = 0;
+
+    function isChipsSlide(i) {
+      return i < requiredUnits.length && requiredUnits[i].kind === 'chips';
+    }
+    function isLast(i) { return i === N - 1; }
+
+    function progress() {
+      if (label) label.textContent = t('Question ', 'Vraag ') + (at + 1) + t(' of ', ' van ') + N;
+      if (bar) {
+        bar.classList.toggle('-step2', at === N - 1);
+        var pb = bar.querySelector('.lp-progress-bar');
+        if (pb) pb.style.width = Math.round(((at + 1) / N) * 100) + '%';
+      }
+    }
+
     function fit() {
       var top = card.getBoundingClientRect().top;
-      if (window.innerWidth >= 768) {
-        if (top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
+      if (window.innerWidth >= 768) { if (top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
       if (Math.abs(top - 6) > 4) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
       tuckHeader();
     }
     card.lpFit = fit;
-    function missing() {
-      return required.filter(function (n) { return !form.querySelector('input[name="' + n + '"]:checked'); });
+
+    function show(i, focus) {
+      at = Math.max(0, Math.min(i, N - 1));
+      slides.forEach(function (s, k) { s.hidden = k !== at; });
+      err.hidden = true;
+      backBtn.hidden = at === 0;
+      var last = isLast(at);
+      submitBtn.hidden = !last;
+      // Choice screens advance on tap, so they need no Next button (unless they're last).
+      nextBtn.hidden = last || isChipsSlide(at);
+      progress();
+      if (focus !== false) {
+        if (isChipsSlide(at)) {
+          // leave focus for a deliberate tap; nothing to type
+        } else {
+          var input = slides[at].querySelector('input:not([type=radio]):not([type=hidden]), textarea');
+          if (input && window.innerWidth >= 768) try { input.focus({ preventScroll: true }); } catch (e) {}
+        }
+      }
+      fit();
     }
-    // A choice we can't help with (under 500 m²) stops at step 1 with its own message
-    function stopped() {
+
+    // A size the team can't help with (e.g. under 500 m²) stops the flow with its message.
+    function stopMsg() {
       var c = form.querySelector('input[data-stop]:checked');
       return c ? c.getAttribute('data-stop') : '';
     }
+    function fail(msg) { err.textContent = msg || errText; err.hidden = false; }
 
-    form.querySelector('[data-lp-next]').addEventListener('click', function () {
-      var stop = stopped();
-      if (stop || missing().length) { err.textContent = stop || errText; err.hidden = false; return; }
-      err.hidden = true;
-      show(2);
+    // Validate the current required slide before moving on.
+    function validate() {
+      if (at >= requiredUnits.length) return true; // optional slide
+      var u = requiredUnits[at];
+      if (u.kind === 'chips') {
+        if (!form.querySelector('input[name="' + u.name + '"]:checked')) { fail(); return false; }
+        var stop = stopMsg();
+        if (stop) { fail(stop); return false; }
+        return true;
+      }
+      var v = (u.control.value || '').trim();
+      if (!v) { fail(); return false; }
+      if (u.control.type === 'email' && v.indexOf('@') < 1) {
+        fail(t('Please enter a valid email address.', 'Vul een geldig e-mailadres in.'));
+        return false;
+      }
+      return true;
+    }
+
+    function next() { if (validate()) show(at + 1); }
+
+    nextBtn.addEventListener('click', next);
+    backBtn.addEventListener('click', function () { show(at - 1); });
+
+    // Enter in a text field advances instead of submitting early.
+    form.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'textarea') return;
+      if (!isLast(at)) { e.preventDefault(); next(); }
     });
-    form.addEventListener('change', function () { if (!missing().length && !stopped()) err.hidden = true; });
-    form.querySelector('[data-lp-back]').addEventListener('click', function () { show(1); });
 
-    // General form: owners (rent out, sell) are asked about their building instead of
-    // the space they need. ?intent=sell in the URL, or the page's data-default-intent,
-    // preselects the first question.
+    // Choice chips: selecting one clears any error and, on a non-final screen, advances.
+    form.addEventListener('change', function (e) {
+      if (!e.target || e.target.type !== 'radio') return;
+      if (at < requiredUnits.length && requiredUnits[at].name === e.target.name) {
+        var stop = stopMsg();
+        if (stop) { fail(stop); return; }
+        err.hidden = true;
+        if (!isLast(at)) setTimeout(function () { show(at + 1); }, 220);
+      }
+    });
+
+    // General form: owners (rent out, sell) are asked about their building rather than the
+    // space they need. ?intent=sell in the URL, or data-default-intent, preselects it.
     var swaps = card.querySelectorAll('[data-owner-text]');
+    var startAt = 0;
     if (swaps.length) {
       swaps.forEach(function (el) { el.setAttribute('data-default-text', el.textContent); });
       var wording = function () {
@@ -78,20 +244,27 @@
       };
       var want = (/[?&]intent=(lease|buy|let|sell)\b/.exec(location.search) || [])[1] || form.getAttribute('data-default-intent');
       var pre = want && form.querySelector('input[name="intent"][value="' + want + '"]');
-      if (pre) pre.checked = true;
+      if (pre) { pre.checked = true; if (requiredUnits[0] && requiredUnits[0].name === 'intent') startAt = 1; }
       wording();
       form.addEventListener('change', function (e) { if (e.target.name === 'intent') wording(); });
     }
 
-    // forms.js reports success in the form's status line; swap the form for a thank-you panel
-    var status = form.querySelector('.form-status');
+    // forms.js reports success in the status line; swap the whole form for the thank-you panel.
     var done = card.querySelector('.lp-done');
-    new MutationObserver(function () {
-      if (!status.classList.contains('-ok')) return;
-      form.hidden = true; label.hidden = true; bar.hidden = true;
-      done.hidden = false; done.focus();
-    }).observe(status, { attributes: true, attributeFilter: ['class'] });
-  });
+    if (status && done) {
+      new MutationObserver(function () {
+        if (!status.classList.contains('-ok')) return;
+        form.hidden = true;
+        if (label) label.hidden = true;
+        if (bar) bar.hidden = true;
+        done.hidden = false; done.focus();
+      }).observe(status, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    show(startAt, false);
+  }
+
+  document.querySelectorAll('.lp-card').forEach(wizard);
 
   // The page's own form: #requirement on the service pages, #enquiry everywhere else
   var section = document.getElementById('requirement') || document.getElementById('enquiry');
@@ -111,7 +284,7 @@
       e.preventDefault();
       setTimeout(function () {
         if (window.innerWidth >= 768) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        else card.lpFit();
+        else if (card.lpFit) card.lpFit();
       }, menuOpen ? 350 : 0);
     });
   });
